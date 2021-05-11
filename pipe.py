@@ -85,7 +85,7 @@ def inf_mask(mask):
 
 
 def map2cl(t_map, lmax):
-	return alm2cl(map2alm(t_map,lmax=lmax-1))
+	return alm2cl(map2alm(t_map,lmax=lmax))
 
 
 def ind_round(ix, iy, shape):
@@ -174,7 +174,7 @@ class ActCMBPipe:
 		# TODO fiducial CIB power spectrum import
 
 		cl_ksz = np.load(self.fid_ksz_path)
-		l = np.arange(self.lmax)
+		l = np.arange(self.lmax + 1)
 		print('ksz lmax:',len(l))
 		# self.cl_ksz = cl_ksz.copy()
 		# self.cl_ksz[1:,1] =  self.cl_ksz[1:,1] * 2 * np.pi / (l[1:] * (l[1:] + 1))
@@ -183,7 +183,7 @@ class ActCMBPipe:
 		self.cl_ksz = 1./l**2
 		self.cl_ksz[0] = 1.
 
-		cl_cmb = np.load(self.fid_cmb_path)[:self.lmax]
+		cl_cmb = np.load(self.fid_cmb_path)[:self.lmax + 1]
 		l = np.arange(len(cl_cmb))
 		print('cmb lmax:',len(l))
 		self.cl_cmb = cl_cmb.copy()
@@ -230,7 +230,7 @@ class ActCMBPipe:
 		# cl_weight = map2cl(self.imap_t * self.map_fkp, self.lmax)
 		# print(cl_weight)
 
-		ls = np.arange(self.lmax)
+		ls = np.arange(self.lmax + 1)
 
 		plt.figure(dpi=300)
 
@@ -284,13 +284,13 @@ class ActCMBPipe:
 	def compare_mode_mixing(self, l_cut=1500):
 		# construct a "left" power spectrum without noise (l<1500)
 		cl_1 = self.cl_cmb[:,1].copy()
-		cl_1[l_cut:] = 0.
+		cl_1[l_cut + 1:] = 0.
 
 		ls = np.arange(len(self.cl_cmb))
 
 		# construct a "right" power spectrum with noise (l>1500)
 		cl_2 = self.cl_cmb[:,1].copy() + eta2_ref
-		cl_2[:l_cut] = 0.
+		cl_2[:l_cut + 1] = 0.
 		cl_psuedo_1 = self.get_psuedo_cl(cl_1)
 		cl_psuedo_2 = self.get_psuedo_cl(cl_2)
 
@@ -308,11 +308,23 @@ class ActCMBPipe:
 	# return a estimator-weighted t-psuedo beam given a realization of unbeamed noise
 	# e.g. from CAMB
 	def process_t_map(self, t_map, l_weight):
+		# print(np.isnan(t_map.sum()))
 		t_fkp = t_map * self.map_fkp
+		# print(np.isnan(t_fkp.sum()))
 		t_alm = map2alm(t_fkp, lmax=self.lmax)
+		# print(np.isnan(t_alm.sum()))
 
 		t_fkp_est = self.get_zero_map()
-		t_fkp_est = alm2map(almxfl(self.t_psuedo_alm, l_weight), t_fkp_est)
+		# print(np.isnan(t_fkp_est.sum()))
+		# print(np.isnan(l_weight.sum()))
+		# print(np.where(l_weight == np.inf))
+		weighted_alm = almxfl(t_alm, l_weight)
+		# print(np.isnan(weighted_alm.sum()))
+		plt.figure(dpi=300)
+		plt.plot(l_weight)
+		plt.savefig('plots/l_weight.png')
+		t_fkp_est = alm2map(weighted_alm, t_fkp_est)
+		# print(np.isnan(t_fkp_est.sum()))
 		return t_fkp_est
 
 	def compute_est_kernel(self, v_r, gal_pos, t_psuedo):
@@ -340,16 +352,23 @@ class ActCMBPipe:
 		# self.gal_pos[:,0] = self.gal_table['DEC_DEG']
 		# self.gal_pos[:,1] = self.gal_table['RA_DEG']
 		# TODO: check cl_zz assumption holds
-		self.cl_zz = np.ones(self.lmax)
-		self.cl_zz[:self.l_ksz] = 0.
+
+		self.cl_zz = np.ones(self.lmax + 1)
+		# TODO: find correct form for low-l cl_zz!
+		# self.cl_zz[:self.l_ksz] = 0.
+		# prove this statement
+		# Is l >> the correlation field scale ?
+		# Investigate power spectrum to see if cl_zz assumption is valid
 		self.cl_zz *= np.var(self.v_rad) / self.ngal2d
 
 		self.cl_obs = self.cl_mask
 		# self.z_theta = self.get_zero_map()
 
+		# TODO: Choose l-split that gives same SNR for both bins
 
 		# optimal weighting for the alpha estimator
-		l_weight = self.beam[:self.lmax,1] * self.cl_ksz / (self.cl_obs * self.cl_zz)
+
+		l_weight = self.beam[:self.lmax + 1,1] * self.cl_ksz / (self.cl_obs * self.cl_zz)
 		l_weight[0] = 0.
 
 		t_fkp_est = self.process_t_map(self.imap_t, l_weight)
@@ -360,13 +379,16 @@ class ActCMBPipe:
 		for i in range(ntrial):
 			print("running variance trial {} of {}".format(i + 1, ntrial))
 			t_obs = self.get_zero_map()
-			# random beamed map realization with CMB power spectrum
+			# random unbeamed map realization with CMB power spectrum
 			t_rand = rand_alm(self.cl_cmb)
+			# apply beam to t_alm (could just modify power spectrum)
 			t_alm = almxfl(t_rand, self.beam[:,1])
-			t_obs = alm2map(t_alm, t_obs)
-			t_psuedo = self.process_t_map(t_obs, l_weight)
+			# convert to map
+			t_map = alm2map(t_alm, t_obs)
+			t_psuedo = self.process_t_map(t_map, l_weight)
 
 			a_samples[i] = self.compute_est_kernel(self.v_rad, self.gal_pos, t_psuedo)
+			print(a_ksz, a_samples[i])
 		
 		a_sigma = np.sqrt(np.var(a_samples))
 		a_mean = np.mean(a_samples)
@@ -529,4 +551,4 @@ if __name__ == "__main__":
 	act_pipe.compute_pixel_weight()
 	# act_pipe.compare_mode_mixing()
 	# act_pipe.compare_mask()
-	act_pipe.compute_estimator(ntrial=64)
+	act_pipe.compute_estimator(ntrial=4096)
