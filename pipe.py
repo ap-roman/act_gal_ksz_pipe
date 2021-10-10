@@ -11,6 +11,8 @@ from astropy.utils.data import get_pkg_data_filename
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 
+import h5py
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -39,13 +41,17 @@ cl_ksz_path = data_path + 'spectra/cl_ksz.npy'
 planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
 planck_enmask_path = mask_path + 'planck_foreground.npy'
 
-sdss_catalog_path = data_path + 'sdss_radial_velocities/v1/galaxy_DR10v8_CMASS_South_vrad_using_randoms.fits'
+# sdss_catalog_path = data_path + 'sdss_radial_velocities/v1/galaxy_DR10v8_CMASS_South_vrad_using_randoms.fits'
+# sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_CMASS_North.h5'
+# sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_LOWZ_South.h5'
+sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_LOWZ_North.h5'
+
 
 # datpath = '/home/aroman/act_data/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
 
 # TODO: simulate to higher lmax than xform lmax
-LMAX=6000
-LMAX_SIM = 8000
+LMAX=12000
+LMAX_SIM = 12000
 PLANCK_NSIDE=2048
 eta2_ref = 0.003**2 #uK^2 per steridian
 
@@ -122,11 +128,15 @@ def angle_tolerance(pos1, pos2, tol):
 
 
 def make_zero_map(ref_map_t):
-    return enmap.ndmap(np.zeros(self.ref_map_t.shape), self.ref_map_t.wcs)
+    return enmap.ndmap(np.zeros(ref_map_t.shape), ref_map_t.wcs)
 
 
 def make_zero_alm(ref_map_t, lmax):
     return map2alm(make_zero_map(ref_map_t), lmax=lmax)
+
+
+def get_ext(path):
+    return path.split('.')[-1]
 
 
 # WARN: assumes rigid reference geometry across maps
@@ -139,20 +149,39 @@ class GalPipe:
     def import_data(self):
         print("importing galaxy catalog")
 
-        with fits.open(self.sdss_catalog_path) as hdulist:
-            table = hdulist[1].data
-            self.ngal2d = len(table)
-            self.gal_table = table.copy()
+        gal_ext = get_ext(self.sdss_catalog_path)
 
-        self.v_rad = self.gal_table['VR']
-        self.gal_pos = np.zeros((self.ngal2d, 2))
-        self.gal_pos[:,0] = self.gal_table['DEC_DEG'] * (np.pi / 180)
-        self.gal_pos[:,1] = self.gal_table['RA_DEG'] * (np.pi / 180)
+        assert(gal_ext == 'h5' or gal_ext == 'fits')
+
+        if gal_ext == 'h5':
+            with h5py.File(self.sdss_catalog_path, 'r') as f:
+                self.v_rad = f['vr'][:]
+                self.ngal2d = len(self.v_rad)
+
+                self.gal_pos = np.zeros((self.ngal2d, 2))
+                self.gal_pos[:,0] = f['dec_deg'][:] * (np.pi / 180)
+                self.gal_pos[:,1] = f['ra_deg'][:] * (np.pi / 180)
+
+
+        elif gal_ext == 'fits':
+            with fits.open(self.sdss_catalog_path) as hdulist:
+                table = hdulist[1].data
+                self.ngal2d = len(table)
+
+                self.v_rad = table['VR']
+                self.gal_pos = np.zeros((self.ngal2d, 2))
+                self.gal_pos[:,0] = table['DEC_DEG'] * (np.pi / 180)
+                self.gal_pos[:,1] = table['RA_DEG'] * (np.pi / 180)
+
         print("done")
 
     def make_vr_list(self, ref_map_t, make_alm=False):
         if make_alm:
-            self.vr_alm = make_zero_alm(ref_map_t)
+            self.vr_alm = make_zero_alm(ref_map_t, lmax=self.lmax)
+
+        self.vr_map = make_zero_map(ref_map_t)
+
+        angular_res = ref_map_t.wcs.wcs.cdelt[0] * np.pi / 180.
 
         ngal = len(self.gal_pos)
 
@@ -188,6 +217,7 @@ class GalPipe:
                 # TODO: check galaxy overlap?
                 gal_inds.append([idec, ira])
                 vr_list.append(v_r)
+                self.vr_map[idec, ira] += v_r
                 # this method is super inefficient
                 # self.vr_alm[:self.lmax + 1] += v_r * sph_harm(ms, ls, ra, dec)
             # print('Processed galaxy {} of {}'.format(i + 1, ngal))
@@ -195,7 +225,9 @@ class GalPipe:
         self.vr_list = np.array(vr_list)
         self.ngal_in = ngal - n_ob
         print('Fraction of out-of-bounds galaxies: {:.2f}'.format(float(n_ob + 1) / ngal))
-        # self.vr_alm = map2alm(self.vr_map / self.pixel_area, lmax=self.lmax)
+        if make_alm:
+            pixel_area = angular_res**2
+            self.vr_alm = map2alm(self.vr_map / pixel_area, lmax=self.lmax)
 
     def get_t_list(self, t_map):
         return t_map[self.gal_inds[0,:], self.gal_inds[1,:]]
@@ -203,6 +235,13 @@ class GalPipe:
     def get_xz_list(self, t_map):
         t_gal_list = t_map[self.gal_inds[0,:], self.gal_inds[1,:]]
         return t_gal_list * self.vr_list
+
+    def get_xz_map(self, t_map):
+        # ret_map = make_zero_map(t_map)
+        # # WARN: this is unsafe
+        # ret_map[self.gal_inds[0,:], self.gal_inds[1,:]] += self.vr_list
+        # ret_map *= t_map
+        return self.vr_map * t_map
 
     def compute_a_ksz(self, t_map):
         return self.get_xz_list(t_map).sum()
@@ -679,7 +718,7 @@ def compute_estimator(act_pipes, gal_pipe, ntrial=64):
     # placeholder, in the future we will iterate over frequencies
     pipe = act_pipes[0]
     # process the galaxy radial velocity data into map index space
-    gal_pipe.make_vr_list(pipe.imap_t)
+    gal_pipe.make_vr_list(pipe.imap_t, make_alm=True)
 
     cl_zz = np.ones(pipe.lmax + 1)
     # TODO: find correct form for low-l cl_zz!
@@ -698,6 +737,7 @@ def compute_estimator(act_pipes, gal_pipe, ntrial=64):
     # substitute cl_masked for psuedo cl with fkp
     # cl_use = pipe.get_psuedo_cl(pipe.cl_cmb)
 
+    # WARN: noise-free
     cl_use = pipe.get_psuedo_cl(pipe.cl_tt_sim, beam=True)
 
     ell_plot = np.arange(500, pipe.lmax + 1,1)
@@ -733,7 +773,12 @@ def compute_estimator(act_pipes, gal_pipe, ntrial=64):
     plt.savefig('plots/l_weight.png')
     plt.close()
 
+
+    ones = np.ones(pipe.lmax+1)
     t_fkp_est = pipe.process_t_map(pipe.imap_t, l_weight)
+    t_fkp = pipe.process_t_map(pipe.imap_t, ones)
+
+    t_fkp_alm = map2alm(t_fkp, lmax=pipe.lmax)
 
     a_ksz = gal_pipe.compute_a_ksz(t_fkp_est)
 
@@ -758,6 +803,54 @@ def compute_estimator(act_pipes, gal_pipe, ntrial=64):
 
     print(f'ksz_unnormalized: {a_ksz:.4e}')
     # TODO: check cl tilde edge effects
+
+    # TODO: move xz plot elsewhere!!
+    ells = np.arange(pipe.lmax + 1)
+    ellnorm = ells * (ells + 1) / 2 /np.pi
+    # Compute and plot cl^{xz}
+
+    cl_zz = alm2cl(gal_pipe.vr_alm)
+    cl_xx = alm2cl(t_fkp_alm)
+    cl_xx[0] = 0.
+    cl_xz = alm2cl(gal_pipe.vr_alm, t_fkp_alm)
+    cl_xz_std = np.sqrt(cl_xx * cl_zz / (2 * ells + 1))
+
+    plt.figure(dpi=300)
+    plt.plot(ells, ellnorm * cl_xx)
+    plt.savefig('plots/cl_xx.png')
+    plt.close()
+
+    # cl_xz[0] = 0
+
+    bin_width = 500
+    cl_xz_bin = cl_xz[:-1].reshape(bin_width, pipe.lmax // bin_width).sum(axis=0)/bin_width
+    cl_xz_std_bin = np.sqrt((cl_xz_std[:-1]**2).reshape(bin_width, pipe.lmax // bin_width).sum(axis=0))/bin_width
+    bin_centers = np.arange(bin_width//2, pipe.lmax, bin_width)
+
+    plt.figure(dpi=300)
+    plt.plot(ells, cl_xz)
+    plt.fill_between(ells, cl_xz - cl_xz_std, cl_xz + cl_xz_std, alpha=0.5, color='red')
+    plt.savefig('plots/cl_xz.png')
+    plt.close()
+
+    plt.figure(dpi=300)
+    plt.title(r'$C_l^{XZ}$')
+    # plt.errorbar(ells, cl_xz, yerr = cl_xz_std)
+    # plt.errorbar(ells, cl_xz, yerr = cl_xz * np.sqrt(2/(2 * ells + 1)))
+    plt.plot(bin_centers, cl_xz_bin)
+    # plt.plot(ells, cl_xz_std)
+    # plt.plot(ells, cl_xz * np.sqrt(2 / (2 * ells + 1)))
+    plt.fill_between(bin_centers, cl_xz_bin - cl_xz_std_bin, cl_xz_bin + cl_xz_std_bin, alpha=0.5, color='red')
+    plt.axhline(0.)
+
+    # plt.yscale('log')
+    # plt.errorbar(ells, cl_xz)
+    plt.xlabel(r'$l$')
+    plt.ylabel(r'$C_l$ (arbitrary)')
+    plt.savefig('plots/cl_xz_binned.png')
+    plt.close()
+    # for
+
 
     a_samples = np.zeros(ntrial)
 
@@ -841,7 +934,7 @@ if __name__ == "__main__":
 
     act_pipe = ActCMBPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,
                           planck_enmask_path,
-                          diag_plots=True, lmax=6000)
+                          diag_plots=True, lmax=LMAX)
     
     act_pipe.import_data()
     
