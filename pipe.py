@@ -6,7 +6,6 @@ import healpy as hp
 from scipy.special import sph_harm
 
 import astropy
-from astropy.io import fits
 from astropy.utils.data import get_pkg_data_filename
 from astropy import units as u
 from astropy.coordinates import SkyCoord
@@ -18,6 +17,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy import interpolate
+
 
 # from mpi4py import MPI
 
@@ -44,8 +44,8 @@ planck_enmask_path = mask_path + 'planck_foreground.npy'
 # sdss_catalog_path = data_path + 'sdss_radial_velocities/v1/galaxy_DR10v8_CMASS_South_vrad_using_randoms.fits'
 # sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_CMASS_North.h5'
 # sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_LOWZ_South.h5'
-sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_LOWZ_North.h5'
-
+# sdss_catalog_path = data_path + 'sdss_radial_velocities/dr12v5/vradial_DR12v5_LOWZ_North.h5'
+sdss_catalog_path = data_path + 'vr_source/v01/desils/v01_desils_south_cmass.h5'
 
 # datpath = '/home/aroman/act_data/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
 
@@ -54,12 +54,6 @@ LMAX=12000
 LMAX_SIM = 12000
 PLANCK_NSIDE=2048
 eta2_ref = 0.003**2 #uK^2 per steridian
-
-
-def iround(f_ind):
-    sgn = np.sign(f_ind).astype(int)
-    ind_abs = (np.abs(f_ind) + 0.5).astype(int)
-    return sgn * ind_abs
 
 
 def fequal(a,b,tol=1e-6):
@@ -110,11 +104,6 @@ def ind_round(ix, iy, shape):
     return ixr, iyr
 
 
-def bounds_check(ipos, shape):
-    return (ipos[0] >= 0) and (ipos[0] < shape[0]) and (ipos[1] >=0) \
-           and (ipos[1] < shape[1])
-
-
 # assumes dec, ra order in radians
 def angle_tolerance(pos1, pos2, tol):
     dec_tol = np.abs(pos1[0] - pos2[0]) <= tol[0]
@@ -135,17 +124,35 @@ def make_zero_alm(ref_map_t, lmax):
     return map2alm(make_zero_map(ref_map_t), lmax=lmax)
 
 
+def iround(f_ind):
+    sgn = np.sign(f_ind).astype(int)
+    ind_abs = (np.abs(f_ind) + 0.5).astype(int)
+    return sgn * ind_abs
+
+
+def bounds_check(ipos, shape):
+    return (ipos[0] >= 0) and (ipos[0] < shape[0]) and (ipos[1] >=0) \
+           and (ipos[1] < shape[1])
+
+
+def get_fname(path):
+    return '.'.join(path.split(os.sep)[-1].split('.')[:-1])
+
+
 def get_ext(path):
     return path.split('.')[-1]
 
 
 # WARN: assumes rigid reference geometry across maps
 class GalPipe:
-    def __init__(self, sdss_catalog_path, ref_map_t, diag_plots=True, lmax=LMAX):
+    def __init__(self, sdss_catalog_path, ref_map_t, import_now=False, diag_plots=True, lmax=LMAX):
         self.lmax = int(lmax)
         self.sdss_catalog_path = sdss_catalog_path
         self.diag_plots = diag_plots
-    
+
+        if(import_now):
+            self.import_data()
+
     def import_data(self):
         print("importing galaxy catalog")
 
@@ -155,7 +162,7 @@ class GalPipe:
 
         if gal_ext == 'h5':
             with h5py.File(self.sdss_catalog_path, 'r') as f:
-                self.v_rad = f['vr'][:]
+                self.v_rad = f['vr_smoothed'][:]
                 self.ngal2d = len(self.v_rad)
 
                 self.gal_pos = np.zeros((self.ngal2d, 2))
@@ -394,6 +401,8 @@ class ActCMBPipe:
     def get_zero_alm(self):
         return self.zero_alm.copy()
 
+    # compute w_fkp_theta (FKP weight considering inverse var and mask)
+    # map form: map_fkp
     def compute_pixel_weight(self, l0=None):
         if l0 is None:
             l0 = self.l_fkp
@@ -706,6 +715,7 @@ def one_time_setup(data_path='/data/', have_camb=False):
     reproj_planck_map(map_path, planck_mask_inpath, planck_enmask_path, mode='GAL080')
 
 setup = False
+
 
 # @profile
 # TODO: extend to multi-frequency case!
