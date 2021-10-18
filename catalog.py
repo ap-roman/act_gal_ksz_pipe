@@ -87,7 +87,7 @@ def make_vr_list(ref_map_t, gal_pos, vr_s, vr_u, zerr):
 
     n_ob = n_gal - n_ib
 
-    print(f'Fraction of out-of-bounds galaxies: {float(n_ob) / n_gal:.2f}')
+    print(f'{n_ib} of {n_gal} galaxies in map field; fraction={1 - float(n_ob) / n_gal:.2f}')
 
     assert len(gal_inds) == len(vr_s[in_bounds])
 
