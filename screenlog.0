@@ -1,0 +1,4244 @@
+importing map: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits
+done
+generating zero_alm array
+done
+importing mask: /home/aroman/data/mask/planck_foreground.npy
+planck mask range: 0.0 1.0000000000000002
+done
+importing inverse variance mask: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits
+pipe.py:389: RuntimeWarning: divide by zero encountered in true_divide
+  std_t = np.sqrt(1./self.ivar_t)
+done
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 8.955e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 3657487.50
+        fkp sum per gal: 0.62
+done
+r_fkp 0.50 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -12.428
+a_t2v2: -12.756
+ksz_unnormalized: -3.5697e+01
+r_fkp 0.50 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -11.828
+a_t2v2: -12.198
+ksz_unnormalized: -4.2455e+01
+r_fkp 0.50 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -10.081
+a_t2v2: -10.408
+ksz_unnormalized: -4.7026e+01
+r_fkp 0.50 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -8.327
+a_t2v2: -8.597
+ksz_unnormalized: -4.8824e+01
+r_fkp 0.50 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -6.871
+a_t2v2: -7.091
+ksz_unnormalized: -4.8825e+01
+r_fkp 0.50 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -5.758
+a_t2v2: -5.939
+ksz_unnormalized: -4.7908e+01
+r_fkp 0.50 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -4.937
+a_t2v2: -5.089
+ksz_unnormalized: -4.6629e+01
+r_fkp 0.50 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.644
+a_tv2: -4.335
+a_t2v2: -4.467
+ksz_unnormalized: -4.5285e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 8.572e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 3240866.75
+        fkp sum per gal: 0.55
+done
+r_fkp 0.71 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -12.815
+a_t2v2: -13.150
+ksz_unnormalized: -3.2144e+01
+r_fkp 0.71 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -12.141
+a_t2v2: -12.520
+ksz_unnormalized: -3.8130e+01
+r_fkp 0.71 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -10.325
+a_t2v2: -10.662
+ksz_unnormalized: -4.2070e+01
+r_fkp 0.71 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -8.508
+a_t2v2: -8.787
+ksz_unnormalized: -4.3484e+01
+r_fkp 0.71 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -7.001
+a_t2v2: -7.228
+ksz_unnormalized: -4.3287e+01
+r_fkp 0.71 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -5.849
+a_t2v2: -6.036
+ksz_unnormalized: -4.2287e+01
+r_fkp 0.71 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -4.999
+a_t2v2: -5.156
+ksz_unnormalized: -4.0989e+01
+r_fkp 0.71 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.849
+a_tv2: -4.376
+a_t2v2: -4.511
+ksz_unnormalized: -3.9658e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 8.219e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 2920305.00
+        fkp sum per gal: 0.50
+done
+r_fkp 0.93 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -13.104
+a_t2v2: -13.441
+ksz_unnormalized: -2.9310e+01
+r_fkp 0.93 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -12.361
+a_t2v2: -12.745
+ksz_unnormalized: -3.4706e+01
+r_fkp 0.93 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -10.489
+a_t2v2: -10.829
+ksz_unnormalized: -3.8179e+01
+r_fkp 0.93 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -8.623
+a_t2v2: -8.904
+ksz_unnormalized: -3.9328e+01
+r_fkp 0.93 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -7.076
+a_t2v2: -7.305
+ksz_unnormalized: -3.9008e+01
+r_fkp 0.93 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -5.895
+a_t2v2: -6.083
+ksz_unnormalized: -3.7971e+01
+r_fkp 0.93 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -5.024
+a_t2v2: -5.182
+ksz_unnormalized: -3.6681e+01
+r_fkp 0.93 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -6.999
+a_tv2: -4.385
+a_t2v2: -4.521
+ksz_unnormalized: -3.5378e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 7.895e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 2663502.25
+        fkp sum per gal: 0.45
+done
+r_fkp 1.14 r_lwidth 0.50
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -13.336
+a_t2v2: -13.673
+ksz_unnormalized: -2.7042e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 0.71
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -12.537
+a_t2v2: -12.921
+ksz_unnormalized: -3.1981e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 0.93
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -10.613
+a_t2v2: -10.954
+ksz_unnormalized: -3.5097e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 1.14
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -8.705
+a_t2v2: -8.987
+ksz_unnormalized: -3.6053e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 1.36
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -7.127
+a_t2v2: -7.356
+ksz_unnormalized: -3.5661e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 1.57
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -5.923
+a_t2v2: -6.111
+ksz_unnormalized: -3.4620e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 1.79
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -5.036
+a_t2v2: -5.193
+ksz_unnormalized: -3.3360e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+r_fkp 1.14 r_lwidth 2.00
+pipe.py:873: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.115
+a_tv2: -4.387
+a_t2v2: -4.522
+ksz_unnormalized: -3.2102e+01
+pipe.py:929: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300.)
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 7.595e-01
+pipe.py:491: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure(dpi=300)
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 2451888.75
+        fkp sum per gal: 0.42
+done
+r_fkp 1.36 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -13.515
+a_t2v2: -13.851
+ksz_unnormalized: -2.5292e+01
+r_fkp 1.36 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -12.666
+a_t2v2: -13.050
+ksz_unnormalized: -2.9890e+01
+r_fkp 1.36 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -10.702
+a_t2v2: -11.043
+ksz_unnormalized: -3.2746e+01
+r_fkp 1.36 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -8.761
+a_t2v2: -9.043
+ksz_unnormalized: -3.3565e+01
+r_fkp 1.36 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -7.158
+a_t2v2: -7.386
+ksz_unnormalized: -3.3121e+01
+r_fkp 1.36 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -5.936
+a_t2v2: -6.123
+ksz_unnormalized: -3.2076e+01
+r_fkp 1.36 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -5.037
+a_t2v2: -5.192
+ksz_unnormalized: -3.0835e+01
+r_fkp 1.36 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.205
+a_tv2: -4.378
+a_t2v2: -4.511
+ksz_unnormalized: -2.9606e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 7.317e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 2273788.75
+        fkp sum per gal: 0.39
+done
+r_fkp 1.57 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -13.658
+a_t2v2: -13.992
+ksz_unnormalized: -2.3578e+01
+r_fkp 1.57 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -12.762
+a_t2v2: -13.144
+ksz_unnormalized: -2.7836e+01
+r_fkp 1.57 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -10.759
+a_t2v2: -11.097
+ksz_unnormalized: -3.0434e+01
+r_fkp 1.57 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -8.787
+a_t2v2: -9.066
+ksz_unnormalized: -3.1118e+01
+r_fkp 1.57 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -7.161
+a_t2v2: -7.387
+ksz_unnormalized: -3.0625e+01
+r_fkp 1.57 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -5.924
+a_t2v2: -6.107
+ksz_unnormalized: -2.9579e+01
+r_fkp 1.57 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -5.013
+a_t2v2: -5.167
+ksz_unnormalized: -2.8362e+01
+r_fkp 1.57 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.278
+a_tv2: -4.347
+a_t2v2: -4.478
+ksz_unnormalized: -2.7165e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 7.059e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 2121406.25
+        fkp sum per gal: 0.36
+done
+r_fkp 1.79 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -13.778
+a_t2v2: -14.111
+ksz_unnormalized: -2.2185e+01
+r_fkp 1.79 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -12.846
+a_t2v2: -13.226
+ksz_unnormalized: -2.6181e+01
+r_fkp 1.79 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -10.812
+a_t2v2: -11.148
+ksz_unnormalized: -2.8587e+01
+r_fkp 1.79 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -8.814
+a_t2v2: -9.090
+ksz_unnormalized: -2.9175e+01
+r_fkp 1.79 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -7.168
+a_t2v2: -7.391
+ksz_unnormalized: -2.8650e+01
+r_fkp 1.79 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -5.916
+a_t2v2: -6.098
+ksz_unnormalized: -2.7610e+01
+r_fkp 1.79 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -4.996
+a_t2v2: -5.147
+ksz_unnormalized: -2.6415e+01
+r_fkp 1.79 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.337
+a_tv2: -4.323
+a_t2v2: -4.452
+ksz_unnormalized: -2.5246e+01
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 6.819e-01
+pipe.py:607: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:641: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_south_cmass.h5
+summary of v01_desils_south_cmass subset
+        fkp sum: 1989279.50
+        fkp sum per gal: 0.34
+done
+r_fkp 2.00 r_lwidth 0.50
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -13.880
+a_t2v2: -14.211
+ksz_unnormalized: -2.0788e+01
+r_fkp 2.00 r_lwidth 0.71
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -12.914
+a_t2v2: -13.292
+ksz_unnormalized: -2.4520e+01
+r_fkp 2.00 r_lwidth 0.93
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -10.851
+a_t2v2: -11.185
+ksz_unnormalized: -2.6737e+01
+r_fkp 2.00 r_lwidth 1.14
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -8.830
+a_t2v2: -9.104
+ksz_unnormalized: -2.7241e+01
+r_fkp 2.00 r_lwidth 1.36
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -7.168
+a_t2v2: -7.389
+ksz_unnormalized: -2.6703e+01
+r_fkp 2.00 r_lwidth 1.57
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -5.905
+a_t2v2: -6.085
+ksz_unnormalized: -2.5686e+01
+r_fkp 2.00 r_lwidth 1.79
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -4.978
+a_t2v2: -5.127
+ksz_unnormalized: -2.4530e+01
+r_fkp 2.00 r_lwidth 2.00
+starting process_t_map
+done
+starting process_t_map
+done
+a_noweight -7.387
+a_tv2: -4.300
+a_t2v2: -4.427
+ksz_unnormalized: -2.3406e+01
+pipe.py:1125: UserWarning: FixedFormatter should only be used together with FixedLocator
+  ax.set_xticklabels(xlabels)
+pipe.py:1129: UserWarning: FixedFormatter should only be used together with FixedLocator
+  ax.set_yticklabels(ylabels)
+importing map: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits
+done
+generating zero_alm array
+done
+importing mask: /home/aroman/data/mask/planck_foreground.npy
+planck mask range: 0.0 1.0000000000000002
+done
+importing inverse variance mask: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits
+pipe.py:394: RuntimeWarning: divide by zero encountered in true_divide
+  std_t = np.sqrt(1./self.ivar_t)
+done
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_sdss_all.h5
+done
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 8.736e-01
+pipe.py:579: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:613: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+starting process_t_alm
+done
+doing <xz> noise trials
+starting process_t_map
+done
+finished sim map 1 of 512
+starting process_t_map
+done
+finished sim map 2 of 512
+starting process_t_map
+done
+finished sim map 3 of 512
+starting process_t_map
+done
+finished sim map 4 of 512
+starting process_t_map
+done
+finished sim map 5 of 512
+starting process_t_map
+done
+finished sim map 6 of 512
+starting process_t_map
+done
+finished sim map 7 of 512
+starting process_t_map
+done
+finished sim map 8 of 512
+starting process_t_map
+done
+finished sim map 9 of 512
+starting process_t_map
+done
+finished sim map 10 of 512
+starting process_t_map
+done
+finished sim map 11 of 512
+starting process_t_map
+done
+finished sim map 12 of 512
+starting process_t_map
+done
+finished sim map 13 of 512
+starting process_t_map
+done
+finished sim map 14 of 512
+starting process_t_map
+done
+finished sim map 15 of 512
+starting process_t_map
+done
+finished sim map 16 of 512
+starting process_t_map
+done
+finished sim map 17 of 512
+starting process_t_map
+done
+finished sim map 18 of 512
+starting process_t_map
+done
+finished sim map 19 of 512
+starting process_t_map
+done
+finished sim map 20 of 512
+starting process_t_map
+done
+finished sim map 21 of 512
+starting process_t_map
+done
+finished sim map 22 of 512
+starting process_t_map
+done
+finished sim map 23 of 512
+starting process_t_map
+done
+finished sim map 24 of 512
+starting process_t_map
+done
+finished sim map 25 of 512
+starting process_t_map
+done
+finished sim map 26 of 512
+starting process_t_map
+done
+finished sim map 27 of 512
+starting process_t_map
+done
+finished sim map 28 of 512
+starting process_t_map
+done
+finished sim map 29 of 512
+starting process_t_map
+done
+finished sim map 30 of 512
+starting process_t_map
+done
+finished sim map 31 of 512
+starting process_t_map
+done
+finished sim map 32 of 512
+starting process_t_map
+done
+finished sim map 33 of 512
+starting process_t_map
+done
+finished sim map 34 of 512
+starting process_t_map
+done
+finished sim map 35 of 512
+starting process_t_map
+done
+finished sim map 36 of 512
+starting process_t_map
+done
+finished sim map 37 of 512
+starting process_t_map
+done
+finished sim map 38 of 512
+starting process_t_map
+done
+finished sim map 39 of 512
+starting process_t_map
+done
+finished sim map 40 of 512
+starting process_t_map
+done
+finished sim map 41 of 512
+starting process_t_map
+done
+finished sim map 42 of 512
+starting process_t_map
+done
+finished sim map 43 of 512
+starting process_t_map
+done
+finished sim map 44 of 512
+starting process_t_map
+done
+finished sim map 45 of 512
+starting process_t_map
+done
+finished sim map 46 of 512
+starting process_t_map
+done
+finished sim map 47 of 512
+starting process_t_map
+done
+finished sim map 48 of 512
+starting process_t_map
+done
+finished sim map 49 of 512
+starting process_t_map
+done
+finished sim map 50 of 512
+starting process_t_map
+done
+finished sim map 51 of 512
+starting process_t_map
+done
+finished sim map 52 of 512
+starting process_t_map
+done
+finished sim map 53 of 512
+starting process_t_map
+done
+finished sim map 54 of 512
+starting process_t_map
+done
+finished sim map 55 of 512
+starting process_t_map
+done
+finished sim map 56 of 512
+starting process_t_map
+done
+finished sim map 57 of 512
+starting process_t_map
+done
+finished sim map 58 of 512
+starting process_t_map
+done
+finished sim map 59 of 512
+starting process_t_map
+done
+finished sim map 60 of 512
+starting process_t_map
+done
+finished sim map 61 of 512
+starting process_t_map
+done
+finished sim map 62 of 512
+starting process_t_map
+done
+finished sim map 63 of 512
+starting process_t_map
+done
+finished sim map 64 of 512
+starting process_t_map
+done
+finished sim map 65 of 512
+starting process_t_map
+done
+finished sim map 66 of 512
+starting process_t_map
+done
+finished sim map 67 of 512
+starting process_t_map
+done
+finished sim map 68 of 512
+starting process_t_map
+done
+finished sim map 69 of 512
+starting process_t_map
+done
+finished sim map 70 of 512
+starting process_t_map
+done
+finished sim map 71 of 512
+starting process_t_map
+done
+finished sim map 72 of 512
+starting process_t_map
+done
+finished sim map 73 of 512
+starting process_t_map
+done
+finished sim map 74 of 512
+starting process_t_map
+done
+finished sim map 75 of 512
+starting process_t_map
+done
+finished sim map 76 of 512
+starting process_t_map
+done
+finished sim map 77 of 512
+starting process_t_map
+done
+finished sim map 78 of 512
+starting process_t_map
+done
+finished sim map 79 of 512
+starting process_t_map
+done
+finished sim map 80 of 512
+starting process_t_map
+done
+finished sim map 81 of 512
+starting process_t_map
+done
+finished sim map 82 of 512
+starting process_t_map
+done
+finished sim map 83 of 512
+starting process_t_map
+done
+finished sim map 84 of 512
+starting process_t_map
+done
+finished sim map 85 of 512
+starting process_t_map
+done
+finished sim map 86 of 512
+starting process_t_map
+done
+finished sim map 87 of 512
+starting process_t_map
+done
+finished sim map 88 of 512
+starting process_t_map
+done
+finished sim map 89 of 512
+starting process_t_map
+done
+finished sim map 90 of 512
+starting process_t_map
+done
+finished sim map 91 of 512
+starting process_t_map
+done
+finished sim map 92 of 512
+starting process_t_map
+done
+finished sim map 93 of 512
+starting process_t_map
+done
+finished sim map 94 of 512
+starting process_t_map
+done
+finished sim map 95 of 512
+starting process_t_map
+done
+finished sim map 96 of 512
+starting process_t_map
+done
+finished sim map 97 of 512
+starting process_t_map
+done
+finished sim map 98 of 512
+starting process_t_map
+done
+finished sim map 99 of 512
+starting process_t_map
+done
+finished sim map 100 of 512
+starting process_t_map
+done
+finished sim map 101 of 512
+starting process_t_map
+done
+finished sim map 102 of 512
+starting process_t_map
+done
+finished sim map 103 of 512
+starting process_t_map
+done
+finished sim map 104 of 512
+starting process_t_map
+done
+finished sim map 105 of 512
+starting process_t_map
+done
+finished sim map 106 of 512
+starting process_t_map
+done
+finished sim map 107 of 512
+starting process_t_map
+done
+finished sim map 108 of 512
+starting process_t_map
+done
+finished sim map 109 of 512
+starting process_t_map
+done
+finished sim map 110 of 512
+starting process_t_map
+done
+finished sim map 111 of 512
+starting process_t_map
+done
+finished sim map 112 of 512
+starting process_t_map
+done
+finished sim map 113 of 512
+starting process_t_map
+done
+finished sim map 114 of 512
+starting process_t_map
+done
+finished sim map 115 of 512
+starting process_t_map
+done
+finished sim map 116 of 512
+starting process_t_map
+done
+finished sim map 117 of 512
+starting process_t_map
+done
+finished sim map 118 of 512
+starting process_t_map
+done
+finished sim map 119 of 512
+starting process_t_map
+done
+finished sim map 120 of 512
+starting process_t_map
+done
+finished sim map 121 of 512
+starting process_t_map
+done
+finished sim map 122 of 512
+starting process_t_map
+done
+finished sim map 123 of 512
+starting process_t_map
+done
+finished sim map 124 of 512
+starting process_t_map
+done
+finished sim map 125 of 512
+starting process_t_map
+done
+finished sim map 126 of 512
+starting process_t_map
+done
+finished sim map 127 of 512
+starting process_t_map
+done
+finished sim map 128 of 512
+starting process_t_map
+done
+finished sim map 129 of 512
+starting process_t_map
+done
+finished sim map 130 of 512
+starting process_t_map
+done
+finished sim map 131 of 512
+starting process_t_map
+done
+finished sim map 132 of 512
+starting process_t_map
+done
+finished sim map 133 of 512
+starting process_t_map
+done
+finished sim map 134 of 512
+starting process_t_map
+done
+finished sim map 135 of 512
+starting process_t_map
+done
+finished sim map 136 of 512
+starting process_t_map
+done
+finished sim map 137 of 512
+starting process_t_map
+done
+finished sim map 138 of 512
+starting process_t_map
+done
+finished sim map 139 of 512
+starting process_t_map
+done
+finished sim map 140 of 512
+starting process_t_map
+done
+finished sim map 141 of 512
+starting process_t_map
+done
+finished sim map 142 of 512
+starting process_t_map
+done
+finished sim map 143 of 512
+starting process_t_map
+done
+finished sim map 144 of 512
+starting process_t_map
+done
+finished sim map 145 of 512
+starting process_t_map
+done
+finished sim map 146 of 512
+starting process_t_map
+done
+finished sim map 147 of 512
+starting process_t_map
+done
+finished sim map 148 of 512
+starting process_t_map
+done
+finished sim map 149 of 512
+starting process_t_map
+done
+finished sim map 150 of 512
+starting process_t_map
+done
+finished sim map 151 of 512
+starting process_t_map
+done
+finished sim map 152 of 512
+starting process_t_map
+done
+finished sim map 153 of 512
+starting process_t_map
+done
+finished sim map 154 of 512
+starting process_t_map
+done
+finished sim map 155 of 512
+starting process_t_map
+done
+finished sim map 156 of 512
+starting process_t_map
+done
+finished sim map 157 of 512
+starting process_t_map
+done
+finished sim map 158 of 512
+starting process_t_map
+done
+finished sim map 159 of 512
+starting process_t_map
+done
+finished sim map 160 of 512
+starting process_t_map
+done
+finished sim map 161 of 512
+starting process_t_map
+done
+finished sim map 162 of 512
+starting process_t_map
+done
+finished sim map 163 of 512
+starting process_t_map
+done
+finished sim map 164 of 512
+starting process_t_map
+done
+finished sim map 165 of 512
+starting process_t_map
+done
+finished sim map 166 of 512
+starting process_t_map
+done
+finished sim map 167 of 512
+starting process_t_map
+done
+finished sim map 168 of 512
+starting process_t_map
+done
+finished sim map 169 of 512
+starting process_t_map
+done
+finished sim map 170 of 512
+starting process_t_map
+done
+finished sim map 171 of 512
+starting process_t_map
+done
+finished sim map 172 of 512
+starting process_t_map
+done
+finished sim map 173 of 512
+starting process_t_map
+done
+finished sim map 174 of 512
+starting process_t_map
+done
+finished sim map 175 of 512
+starting process_t_map
+done
+finished sim map 176 of 512
+starting process_t_map
+done
+finished sim map 177 of 512
+starting process_t_map
+done
+finished sim map 178 of 512
+starting process_t_map
+done
+finished sim map 179 of 512
+starting process_t_map
+done
+finished sim map 180 of 512
+starting process_t_map
+done
+finished sim map 181 of 512
+starting process_t_map
+done
+finished sim map 182 of 512
+starting process_t_map
+done
+finished sim map 183 of 512
+starting process_t_map
+done
+finished sim map 184 of 512
+starting process_t_map
+done
+finished sim map 185 of 512
+starting process_t_map
+done
+finished sim map 186 of 512
+starting process_t_map
+done
+finished sim map 187 of 512
+starting process_t_map
+done
+finished sim map 188 of 512
+starting process_t_map
+done
+finished sim map 189 of 512
+starting process_t_map
+done
+finished sim map 190 of 512
+starting process_t_map
+done
+finished sim map 191 of 512
+starting process_t_map
+done
+finished sim map 192 of 512
+starting process_t_map
+done
+finished sim map 193 of 512
+starting process_t_map
+done
+finished sim map 194 of 512
+starting process_t_map
+done
+finished sim map 195 of 512
+starting process_t_map
+done
+finished sim map 196 of 512
+starting process_t_map
+done
+finished sim map 197 of 512
+starting process_t_map
+done
+finished sim map 198 of 512
+starting process_t_map
+done
+finished sim map 199 of 512
+starting process_t_map
+done
+finished sim map 200 of 512
+starting process_t_map
+done
+finished sim map 201 of 512
+starting process_t_map
+done
+finished sim map 202 of 512
+starting process_t_map
+done
+finished sim map 203 of 512
+starting process_t_map
+done
+finished sim map 204 of 512
+starting process_t_map
+done
+finished sim map 205 of 512
+starting process_t_map
+done
+finished sim map 206 of 512
+starting process_t_map
+done
+finished sim map 207 of 512
+starting process_t_map
+done
+finished sim map 208 of 512
+starting process_t_map
+done
+finished sim map 209 of 512
+starting process_t_map
+done
+finished sim map 210 of 512
+starting process_t_map
+done
+finished sim map 211 of 512
+starting process_t_map
+done
+finished sim map 212 of 512
+starting process_t_map
+done
+finished sim map 213 of 512
+starting process_t_map
+done
+finished sim map 214 of 512
+starting process_t_map
+done
+finished sim map 215 of 512
+starting process_t_map
+done
+finished sim map 216 of 512
+starting process_t_map
+done
+finished sim map 217 of 512
+starting process_t_map
+done
+finished sim map 218 of 512
+starting process_t_map
+done
+finished sim map 219 of 512
+starting process_t_map
+done
+finished sim map 220 of 512
+starting process_t_map
+done
+finished sim map 221 of 512
+starting process_t_map
+done
+finished sim map 222 of 512
+starting process_t_map
+done
+finished sim map 223 of 512
+starting process_t_map
+done
+finished sim map 224 of 512
+starting process_t_map
+done
+finished sim map 225 of 512
+starting process_t_map
+done
+finished sim map 226 of 512
+starting process_t_map
+done
+finished sim map 227 of 512
+starting process_t_map
+done
+finished sim map 228 of 512
+starting process_t_map
+done
+finished sim map 229 of 512
+starting process_t_map
+done
+finished sim map 230 of 512
+starting process_t_map
+done
+finished sim map 231 of 512
+starting process_t_map
+done
+finished sim map 232 of 512
+starting process_t_map
+done
+finished sim map 233 of 512
+starting process_t_map
+done
+finished sim map 234 of 512
+starting process_t_map
+done
+finished sim map 235 of 512
+starting process_t_map
+done
+finished sim map 236 of 512
+starting process_t_map
+done
+finished sim map 237 of 512
+starting process_t_map
+done
+finished sim map 238 of 512
+starting process_t_map
+done
+finished sim map 239 of 512
+starting process_t_map
+done
+finished sim map 240 of 512
+starting process_t_map
+done
+finished sim map 241 of 512
+starting process_t_map
+done
+finished sim map 242 of 512
+starting process_t_map
+done
+finished sim map 243 of 512
+starting process_t_map
+done
+finished sim map 244 of 512
+starting process_t_map
+done
+finished sim map 245 of 512
+starting process_t_map
+done
+finished sim map 246 of 512
+starting process_t_map
+done
+finished sim map 247 of 512
+starting process_t_map
+done
+finished sim map 248 of 512
+starting process_t_map
+done
+finished sim map 249 of 512
+starting process_t_map
+done
+finished sim map 250 of 512
+starting process_t_map
+done
+finished sim map 251 of 512
+starting process_t_map
+done
+finished sim map 252 of 512
+starting process_t_map
+done
+finished sim map 253 of 512
+starting process_t_map
+done
+finished sim map 254 of 512
+starting process_t_map
+done
+finished sim map 255 of 512
+starting process_t_map
+done
+finished sim map 256 of 512
+starting process_t_map
+done
+finished sim map 257 of 512
+starting process_t_map
+done
+finished sim map 258 of 512
+starting process_t_map
+done
+finished sim map 259 of 512
+starting process_t_map
+done
+finished sim map 260 of 512
+starting process_t_map
+done
+finished sim map 261 of 512
+starting process_t_map
+done
+finished sim map 262 of 512
+starting process_t_map
+done
+finished sim map 263 of 512
+starting process_t_map
+done
+finished sim map 264 of 512
+starting process_t_map
+done
+finished sim map 265 of 512
+starting process_t_map
+done
+finished sim map 266 of 512
+starting process_t_map
+done
+finished sim map 267 of 512
+starting process_t_map
+done
+finished sim map 268 of 512
+starting process_t_map
+done
+finished sim map 269 of 512
+starting process_t_map
+done
+finished sim map 270 of 512
+starting process_t_map
+done
+finished sim map 271 of 512
+starting process_t_map
+done
+finished sim map 272 of 512
+starting process_t_map
+done
+finished sim map 273 of 512
+starting process_t_map
+done
+finished sim map 274 of 512
+starting process_t_map
+done
+finished sim map 275 of 512
+starting process_t_map
+done
+finished sim map 276 of 512
+starting process_t_map
+done
+finished sim map 277 of 512
+starting process_t_map
+done
+finished sim map 278 of 512
+starting process_t_map
+done
+finished sim map 279 of 512
+starting process_t_map
+done
+finished sim map 280 of 512
+starting process_t_map
+done
+finished sim map 281 of 512
+starting process_t_map
+done
+finished sim map 282 of 512
+starting process_t_map
+done
+finished sim map 283 of 512
+starting process_t_map
+done
+finished sim map 284 of 512
+starting process_t_map
+done
+finished sim map 285 of 512
+starting process_t_map
+done
+finished sim map 286 of 512
+starting process_t_map
+done
+finished sim map 287 of 512
+starting process_t_map
+done
+finished sim map 288 of 512
+starting process_t_map
+done
+finished sim map 289 of 512
+starting process_t_map
+done
+finished sim map 290 of 512
+starting process_t_map
+done
+finished sim map 291 of 512
+starting process_t_map
+done
+finished sim map 292 of 512
+starting process_t_map
+done
+finished sim map 293 of 512
+starting process_t_map
+done
+finished sim map 294 of 512
+starting process_t_map
+done
+finished sim map 295 of 512
+starting process_t_map
+done
+finished sim map 296 of 512
+starting process_t_map
+done
+finished sim map 297 of 512
+starting process_t_map
+done
+finished sim map 298 of 512
+starting process_t_map
+done
+finished sim map 299 of 512
+starting process_t_map
+done
+finished sim map 300 of 512
+starting process_t_map
+done
+finished sim map 301 of 512
+starting process_t_map
+done
+finished sim map 302 of 512
+starting process_t_map
+done
+finished sim map 303 of 512
+starting process_t_map
+done
+finished sim map 304 of 512
+starting process_t_map
+done
+finished sim map 305 of 512
+starting process_t_map
+done
+finished sim map 306 of 512
+starting process_t_map
+done
+finished sim map 307 of 512
+starting process_t_map
+done
+finished sim map 308 of 512
+starting process_t_map
+done
+finished sim map 309 of 512
+starting process_t_map
+done
+finished sim map 310 of 512
+starting process_t_map
+done
+finished sim map 311 of 512
+starting process_t_map
+done
+finished sim map 312 of 512
+starting process_t_map
+done
+finished sim map 313 of 512
+starting process_t_map
+done
+finished sim map 314 of 512
+starting process_t_map
+done
+finished sim map 315 of 512
+starting process_t_map
+done
+finished sim map 316 of 512
+starting process_t_map
+done
+finished sim map 317 of 512
+starting process_t_map
+done
+finished sim map 318 of 512
+starting process_t_map
+done
+finished sim map 319 of 512
+starting process_t_map
+done
+finished sim map 320 of 512
+starting process_t_map
+done
+finished sim map 321 of 512
+starting process_t_map
+done
+finished sim map 322 of 512
+starting process_t_map
+done
+finished sim map 323 of 512
+starting process_t_map
+done
+finished sim map 324 of 512
+starting process_t_map
+done
+finished sim map 325 of 512
+starting process_t_map
+done
+finished sim map 326 of 512
+starting process_t_map
+done
+finished sim map 327 of 512
+starting process_t_map
+done
+finished sim map 328 of 512
+starting process_t_map
+done
+finished sim map 329 of 512
+starting process_t_map
+done
+finished sim map 330 of 512
+starting process_t_map
+done
+finished sim map 331 of 512
+starting process_t_map
+done
+finished sim map 332 of 512
+starting process_t_map
+done
+finished sim map 333 of 512
+starting process_t_map
+done
+finished sim map 334 of 512
+starting process_t_map
+done
+finished sim map 335 of 512
+starting process_t_map
+done
+finished sim map 336 of 512
+starting process_t_map
+done
+finished sim map 337 of 512
+starting process_t_map
+done
+finished sim map 338 of 512
+starting process_t_map
+done
+finished sim map 339 of 512
+starting process_t_map
+done
+finished sim map 340 of 512
+starting process_t_map
+done
+finished sim map 341 of 512
+starting process_t_map
+done
+finished sim map 342 of 512
+starting process_t_map
+done
+finished sim map 343 of 512
+starting process_t_map
+done
+finished sim map 344 of 512
+starting process_t_map
+done
+finished sim map 345 of 512
+starting process_t_map
+done
+finished sim map 346 of 512
+starting process_t_map
+done
+finished sim map 347 of 512
+starting process_t_map
+done
+finished sim map 348 of 512
+starting process_t_map
+done
+finished sim map 349 of 512
+starting process_t_map
+done
+finished sim map 350 of 512
+starting process_t_map
+done
+finished sim map 351 of 512
+starting process_t_map
+done
+finished sim map 352 of 512
+starting process_t_map
+done
+finished sim map 353 of 512
+starting process_t_map
+done
+finished sim map 354 of 512
+starting process_t_map
+done
+finished sim map 355 of 512
+starting process_t_map
+done
+finished sim map 356 of 512
+starting process_t_map
+done
+finished sim map 357 of 512
+starting process_t_map
+done
+finished sim map 358 of 512
+starting process_t_map
+done
+finished sim map 359 of 512
+starting process_t_map
+done
+finished sim map 360 of 512
+starting process_t_map
+done
+finished sim map 361 of 512
+starting process_t_map
+done
+finished sim map 362 of 512
+starting process_t_map
+done
+finished sim map 363 of 512
+starting process_t_map
+done
+finished sim map 364 of 512
+starting process_t_map
+done
+finished sim map 365 of 512
+starting process_t_map
+done
+finished sim map 366 of 512
+starting process_t_map
+done
+finished sim map 367 of 512
+starting process_t_map
+done
+finished sim map 368 of 512
+starting process_t_map
+done
+finished sim map 369 of 512
+starting process_t_map
+done
+finished sim map 370 of 512
+starting process_t_map
+done
+finished sim map 371 of 512
+starting process_t_map
+done
+finished sim map 372 of 512
+starting process_t_map
+done
+finished sim map 373 of 512
+starting process_t_map
+done
+finished sim map 374 of 512
+starting process_t_map
+done
+finished sim map 375 of 512
+starting process_t_map
+done
+finished sim map 376 of 512
+starting process_t_map
+done
+finished sim map 377 of 512
+starting process_t_map
+done
+finished sim map 378 of 512
+starting process_t_map
+done
+finished sim map 379 of 512
+starting process_t_map
+done
+finished sim map 380 of 512
+starting process_t_map
+done
+finished sim map 381 of 512
+starting process_t_map
+done
+finished sim map 382 of 512
+starting process_t_map
+done
+finished sim map 383 of 512
+starting process_t_map
+done
+finished sim map 384 of 512
+starting process_t_map
+done
+finished sim map 385 of 512
+starting process_t_map
+done
+finished sim map 386 of 512
+starting process_t_map
+done
+finished sim map 387 of 512
+starting process_t_map
+done
+finished sim map 388 of 512
+starting process_t_map
+done
+finished sim map 389 of 512
+starting process_t_map
+done
+finished sim map 390 of 512
+starting process_t_map
+done
+finished sim map 391 of 512
+starting process_t_map
+done
+finished sim map 392 of 512
+starting process_t_map
+done
+finished sim map 393 of 512
+starting process_t_map
+done
+finished sim map 394 of 512
+starting process_t_map
+done
+finished sim map 395 of 512
+starting process_t_map
+done
+finished sim map 396 of 512
+starting process_t_map
+done
+finished sim map 397 of 512
+starting process_t_map
+done
+finished sim map 398 of 512
+starting process_t_map
+done
+finished sim map 399 of 512
+starting process_t_map
+done
+finished sim map 400 of 512
+starting process_t_map
+done
+finished sim map 401 of 512
+starting process_t_map
+done
+finished sim map 402 of 512
+starting process_t_map
+done
+finished sim map 403 of 512
+starting process_t_map
+done
+finished sim map 404 of 512
+starting process_t_map
+done
+finished sim map 405 of 512
+starting process_t_map
+done
+finished sim map 406 of 512
+starting process_t_map
+done
+finished sim map 407 of 512
+starting process_t_map
+done
+finished sim map 408 of 512
+starting process_t_map
+done
+finished sim map 409 of 512
+starting process_t_map
+done
+finished sim map 410 of 512
+starting process_t_map
+done
+finished sim map 411 of 512
+starting process_t_map
+done
+finished sim map 412 of 512
+starting process_t_map
+done
+finished sim map 413 of 512
+starting process_t_map
+done
+finished sim map 414 of 512
+starting process_t_map
+done
+finished sim map 415 of 512
+starting process_t_map
+done
+finished sim map 416 of 512
+starting process_t_map
+done
+finished sim map 417 of 512
+starting process_t_map
+done
+finished sim map 418 of 512
+starting process_t_map
+done
+finished sim map 419 of 512
+starting process_t_map
+done
+finished sim map 420 of 512
+starting process_t_map
+done
+finished sim map 421 of 512
+starting process_t_map
+done
+finished sim map 422 of 512
+starting process_t_map
+done
+finished sim map 423 of 512
+starting process_t_map
+done
+finished sim map 424 of 512
+starting process_t_map
+done
+finished sim map 425 of 512
+starting process_t_map
+done
+finished sim map 426 of 512
+starting process_t_map
+done
+finished sim map 427 of 512
+starting process_t_map
+done
+finished sim map 428 of 512
+starting process_t_map
+done
+finished sim map 429 of 512
+starting process_t_map
+done
+finished sim map 430 of 512
+starting process_t_map
+done
+finished sim map 431 of 512
+starting process_t_map
+done
+finished sim map 432 of 512
+starting process_t_map
+done
+finished sim map 433 of 512
+starting process_t_map
+done
+finished sim map 434 of 512
+starting process_t_map
+done
+finished sim map 435 of 512
+starting process_t_map
+done
+finished sim map 436 of 512
+starting process_t_map
+done
+finished sim map 437 of 512
+starting process_t_map
+done
+finished sim map 438 of 512
+starting process_t_map
+done
+finished sim map 439 of 512
+starting process_t_map
+done
+finished sim map 440 of 512
+starting process_t_map
+done
+finished sim map 441 of 512
+starting process_t_map
+done
+finished sim map 442 of 512
+starting process_t_map
+done
+finished sim map 443 of 512
+starting process_t_map
+done
+finished sim map 444 of 512
+starting process_t_map
+done
+finished sim map 445 of 512
+starting process_t_map
+done
+finished sim map 446 of 512
+starting process_t_map
+done
+finished sim map 447 of 512
+starting process_t_map
+done
+finished sim map 448 of 512
+starting process_t_map
+done
+finished sim map 449 of 512
+starting process_t_map
+done
+finished sim map 450 of 512
+starting process_t_map
+done
+finished sim map 451 of 512
+starting process_t_map
+done
+finished sim map 452 of 512
+starting process_t_map
+done
+finished sim map 453 of 512
+starting process_t_map
+done
+finished sim map 454 of 512
+starting process_t_map
+done
+finished sim map 455 of 512
+starting process_t_map
+done
+finished sim map 456 of 512
+starting process_t_map
+done
+finished sim map 457 of 512
+starting process_t_map
+done
+finished sim map 458 of 512
+starting process_t_map
+done
+finished sim map 459 of 512
+starting process_t_map
+done
+finished sim map 460 of 512
+starting process_t_map
+done
+finished sim map 461 of 512
+starting process_t_map
+done
+finished sim map 462 of 512
+starting process_t_map
+done
+finished sim map 463 of 512
+starting process_t_map
+done
+finished sim map 464 of 512
+starting process_t_map
+done
+finished sim map 465 of 512
+starting process_t_map
+done
+finished sim map 466 of 512
+starting process_t_map
+done
+finished sim map 467 of 512
+starting process_t_map
+done
+finished sim map 468 of 512
+starting process_t_map
+done
+finished sim map 469 of 512
+starting process_t_map
+done
+finished sim map 470 of 512
+starting process_t_map
+done
+finished sim map 471 of 512
+starting process_t_map
+done
+finished sim map 472 of 512
+starting process_t_map
+done
+finished sim map 473 of 512
+starting process_t_map
+done
+finished sim map 474 of 512
+starting process_t_map
+done
+finished sim map 475 of 512
+starting process_t_map
+done
+finished sim map 476 of 512
+starting process_t_map
+done
+finished sim map 477 of 512
+starting process_t_map
+done
+finished sim map 478 of 512
+starting process_t_map
+done
+finished sim map 479 of 512
+starting process_t_map
+done
+finished sim map 480 of 512
+starting process_t_map
+done
+finished sim map 481 of 512
+starting process_t_map
+done
+finished sim map 482 of 512
+starting process_t_map
+done
+finished sim map 483 of 512
+starting process_t_map
+done
+finished sim map 484 of 512
+starting process_t_map
+done
+finished sim map 485 of 512
+starting process_t_map
+done
+finished sim map 486 of 512
+starting process_t_map
+done
+finished sim map 487 of 512
+starting process_t_map
+done
+finished sim map 488 of 512
+starting process_t_map
+done
+finished sim map 489 of 512
+starting process_t_map
+done
+finished sim map 490 of 512
+starting process_t_map
+done
+finished sim map 491 of 512
+starting process_t_map
+done
+finished sim map 492 of 512
+starting process_t_map
+done
+finished sim map 493 of 512
+starting process_t_map
+done
+finished sim map 494 of 512
+starting process_t_map
+done
+finished sim map 495 of 512
+starting process_t_map
+done
+finished sim map 496 of 512
+starting process_t_map
+done
+finished sim map 497 of 512
+starting process_t_map
+done
+finished sim map 498 of 512
+starting process_t_map
+done
+finished sim map 499 of 512
+starting process_t_map
+done
+finished sim map 500 of 512
+starting process_t_map
+done
+finished sim map 501 of 512
+starting process_t_map
+done
+finished sim map 502 of 512
+starting process_t_map
+done
+finished sim map 503 of 512
+starting process_t_map
+done
+finished sim map 504 of 512
+starting process_t_map
+done
+finished sim map 505 of 512
+starting process_t_map
+done
+finished sim map 506 of 512
+starting process_t_map
+done
+finished sim map 507 of 512
+starting process_t_map
+done
+finished sim map 508 of 512
+starting process_t_map
+done
+finished sim map 509 of 512
+starting process_t_map
+done
+finished sim map 510 of 512
+starting process_t_map
+done
+finished sim map 511 of 512
+starting process_t_map
+done
+finished sim map 512 of 512
+done
+importing map: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits
+done
+generating zero_alm array
+done
+importing mask: /home/aroman/data/mask/planck_foreground.npy
+planck mask range: 0.0 1.0000000000000002
+done
+importing inverse variance mask: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits
+pipe.py:400: RuntimeWarning: divide by zero encountered in true_divide
+  std_t = np.sqrt(1./self.ivar_t)
+done
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_sdss_all.h5
+done
+No FKP l scale provided, using l_fkp=3000
+Applying supplemental mask
+Eta^-2 min/max: 0.000e+00 4.137e+05
+FKP min/max: 0.000e+00 7.330e-01
+pipe.py:589: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:623: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+starting process_t_map
+done
+a_tv2: 39.242
+a_t2v2: 1926.289
+ksz_unnormalized: 4.7614e+03
+running variance trial 1 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.229e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.387e+00
+4.761e+03 7.438e+02 4.761e+03 2.549e+02 1.413e+03
+running variance trial 2 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.367e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.965e+00
+4.761e+03 3.985e+03 4.761e+03 4.720e+01 1.391e+03
+running variance trial 3 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.155e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.168e+00
+4.761e+03 -5.747e+02 4.761e+03 3.182e+02 1.426e+03
+running variance trial 4 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.100e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.970e+00
+4.761e+03 -1.780e+03 2.213e+00 1.044e+02 1.436e+03
+running variance trial 5 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.198e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.317e+00
+4.761e+03 -2.985e+02 2.432e+00 5.629e+02 1.419e+03
+running variance trial 6 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.021e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.708e+00
+4.761e+03 -1.539e+02 2.646e+00 9.575e+02 1.450e+03
+running variance trial 7 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.360e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.886e+00
+4.761e+03 -4.071e+03 2.101e+00 4.623e+01 1.392e+03
+running variance trial 8 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.053e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.831e+00
+4.761e+03 -2.253e+03 2.149e+00 8.298e+01 1.444e+03
+running variance trial 9 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.186e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.261e+00
+4.761e+03 -1.401e+03 2.261e+00 1.324e+02 1.421e+03
+running variance trial 10 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.354e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.784e+00
+4.761e+03 -3.690e+03 2.167e+00 5.096e+01 1.393e+03
+running variance trial 11 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.101e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.968e+00
+4.761e+03 -9.376e+02 2.273e+00 2.013e+02 1.435e+03
+running variance trial 12 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.032e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.698e+00
+4.761e+03 6.988e+02 2.315e+00 2.624e+02 1.448e+03
+running variance trial 13 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.238e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.456e+00
+4.761e+03 -4.776e+03 2.125e+00 3.927e+01 1.412e+03
+running variance trial 14 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.103e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.976e+00
+4.761e+03 -1.189e+02 2.190e+00 1.097e+03 1.435e+03
+running variance trial 15 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.220e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.393e+00
+4.761e+03 3.370e+03 2.008e+00 5.569e+01 1.415e+03
+running variance trial 16 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.259e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.478e+00
+4.761e+03 -2.794e+03 2.027e+00 6.678e+01 1.408e+03
+running variance trial 17 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.323e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.695e+00
+4.761e+03 -1.960e+02 2.084e+00 7.524e+02 1.398e+03
+running variance trial 18 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.176e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.231e+00
+4.761e+03 5.176e+00 2.137e+00 1.439e+03 1.422e+03
+running variance trial 19 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.583e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.066e+01
+4.761e+03 -2.501e+02 2.192e+00 5.939e+02 1.358e+03
+running variance trial 20 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.282e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.568e+00
+4.761e+03 -4.920e+03 2.067e+00 3.803e+01 1.405e+03
+running variance trial 21 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.224e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.384e+00
+4.761e+03 -3.747e+03 2.049e+00 4.977e+01 1.414e+03
+running variance trial 22 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.071e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.911e+00
+4.761e+03 4.489e+02 2.076e+00 4.017e+02 1.441e+03
+running variance trial 23 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.361e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.883e+00
+4.761e+03 4.705e+03 1.882e+00 3.972e+01 1.392e+03
+running variance trial 24 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.390e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.002e+01
+4.761e+03 1.507e+02 1.917e+00 8.647e+02 1.387e+03
+running variance trial 25 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.225e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.465e+00
+4.761e+03 -2.777e+03 1.931e+00 6.775e+01 1.414e+03
+running variance trial 26 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.211e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.448e+00
+4.761e+03 -3.150e+03 1.936e+00 5.967e+01 1.416e+03
+running variance trial 27 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.132e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.151e+00
+4.761e+03 7.769e+02 1.956e+00 2.400e+02 1.430e+03
+running variance trial 28 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.243e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.479e+00
+4.761e+03 1.030e+03 1.971e+00 1.854e+02 1.411e+03
+running variance trial 29 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.115e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.981e+00
+4.761e+03 1.543e+03 1.975e+00 1.212e+02 1.433e+03
+running variance trial 30 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.080e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.012e+00
+4.761e+03 2.370e+03 1.956e+00 7.887e+01 1.439e+03
+running variance trial 31 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.239e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.406e+00
+4.761e+03 1.915e+03 1.955e+00 9.769e+01 1.412e+03
+running variance trial 32 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.299e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.684e+00
+4.761e+03 -2.379e+03 1.968e+00 7.810e+01 1.402e+03
+running variance trial 33 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.410e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.006e+01
+4.761e+03 9.313e+02 1.987e+00 1.971e+02 1.384e+03
+running variance trial 34 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.297e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.606e+00
+4.761e+03 -1.681e+03 2.010e+00 1.121e+02 1.402e+03
+running variance trial 35 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.149e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.086e+00
+4.761e+03 -2.459e+03 2.021e+00 7.616e+01 1.427e+03
+running variance trial 36 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.184e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.197e+00
+4.761e+03 1.899e+03 2.018e+00 9.788e+01 1.421e+03
+running variance trial 37 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.143e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.143e+00
+4.761e+03 2.651e+03 1.997e+00 7.032e+01 1.428e+03
+running variance trial 38 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.117e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.988e+00
+4.761e+03 1.294e+03 2.009e+00 1.445e+02 1.433e+03
+running variance trial 39 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.054e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.787e+00
+4.761e+03 6.666e+01 2.035e+00 1.304e+03 1.444e+03
+running variance trial 40 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.137e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.128e+00
+4.761e+03 1.642e+03 2.041e+00 1.134e+02 1.429e+03
+running variance trial 41 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.405e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.986e+00
+4.761e+03 -4.162e+03 2.002e+00 4.476e+01 1.385e+03
+running variance trial 42 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.351e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.892e+00
+4.761e+03 2.168e+03 1.998e+00 8.658e+01 1.394e+03
+running variance trial 43 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.300e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.673e+00
+4.761e+03 6.095e+03 1.868e+00 3.073e+01 1.402e+03
+running variance trial 44 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.166e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.152e+00
+4.761e+03 1.797e+03 1.876e+00 1.045e+02 1.424e+03
+running variance trial 45 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.147e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.098e+00
+4.761e+03 3.211e+02 1.896e+00 5.376e+02 1.428e+03
+running variance trial 46 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.157e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.158e+00
+4.761e+03 1.655e+03 1.906e+00 1.130e+02 1.426e+03
+running variance trial 47 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.205e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.378e+00
+4.761e+03 2.206e+02 1.926e+00 7.618e+02 1.418e+03
+running variance trial 48 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.091e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.964e+00
+4.761e+03 -2.063e+03 1.934e+00 9.076e+01 1.437e+03
+running variance trial 49 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.258e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.549e+00
+4.761e+03 4.930e+03 1.874e+00 3.792e+01 1.409e+03
+running variance trial 50 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.090e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.923e+00
+4.761e+03 1.023e+03 1.889e+00 1.823e+02 1.437e+03
+running variance trial 51 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.196e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.348e+00
+4.761e+03 -1.569e+03 1.901e+00 1.198e+02 1.419e+03
+running variance trial 52 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.104e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.008e+00
+4.761e+03 1.872e+03 1.909e+00 1.003e+02 1.435e+03
+running variance trial 53 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.331e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.675e+00
+4.761e+03 3.381e+03 1.894e+00 5.510e+01 1.397e+03
+running variance trial 54 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.100e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.941e+00
+4.761e+03 2.190e+03 1.899e+00 8.537e+01 1.436e+03
+running variance trial 55 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.306e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.639e+00
+4.761e+03 3.770e+03 1.879e+00 4.975e+01 1.401e+03
+running variance trial 56 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.083e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.917e+00
+4.761e+03 -1.820e+03 1.886e+00 1.030e+02 1.439e+03
+running variance trial 57 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.149e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.150e+00
+4.761e+03 -3.132e+02 1.903e+00 5.672e+02 1.427e+03
+running variance trial 58 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.200e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.316e+00
+4.761e+03 3.347e+03 1.892e+00 5.592e+01 1.418e+03
+running variance trial 59 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.151e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.050e+00
+4.761e+03 -2.790e+03 1.887e+00 6.690e+01 1.427e+03
+running variance trial 60 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.119e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.085e+00
+4.761e+03 -3.595e+00 1.902e+00 1.449e+03 1.432e+03
+running variance trial 61 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.514e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.044e+01
+4.761e+03 -5.251e+03 1.850e+00 3.575e+01 1.368e+03
+running variance trial 62 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.159e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.165e+00
+4.761e+03 3.905e+02 1.865e+00 4.439e+02 1.425e+03
+running variance trial 63 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.207e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.312e+00
+4.761e+03 2.825e+02 1.880e+00 5.938e+02 1.417e+03
+running variance trial 64 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.239e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.384e+00
+4.761e+03 -2.340e+03 1.882e+00 8.015e+01 1.412e+03
+running variance trial 65 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.298e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.695e+00
+4.761e+03 3.785e+03 1.865e+00 4.961e+01 1.402e+03
+running variance trial 66 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.264e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.561e+00
+4.761e+03 4.562e+03 1.836e+00 4.109e+01 1.408e+03
+running variance trial 67 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.134e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.072e+00
+4.761e+03 -2.913e+02 1.849e+00 6.004e+02 1.430e+03
+running variance trial 68 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.201e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.278e+00
+4.761e+03 -3.750e+03 1.833e+00 4.992e+01 1.418e+03
+running variance trial 69 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.177e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.256e+00
+4.761e+03 -8.901e+02 1.845e+00 2.093e+02 1.422e+03
+running variance trial 70 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.053e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.772e+00
+4.761e+03 -1.969e+03 1.850e+00 9.525e+01 1.444e+03
+running variance trial 71 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.078e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.903e+00
+4.761e+03 -8.694e+02 1.862e+00 2.126e+02 1.439e+03
+running variance trial 72 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.302e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.689e+00
+4.761e+03 3.839e+03 1.846e+00 4.889e+01 1.401e+03
+running variance trial 73 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.067e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.826e+00
+4.761e+03 -7.458e+02 1.858e+00 2.467e+02 1.441e+03
+running variance trial 74 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.074e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.783e+00
+4.761e+03 1.361e+03 1.867e+00 1.373e+02 1.440e+03
+running variance trial 75 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.160e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.202e+00
+4.761e+03 1.144e+03 1.877e+00 1.601e+02 1.425e+03
+running variance trial 76 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.152e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.166e+00
+4.761e+03 2.585e+03 1.878e+00 7.251e+01 1.427e+03
+running variance trial 77 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.138e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.100e+00
+4.761e+03 2.530e+03 1.879e+00 7.377e+01 1.429e+03
+running variance trial 78 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.316e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.771e+00
+4.761e+03 3.062e+03 1.875e+00 6.112e+01 1.399e+03
+running variance trial 79 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.269e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.620e+00
+4.761e+03 -3.629e+03 1.861e+00 5.176e+01 1.407e+03
+running variance trial 80 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.084e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.954e+00
+4.761e+03 -1.902e+03 1.865e+00 9.795e+01 1.438e+03
+running variance trial 81 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.533e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.048e+01
+4.761e+03 -3.032e+03 1.860e+00 6.211e+01 1.365e+03
+running variance trial 82 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.156e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.145e+00
+4.761e+03 1.010e+03 1.870e+00 1.841e+02 1.426e+03
+running variance trial 83 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.292e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.658e+00
+4.761e+03 -2.472e+03 1.870e+00 7.569e+01 1.403e+03
+running variance trial 84 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.159e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.173e+00
+4.761e+03 6.746e+02 1.880e+00 2.715e+02 1.425e+03
+running variance trial 85 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.168e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.216e+00
+4.761e+03 -9.573e+02 1.890e+00 1.953e+02 1.424e+03
+running variance trial 86 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.105e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.993e+00
+4.761e+03 -1.016e+02 1.901e+00 1.101e+03 1.435e+03
+running variance trial 87 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.560e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.055e+01
+4.761e+03 5.716e+03 1.858e+00 3.276e+01 1.361e+03
+running variance trial 88 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.546e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.064e+01
+4.761e+03 3.300e+03 1.852e+00 5.641e+01 1.363e+03
+running variance trial 89 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.193e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.334e+00
+4.761e+03 -3.277e+03 1.844e+00 5.695e+01 1.420e+03
+running variance trial 90 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.127e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.119e+00
+4.761e+03 3.325e+03 1.839e+00 5.639e+01 1.431e+03
+running variance trial 91 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.426e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.014e+01
+4.761e+03 -6.615e+02 1.848e+00 2.674e+02 1.382e+03
+running variance trial 92 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.056e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.809e+00
+4.761e+03 1.050e+02 1.858e+00 1.099e+03 1.443e+03
+running variance trial 93 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.259e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.538e+00
+4.761e+03 -1.560e+02 1.868e+00 9.267e+02 1.409e+03
+running variance trial 94 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.176e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.296e+00
+4.761e+03 -2.995e+02 1.878e+00 5.691e+02 1.422e+03
+running variance trial 95 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.347e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.877e+00
+4.761e+03 -5.317e+03 1.844e+00 3.534e+01 1.394e+03
+running variance trial 96 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.096e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.916e+00
+4.761e+03 1.107e+03 1.852e+00 1.692e+02 1.436e+03
+running variance trial 97 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.140e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.105e+00
+4.761e+03 -1.242e+03 1.859e+00 1.489e+02 1.429e+03
+running variance trial 98 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.299e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.674e+00
+4.761e+03 -4.490e+02 1.868e+00 4.193e+02 1.402e+03
+running variance trial 99 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.162e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.185e+00
+4.761e+03 3.918e+02 1.877e+00 4.483e+02 1.425e+03
+running variance trial 100 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.384e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.932e+00
+4.761e+03 3.465e+03 1.870e+00 5.381e+01 1.388e+03
+running variance trial 101 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.493e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.039e+01
+4.761e+03 -2.443e+03 1.870e+00 7.609e+01 1.371e+03
+running variance trial 102 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.173e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.204e+00
+4.761e+03 7.652e+02 1.879e+00 2.438e+02 1.423e+03
+running variance trial 103 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.193e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.148e+00
+4.761e+03 1.820e+02 1.888e+00 8.228e+02 1.420e+03
+running variance trial 104 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.271e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.479e+00
+4.761e+03 3.301e+03 1.882e+00 5.690e+01 1.407e+03
+running variance trial 105 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.120e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.995e+00
+4.761e+03 1.001e+03 1.890e+00 1.878e+02 1.432e+03
+running variance trial 106 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.157e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.251e+00
+4.761e+03 1.869e+03 1.895e+00 1.006e+02 1.426e+03
+running variance trial 107 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.621e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.084e+01
+4.761e+03 -6.225e+03 1.849e+00 3.016e+01 1.352e+03
+running variance trial 108 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.342e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.869e+00
+4.761e+03 5.019e+02 1.858e+00 3.531e+02 1.395e+03
+running variance trial 109 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.337e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.793e+00
+4.761e+03 7.056e+01 1.866e+00 1.168e+03 1.396e+03
+running variance trial 110 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.171e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.242e+00
+4.761e+03 4.439e+02 1.875e+00 4.136e+02 1.423e+03
+running variance trial 111 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.127e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.995e+00
+4.761e+03 -8.626e+02 1.882e+00 2.145e+02 1.431e+03
+running variance trial 112 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.330e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.680e+00
+4.761e+03 -4.476e+03 1.864e+00 4.176e+01 1.397e+03
+running variance trial 113 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.249e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.493e+00
+4.761e+03 1.185e+03 1.870e+00 1.581e+02 1.410e+03
+running variance trial 114 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.186e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.265e+00
+4.761e+03 -3.884e+03 1.859e+00 4.820e+01 1.421e+03
+running variance trial 115 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.119e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.051e+00
+4.761e+03 -1.083e+02 1.867e+00 1.114e+03 1.432e+03
+running variance trial 116 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.245e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.509e+00
+4.761e+03 -1.199e+02 1.876e+00 1.144e+03 1.411e+03
+running variance trial 117 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.148e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.070e+00
+4.761e+03 -2.128e+03 1.878e+00 8.816e+01 1.427e+03
+running variance trial 118 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.167e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.205e+00
+4.761e+03 -3.151e+03 1.874e+00 5.940e+01 1.424e+03
+running variance trial 119 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.059e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.839e+00
+4.761e+03 1.504e+02 1.882e+00 9.492e+02 1.443e+03
+running variance trial 120 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.324e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.753e+00
+4.761e+03 4.726e+03 1.862e+00 3.968e+01 1.398e+03
+running variance trial 121 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.429e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.009e+01
+4.761e+03 3.523e+03 1.856e+00 5.306e+01 1.381e+03
+running variance trial 122 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.177e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.182e+00
+4.761e+03 -7.893e+02 1.862e+00 2.307e+02 1.422e+03
+running variance trial 123 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.121e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.118e+00
+4.761e+03 -1.147e+03 1.868e+00 1.624e+02 1.432e+03
+running variance trial 124 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.316e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.641e+00
+4.761e+03 -2.800e+03 1.867e+00 6.723e+01 1.399e+03
+running variance trial 125 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.173e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.256e+00
+4.761e+03 1.003e+03 1.873e+00 1.853e+02 1.423e+03
+running variance trial 126 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.506e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.039e+01
+4.761e+03 -4.729e+03 1.855e+00 3.972e+01 1.369e+03
+running variance trial 127 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.147e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.182e+00
+4.761e+03 2.751e+03 1.854e+00 6.820e+01 1.427e+03
+running variance trial 128 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.286e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.570e+00
+4.761e+03 5.056e+03 1.834e+00 3.694e+01 1.404e+03
+running variance trial 129 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.189e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.269e+00
+4.761e+03 2.088e+03 1.836e+00 8.963e+01 1.420e+03
+running variance trial 130 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.155e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.094e+00
+4.761e+03 -9.112e+02 1.842e+00 2.021e+02 1.426e+03
+running variance trial 131 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.218e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.254e+00
+4.761e+03 7.763e+02 1.849e+00 2.419e+02 1.415e+03
+running variance trial 132 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.196e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.306e+00
+4.761e+03 9.711e+02 1.855e+00 1.915e+02 1.419e+03
+running variance trial 133 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.279e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.520e+00
+4.761e+03 3.657e+02 1.862e+00 4.763e+02 1.405e+03
+running variance trial 134 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.116e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.006e+00
+4.761e+03 -1.016e+03 1.868e+00 1.844e+02 1.433e+03
+running variance trial 135 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.113e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.937e+00
+4.761e+03 7.475e+02 1.874e+00 2.452e+02 1.433e+03
+running variance trial 136 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.155e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.166e+00
+4.761e+03 -1.498e+03 1.879e+00 1.257e+02 1.426e+03
+running variance trial 137 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.400e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.011e+01
+4.761e+03 -2.399e+03 1.879e+00 7.831e+01 1.386e+03
+running variance trial 138 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.309e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.786e+00
+4.761e+03 6.848e+02 1.886e+00 2.798e+02 1.400e+03
+running variance trial 139 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.397e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.003e+01
+4.761e+03 -4.026e+03 1.875e+00 4.670e+01 1.386e+03
+running variance trial 140 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.140e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.070e+00
+4.761e+03 -3.555e+03 1.869e+00 5.263e+01 1.429e+03
+running variance trial 141 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.131e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.048e+00
+4.761e+03 -2.274e+03 1.871e+00 8.226e+01 1.430e+03
+running variance trial 142 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.360e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.920e+00
+4.761e+03 3.876e+02 1.877e+00 4.720e+02 1.392e+03
+running variance trial 143 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.060e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.848e+00
+4.761e+03 2.648e+03 1.876e+00 7.092e+01 1.443e+03
+running variance trial 144 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.202e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.299e+00
+4.761e+03 1.688e+02 1.883e+00 9.186e+02 1.418e+03
+running variance trial 145 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.164e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.197e+00
+4.761e+03 3.111e+03 1.879e+00 6.002e+01 1.424e+03
+running variance trial 146 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.147e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.114e+00
+4.761e+03 2.545e+03 1.879e+00 7.336e+01 1.427e+03
+running variance trial 147 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.104e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.965e+00
+4.761e+03 2.413e+02 1.885e+00 6.420e+02 1.435e+03
+running variance trial 148 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.218e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.328e+00
+4.761e+03 -1.637e+03 1.889e+00 1.146e+02 1.415e+03
+running variance trial 149 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.245e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.427e+00
+4.761e+03 8.792e+02 1.895e+00 2.127e+02 1.411e+03
+running variance trial 150 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.085e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.863e+00
+4.761e+03 -3.756e+02 1.901e+00 4.691e+02 1.438e+03
+running variance trial 151 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.222e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.444e+00
+4.761e+03 2.837e+03 1.899e+00 6.558e+01 1.415e+03
+running variance trial 152 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.154e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.217e+00
+4.761e+03 1.973e+03 1.902e+00 9.470e+01 1.426e+03
+running variance trial 153 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.212e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.292e+00
+4.761e+03 -6.726e+02 1.908e+00 2.800e+02 1.416e+03
+running variance trial 154 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.092e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.932e+00
+4.761e+03 1.110e+03 1.913e+00 1.695e+02 1.437e+03
+running variance trial 155 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.380e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.980e+00
+4.761e+03 -6.480e+03 1.878e+00 2.890e+01 1.389e+03
+running variance trial 156 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.267e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.628e+00
+4.761e+03 5.074e+03 1.860e+00 3.694e+01 1.407e+03
+running variance trial 157 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.060e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.785e+00
+4.761e+03 1.286e+03 1.865e+00 1.455e+02 1.443e+03
+running variance trial 158 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.100e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.996e+00
+4.761e+03 -2.300e+03 1.866e+00 8.171e+01 1.436e+03
+running variance trial 159 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.187e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.288e+00
+4.761e+03 -2.820e+03 1.864e+00 6.635e+01 1.421e+03
+running variance trial 160 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.242e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.536e+00
+4.761e+03 -3.938e+03 1.856e+00 4.737e+01 1.411e+03
+running variance trial 161 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.268e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.511e+00
+4.761e+03 2.897e+02 1.862e+00 5.699e+02 1.407e+03
+running variance trial 162 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.150e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.104e+00
+4.761e+03 -7.093e+02 1.867e+00 2.573e+02 1.427e+03
+running variance trial 163 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.184e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.216e+00
+4.761e+03 -2.343e+03 1.868e+00 8.011e+01 1.421e+03
+running variance trial 164 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.077e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.864e+00
+4.761e+03 1.660e+03 1.872e+00 1.120e+02 1.440e+03
+running variance trial 165 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.212e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.355e+00
+4.761e+03 1.554e+03 1.875e+00 1.192e+02 1.416e+03
+running variance trial 166 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.077e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.836e+00
+4.761e+03 9.880e+02 1.880e+00 1.883e+02 1.440e+03
+running variance trial 167 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.492e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.039e+01
+4.761e+03 6.264e+03 1.852e+00 2.986e+01 1.372e+03
+running variance trial 168 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.168e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.237e+00
+4.761e+03 1.279e+03 1.856e+00 1.476e+02 1.424e+03
+running variance trial 169 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.282e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.620e+00
+4.761e+03 -5.697e+03 1.835e+00 3.277e+01 1.405e+03
+running variance trial 170 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.349e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.746e+00
+4.761e+03 4.318e+03 1.825e+00 4.326e+01 1.394e+03
+running variance trial 171 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.172e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.162e+00
+4.761e+03 1.442e+03 1.829e+00 1.284e+02 1.423e+03
+running variance trial 172 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.068e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.815e+00
+4.761e+03 7.536e+01 1.834e+00 1.247e+03 1.441e+03
+running variance trial 173 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.301e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.619e+00
+4.761e+03 7.500e+02 1.839e+00 2.379e+02 1.402e+03
+running variance trial 174 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.422e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.022e+01
+4.761e+03 2.123e+03 1.841e+00 8.751e+01 1.382e+03
+running variance trial 175 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.211e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.364e+00
+4.761e+03 -4.054e+03 1.833e+00 4.617e+01 1.417e+03
+running variance trial 176 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.160e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.177e+00
+4.761e+03 1.776e+03 1.836e+00 1.050e+02 1.425e+03
+running variance trial 177 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.226e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.428e+00
+4.761e+03 2.615e+03 1.836e+00 7.191e+01 1.414e+03
+running variance trial 178 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.269e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.584e+00
+4.761e+03 -2.589e+03 1.836e+00 7.235e+01 1.407e+03
+running variance trial 179 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.243e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.469e+00
+4.761e+03 -1.219e+03 1.840e+00 1.502e+02 1.411e+03
+running variance trial 180 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.142e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.104e+00
+4.761e+03 3.963e+03 1.833e+00 4.722e+01 1.428e+03
+running variance trial 181 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.106e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.988e+00
+4.761e+03 -2.056e+03 1.835e+00 9.073e+01 1.434e+03
+running variance trial 182 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.223e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.336e+00
+4.761e+03 -6.631e+02 1.840e+00 2.843e+02 1.415e+03
+running variance trial 183 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.251e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.539e+00
+4.761e+03 3.783e+03 1.834e+00 4.933e+01 1.410e+03
+running variance trial 184 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.392e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.958e+00
+4.761e+03 -3.852e+03 1.828e+00 4.880e+01 1.387e+03
+running variance trial 185 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.025e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.778e+00
+4.761e+03 -1.825e+02 1.833e+00 8.469e+02 1.449e+03
+running variance trial 186 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.227e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.456e+00
+4.761e+03 1.981e+03 1.835e+00 9.483e+01 1.414e+03
+running variance trial 187 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.113e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.010e+00
+4.761e+03 1.376e+03 1.839e+00 1.346e+02 1.433e+03
+running variance trial 188 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.185e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.192e+00
+4.761e+03 -1.900e+02 1.844e+00 8.646e+02 1.421e+03
+running variance trial 189 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.182e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.264e+00
+4.761e+03 -6.452e+01 1.849e+00 1.324e+03 1.421e+03
+running variance trial 190 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.062e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.778e+00
+4.761e+03 -1.325e+03 1.852e+00 1.413e+02 1.442e+03
+running variance trial 191 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.102e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.966e+00
+4.761e+03 -1.993e+03 1.854e+00 9.353e+01 1.435e+03
+running variance trial 192 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.225e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.378e+00
+4.761e+03 -1.430e+03 1.857e+00 1.306e+02 1.414e+03
+running variance trial 193 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.159e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.177e+00
+4.761e+03 1.672e+03 1.860e+00 1.123e+02 1.425e+03
+running variance trial 194 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.291e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.707e+00
+4.761e+03 2.693e+03 1.860e+00 6.957e+01 1.403e+03
+running variance trial 195 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.135e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.065e+00
+4.761e+03 8.537e+02 1.864e+00 2.192e+02 1.429e+03
+running variance trial 196 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.064e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.905e+00
+4.761e+03 -1.466e+03 1.867e+00 1.279e+02 1.442e+03
+running variance trial 197 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.089e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.953e+00
+4.761e+03 -7.508e+02 1.871e+00 2.399e+02 1.438e+03
+running variance trial 198 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.225e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.512e+00
+4.761e+03 -4.291e+03 1.863e+00 4.371e+01 1.414e+03
+running variance trial 199 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.107e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.948e+00
+4.761e+03 -2.573e+03 1.863e+00 7.243e+01 1.434e+03
+running variance trial 200 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.304e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.695e+00
+4.761e+03 4.864e+03 1.851e+00 3.848e+01 1.401e+03
+running variance trial 201 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.296e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.668e+00
+4.761e+03 -1.646e+03 1.853e+00 1.141e+02 1.402e+03
+running variance trial 202 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.123e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.018e+00
+4.761e+03 1.169e+03 1.857e+00 1.586e+02 1.432e+03
+running variance trial 203 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.199e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.339e+00
+4.761e+03 2.239e+03 1.858e+00 8.304e+01 1.419e+03
+running variance trial 204 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.094e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.916e+00
+4.761e+03 2.267e+02 1.863e+00 7.287e+02 1.437e+03
+running variance trial 205 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.259e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.434e+00
+4.761e+03 2.579e+03 1.863e+00 7.249e+01 1.409e+03
+running variance trial 206 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.248e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.557e+00
+4.761e+03 -3.746e+03 1.857e+00 4.988e+01 1.410e+03
+running variance trial 207 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.365e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.959e+00
+4.761e+03 -3.764e+03 1.852e+00 4.999e+01 1.391e+03
+running variance trial 208 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.104e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.901e+00
+4.761e+03 2.858e+03 1.851e+00 6.546e+01 1.435e+03
+running variance trial 209 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.142e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.125e+00
+4.761e+03 1.813e+03 1.853e+00 1.023e+02 1.428e+03
+running variance trial 210 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.178e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.168e+00
+4.761e+03 -2.262e+03 1.854e+00 8.270e+01 1.422e+03
+running variance trial 211 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.250e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.411e+00
+4.761e+03 -4.610e+03 1.845e+00 4.065e+01 1.410e+03
+running variance trial 212 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.095e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.850e+00
+4.761e+03 7.153e+02 1.849e+00 2.572e+02 1.437e+03
+running variance trial 213 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.159e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.105e+00
+4.761e+03 1.497e+03 1.851e+00 1.250e+02 1.425e+03
+running variance trial 214 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.224e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.411e+00
+4.761e+03 2.096e+02 1.856e+00 7.110e+02 1.414e+03
+running variance trial 215 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.104e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.962e+00
+4.761e+03 -1.643e+03 1.858e+00 1.130e+02 1.435e+03
+running variance trial 216 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.105e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.987e+00
+4.761e+03 5.578e+02 1.862e+00 3.213e+02 1.435e+03
+running variance trial 217 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.221e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.406e+00
+4.761e+03 4.991e+02 1.867e+00 3.660e+02 1.415e+03
+running variance trial 218 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.162e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.174e+00
+4.761e+03 -4.082e+02 1.871e+00 4.443e+02 1.425e+03
+running variance trial 219 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.227e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.390e+00
+4.761e+03 -3.109e+02 1.875e+00 5.472e+02 1.414e+03
+running variance trial 220 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.246e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.487e+00
+4.761e+03 -1.089e+03 1.878e+00 1.679e+02 1.411e+03
+running variance trial 221 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.103e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.988e+00
+4.761e+03 -3.281e+03 1.876e+00 5.721e+01 1.435e+03
+running variance trial 222 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.283e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.600e+00
+4.761e+03 3.735e+03 1.871e+00 5.024e+01 1.405e+03
+running variance trial 223 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.216e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.283e+00
+4.761e+03 1.068e+02 1.875e+00 1.130e+03 1.416e+03
+running variance trial 224 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.169e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.255e+00
+4.761e+03 -2.261e+03 1.876e+00 8.302e+01 1.424e+03
+running variance trial 225 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.117e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.011e+00
+4.761e+03 2.863e+03 1.875e+00 6.525e+01 1.433e+03
+running variance trial 226 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.314e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.724e+00
+4.761e+03 -3.671e+03 1.870e+00 5.072e+01 1.399e+03
+running variance trial 227 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.196e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.370e+00
+4.761e+03 1.757e+03 1.872e+00 1.067e+02 1.419e+03
+running variance trial 228 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.180e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.215e+00
+4.761e+03 -3.715e+03 1.868e+00 5.033e+01 1.422e+03
+running variance trial 229 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.181e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.169e+00
+4.761e+03 1.788e+02 1.872e+00 8.016e+02 1.422e+03
+running variance trial 230 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.284e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.571e+00
+4.761e+03 5.186e+02 1.876e+00 3.622e+02 1.404e+03
+running variance trial 231 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.091e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.944e+00
+4.761e+03 -2.035e+03 1.877e+00 9.191e+01 1.437e+03
+running variance trial 232 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.287e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.704e+00
+4.761e+03 -4.680e+03 1.868e+00 4.001e+01 1.404e+03
+running variance trial 233 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.091e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.954e+00
+4.761e+03 7.222e+02 1.871e+00 2.533e+02 1.437e+03
+running variance trial 234 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.174e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.326e+00
+4.761e+03 -3.469e+03 1.868e+00 5.394e+01 1.423e+03
+running variance trial 235 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.094e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.951e+00
+4.761e+03 -7.142e+02 1.872e+00 2.611e+02 1.437e+03
+running variance trial 236 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.212e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.341e+00
+4.761e+03 -1.087e+03 1.875e+00 1.711e+02 1.416e+03
+running variance trial 237 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.084e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.912e+00
+4.761e+03 1.193e+03 1.878e+00 1.571e+02 1.438e+03
+running variance trial 238 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.205e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.360e+00
+4.761e+03 6.847e+02 1.882e+00 2.669e+02 1.418e+03
+running variance trial 239 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.229e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.456e+00
+4.761e+03 6.056e+02 1.885e+00 3.095e+02 1.413e+03
+running variance trial 240 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.491e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 1.035e+01
+4.761e+03 -6.875e+03 1.861e+00 2.729e+01 1.372e+03
+running variance trial 241 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.207e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.363e+00
+4.761e+03 -1.373e+03 1.864e+00 1.357e+02 1.417e+03
+running variance trial 242 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.092e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.948e+00
+4.761e+03 1.241e+03 1.867e+00 1.507e+02 1.437e+03
+running variance trial 243 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.274e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.489e+00
+4.761e+03 -2.652e+03 1.867e+00 7.039e+01 1.406e+03
+running variance trial 244 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.212e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.392e+00
+4.761e+03 3.136e+02 1.871e+00 5.657e+02 1.416e+03
+running variance trial 245 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.142e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.100e+00
+4.761e+03 -1.287e+03 1.874e+00 1.456e+02 1.428e+03
+running variance trial 246 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.167e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.116e+00
+4.761e+03 -1.528e+03 1.876e+00 1.229e+02 1.424e+03
+running variance trial 247 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.154e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.124e+00
+4.761e+03 -7.761e+02 1.880e+00 2.393e+02 1.426e+03
+running variance trial 248 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.276e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.534e+00
+4.761e+03 3.837e+03 1.875e+00 4.859e+01 1.406e+03
+running variance trial 249 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.327e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.719e+00
+4.761e+03 2.459e+03 1.875e+00 7.653e+01 1.397e+03
+running variance trial 250 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.161e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.253e+00
+4.761e+03 5.992e+02 1.878e+00 2.992e+02 1.425e+03
+running variance trial 251 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.171e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.127e+00
+4.761e+03 2.593e+03 1.878e+00 7.192e+01 1.423e+03
+running variance trial 252 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.241e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.425e+00
+4.761e+03 1.192e+03 1.880e+00 1.544e+02 1.412e+03
+running variance trial 253 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.205e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.349e+00
+4.761e+03 -8.534e+02 1.884e+00 2.149e+02 1.417e+03
+running variance trial 254 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.210e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 9.328e+00
+4.761e+03 3.371e+03 1.881e+00 5.551e+01 1.417e+03
+running variance trial 255 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.085e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.898e+00
+4.761e+03 1.164e+03 1.884e+00 1.608e+02 1.438e+03
+running variance trial 256 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.109e+01 2.277e+01
+var(T_all), var(T_all_obs) 6.035e+00 8.963e+00
+4.761e+03 -1.227e+03 1.886e+00 1.526e+02 1.434e+03
+[ 7.43753951e+02  3.98490649e+03 -5.74697877e+02 -1.78028643e+03
+ -2.98532916e+02 -1.53905961e+02 -4.07062760e+03 -2.25274942e+03
+ -1.40117301e+03 -3.69043670e+03 -9.37573553e+02  6.98839113e+02
+ -4.77637852e+03 -1.18879931e+02  3.37007898e+03 -2.79364427e+03
+ -1.95958240e+02  5.17573781e+00 -2.50147550e+02 -4.91987961e+03
+ -3.74738338e+03  4.48915441e+02  4.70495859e+03  1.50653039e+02
+ -2.77701546e+03 -3.15013134e+03  7.76886141e+02  1.03000355e+03
+  1.54277562e+03  2.36990074e+03  1.91474577e+03 -2.37933124e+03
+  9.31316821e+02 -1.68061681e+03 -2.45910353e+03  1.89918341e+03
+  2.65112889e+03  1.29405221e+03  6.66594404e+01  1.64170488e+03
+ -4.16153499e+03  2.16769127e+03  6.09546266e+03  1.79663392e+03
+  3.21074573e+02  1.65469556e+03  2.20589151e+02 -2.06341203e+03
+  4.92992345e+03  1.02322732e+03 -1.56896898e+03  1.87174345e+03
+  3.38146246e+03  2.18987008e+03  3.76985929e+03 -1.81956193e+03
+ -3.13219445e+02  3.34691230e+03 -2.78996636e+03 -3.59534824e+00
+ -5.25053376e+03  3.90452102e+02  2.82509877e+02 -2.33991152e+03
+  3.78460562e+03  4.56214126e+03 -2.91277966e+02 -3.75048523e+03
+ -8.90123612e+02 -1.96949739e+03 -8.69425879e+02  3.83864293e+03
+ -7.45752051e+02  1.36086403e+03  1.14365864e+03  2.58499384e+03
+  2.52956393e+03  3.06166801e+03 -3.62933898e+03 -1.90202961e+03
+ -3.03234196e+03  1.00975239e+03 -2.47185334e+03  6.74598234e+02
+ -9.57306085e+02 -1.01632673e+02  5.71592662e+03  3.30021422e+03
+ -3.27701184e+03  3.32492210e+03 -6.61502362e+02  1.04954826e+02
+ -1.55993891e+02 -2.99460652e+02 -5.31654327e+03  1.10718311e+03
+ -1.24226398e+03 -4.49011931e+02  3.91766591e+02  3.46467526e+03
+ -2.44320000e+03  7.65151961e+02  1.81951433e+02  3.30098936e+03
+  1.00105387e+03  1.86859433e+03 -6.22505243e+03  5.01899638e+02
+  7.05550888e+01  4.43875172e+02 -8.62563665e+02 -4.47615078e+03
+  1.18490875e+03 -3.88382313e+03 -1.08294607e+02 -1.19878630e+02
+ -2.12812208e+03 -3.15119635e+03  1.50406831e+02  4.72604640e+03
+  3.52253156e+03 -7.89321101e+02 -1.14688913e+03 -2.79965321e+03
+  1.00345062e+03 -4.72856499e+03  2.75072188e+03  5.05639104e+03
+  2.08846051e+03 -9.11202584e+02  7.76263661e+02  9.71056961e+02
+  3.65697357e+02 -1.01562199e+03  7.47542241e+02 -1.49777127e+03
+ -2.39919660e+03  6.84754468e+02 -4.02577790e+03 -3.55487538e+03
+ -2.27442872e+03  3.87557884e+02  2.64807591e+03  1.68763045e+02
+  3.11149047e+03  2.54540151e+03  2.41268854e+02 -1.63705438e+03
+  8.79214567e+02 -3.75597012e+02  2.83747696e+03  1.97303928e+03
+ -6.72584892e+02  1.11034157e+03 -6.48042465e+03  5.07430627e+03
+  1.28638625e+03 -2.29961388e+03 -2.82037765e+03 -3.93837869e+03
+  2.89746503e+02 -7.09275134e+02 -2.34283664e+03  1.66023113e+03
+  1.55436458e+03  9.87951317e+02  6.26436220e+03  1.27858165e+03
+ -5.69724455e+03  4.31815453e+03  1.44198087e+03  7.53564997e+01
+  7.49993367e+02  2.12295097e+03 -4.05434830e+03  1.77611148e+03
+  2.61457965e+03 -2.58916125e+03 -1.21943351e+03  3.96305200e+03
+ -2.05595858e+03 -6.63078335e+02  3.78299499e+03 -3.85222384e+03
+ -1.82484155e+02  1.98147969e+03  1.37561234e+03 -1.89981169e+02
+ -6.45152095e+01 -1.32542866e+03 -1.99327277e+03 -1.42952141e+03
+  1.67196868e+03  2.69304103e+03  8.53685163e+02 -1.46599994e+03
+ -7.50835260e+02 -4.29113801e+03 -2.57314634e+03  4.86350587e+03
+ -1.64550247e+03  1.16883112e+03  2.23901704e+03  2.26715769e+02
+  2.57891733e+03 -3.74634840e+03 -3.76366704e+03  2.85811492e+03
+  1.81331841e+03 -2.26240082e+03 -4.60993141e+03  7.15268394e+02
+  1.49705511e+03  2.09581088e+02 -1.64342068e+03  5.57826053e+02
+  4.99130620e+02 -4.08155135e+02 -3.10856896e+02 -1.08921305e+03
+ -3.28052019e+03  3.73529231e+03  1.06772894e+02 -2.26063980e+03
+  2.86304795e+03 -3.67100407e+03  1.75701633e+03 -3.71533465e+03
+  1.78791541e+02  5.18641511e+02 -2.03527206e+03 -4.68032396e+03
+  7.22166815e+02 -3.46868056e+03 -7.14220599e+02 -1.08684997e+03
+  1.19334248e+03  6.84731894e+02  6.05619775e+02 -6.87486012e+03
+ -1.37347119e+03  1.24065006e+03 -2.65247820e+03  3.13577182e+02
+ -1.28709050e+03 -1.52804418e+03 -7.76119557e+02  3.83650250e+03
+  2.45852701e+03  5.99221284e+02  2.59332471e+03  1.19222835e+03
+ -8.53427234e+02  3.37139846e+03  1.16384943e+03 -1.22684577e+03]
+a_ksz, a_sigma, <a>, sigma: 4.76e+03, 2.52e+03, -4.70e+01, 1.89e+00
+Traceback (most recent call last):
+  File "pipe.py", line 1273, in <module>
+    ahat_sdss, a_sigma_sdss = do_single_eval(act_pipe, gal_pipe, r_fkp=1.56, r_lwidth=0.62, ntrial=256, suppl_mask=sdss_footprint)
+TypeError: cannot unpack non-iterable NoneType object
+importing map: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits
+done
+generating zero_alm array
+done
+importing mask: /home/aroman/data/mask/planck_foreground.npy
+planck mask range: 0.0 1.0000000000000002
+done
+importing inverse variance mask: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits
+pipe.py:400: RuntimeWarning: divide by zero encountered in true_divide
+  std_t = np.sqrt(1./self.ivar_t)
+done
+importing galaxy catalog /home/aroman/data/vr_summaries/v01_sdss_all.h5
+done
+No FKP l scale provided, using l_fkp=3000
+Applying supplemental mask
+Eta^-2 min/max: 0.000e+00 4.137e+05
+FKP min/max: 0.000e+00 7.330e-01
+pipe.py:589: RuntimeWarning: divide by zero encountered in true_divide
+  cl_test = 300. * 2 * np.pi * np.power(1./self.ells_sim, 2)
+pipe.py:623: RuntimeWarning: divide by zero encountered in true_divide
+  self.fl = cl_tilde / cl_test
+starting process_t_map
+done
+a_tv2: -1.200
+a_t2v2: -1.195
+ksz_unnormalized: -2.9356e+00
+running variance trial 1 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.151e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.096e+00
+-2.936e+00 1.027e+01 -2.936e+00 -8.932e-01 -8.796e-01
+running variance trial 2 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.160e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.122e+00
+-2.936e+00 -6.673e+00 -2.936e+00 -8.919e-01 -8.787e-01
+running variance trial 3 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.214e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.371e+00
+-2.936e+00 1.088e+01 -2.936e+00 -8.833e-01 -8.730e-01
+running variance trial 4 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.189e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.159e+00
+-2.936e+00 -1.309e+00 -3.900e-01 -8.915e-01 -8.756e-01
+running variance trial 5 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.371e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.906e+00
+-2.936e+00 9.366e+00 -4.101e-01 -8.676e-01 -8.572e-01
+running variance trial 6 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.313e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.707e+00
+-2.936e+00 -1.912e+01 -2.678e-01 -8.763e-01 -8.629e-01
+running variance trial 7 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.076e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 8.805e+00
+-2.936e+00 -1.374e-01 -2.891e-01 -9.006e-01 -8.876e-01
+running variance trial 8 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.177e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.190e+00
+-2.936e+00 -3.903e+00 -3.056e-01 -8.877e-01 -8.769e-01
+running variance trial 9 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.210e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.249e+00
+-2.936e+00 9.372e+00 -3.080e-01 -8.821e-01 -8.735e-01
+running variance trial 10 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.204e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.324e+00
+-2.936e+00 -5.928e-02 -3.244e-01 -8.856e-01 -8.741e-01
+running variance trial 11 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.156e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.044e+00
+-2.936e+00 -7.442e+00 -3.279e-01 -8.900e-01 -8.791e-01
+running variance trial 12 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.171e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.153e+00
+-2.936e+00 -2.899e+00 -3.409e-01 -8.912e-01 -8.775e-01
+running variance trial 13 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.197e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.236e+00
+-2.936e+00 -5.758e+00 -3.492e-01 -8.840e-01 -8.748e-01
+running variance trial 14 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.156e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.126e+00
+-2.936e+00 1.212e+00 -3.618e-01 -8.906e-01 -8.791e-01
+running variance trial 15 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.353e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.836e+00
+-2.936e+00 -7.049e+00 -3.665e-01 -8.683e-01 -8.590e-01
+running variance trial 16 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.321e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.830e+00
+-2.936e+00 -4.838e+00 -3.756e-01 -8.730e-01 -8.622e-01
+running variance trial 17 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.284e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.524e+00
+-2.936e+00 4.048e+00 -3.823e-01 -8.772e-01 -8.658e-01
+running variance trial 18 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.223e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.276e+00
+-2.936e+00 4.870e+00 -3.875e-01 -8.836e-01 -8.721e-01
+running variance trial 19 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.402e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.912e+00
+-2.936e+00 -4.057e+00 -3.958e-01 -8.650e-01 -8.542e-01
+running variance trial 20 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.266e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.478e+00
+-2.936e+00 -4.532e+00 -4.034e-01 -8.745e-01 -8.677e-01
+running variance trial 21 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.138e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.048e+00
+-2.936e+00 -8.621e+00 -4.027e-01 -8.899e-01 -8.810e-01
+running variance trial 22 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.461e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.024e+01
+-2.936e+00 -1.665e+01 -3.758e-01 -8.601e-01 -8.485e-01
+running variance trial 23 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.386e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.001e+01
+-2.936e+00 5.492e+00 -3.769e-01 -8.710e-01 -8.558e-01
+running variance trial 24 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.461e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.013e+01
+-2.936e+00 -2.229e+01 -3.386e-01 -8.575e-01 -8.486e-01
+running variance trial 25 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.386e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.965e+00
+-2.936e+00 2.919e+00 -3.429e-01 -8.645e-01 -8.557e-01
+running variance trial 26 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.610e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.081e+01
+-2.936e+00 1.153e+01 -3.334e-01 -8.497e-01 -8.347e-01
+running variance trial 27 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.274e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.386e+00
+-2.936e+00 1.169e+01 -3.260e-01 -8.782e-01 -8.669e-01
+running variance trial 28 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.121e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 8.991e+00
+-2.936e+00 3.661e+00 -3.302e-01 -8.941e-01 -8.828e-01
+running variance trial 29 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.425e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.005e+01
+-2.936e+00 -1.728e+01 -3.183e-01 -8.665e-01 -8.520e-01
+running variance trial 30 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.620e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.079e+01
+-2.936e+00 1.024e+01 -3.152e-01 -8.402e-01 -8.338e-01
+running variance trial 31 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.204e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.306e+00
+-2.936e+00 -4.031e+00 -3.199e-01 -8.870e-01 -8.741e-01
+running variance trial 32 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.248e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.443e+00
+-2.936e+00 1.057e+01 -3.168e-01 -8.787e-01 -8.695e-01
+running variance trial 33 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.186e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.184e+00
+-2.936e+00 -3.872e+00 -3.213e-01 -8.835e-01 -8.760e-01
+running variance trial 34 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.042e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 8.759e+00
+-2.936e+00 3.341e+00 -3.250e-01 -9.035e-01 -8.914e-01
+running variance trial 35 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.095e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 8.887e+00
+-2.936e+00 1.087e+01 -3.220e-01 -8.955e-01 -8.857e-01
+running variance trial 36 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.307e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.633e+00
+-2.936e+00 -8.263e+00 -3.234e-01 -8.737e-01 -8.636e-01
+running variance trial 37 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.347e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.788e+00
+-2.936e+00 5.562e+00 -3.257e-01 -8.696e-01 -8.596e-01
+running variance trial 38 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.290e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.566e+00
+-2.936e+00 4.589e+00 -3.286e-01 -8.770e-01 -8.652e-01
+running variance trial 39 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.163e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.084e+00
+-2.936e+00 2.474e+00 -3.325e-01 -8.902e-01 -8.783e-01
+running variance trial 40 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.348e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.875e+00
+-2.936e+00 6.338e+00 -3.343e-01 -8.713e-01 -8.595e-01
+running variance trial 41 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.326e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.602e+00
+-2.936e+00 -1.054e+01 -3.329e-01 -8.728e-01 -8.616e-01
+running variance trial 42 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.424e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 1.004e+01
+-2.936e+00 -3.357e+01 -2.916e-01 -8.645e-01 -8.521e-01
+running variance trial 43 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.158e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.137e+00
+-2.936e+00 3.121e+00 -2.944e-01 -8.917e-01 -8.789e-01
+running variance trial 44 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.048e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 8.746e+00
+-2.936e+00 6.387e+00 -2.959e-01 -8.989e-01 -8.908e-01
+running variance trial 45 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.314e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.616e+00
+-2.936e+00 -2.770e-01 -2.992e-01 -8.773e-01 -8.629e-01
+running variance trial 46 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.215e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.303e+00
+-2.936e+00 1.292e+01 -2.961e-01 -8.822e-01 -8.730e-01
+running variance trial 47 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.365e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.800e+00
+-2.936e+00 3.032e+00 -2.989e-01 -8.723e-01 -8.578e-01
+running variance trial 48 of 256
+starting process_t_map
+done
+var(T), var(T_obs) 4.265e+01 2.250e+01
+var(T_all), var(T_all_obs) 6.004e+00 9.590e+00
+-2.936e+00 5.034e+00 -3.010e-01 -8.806e-01 -8.678e-01
+running variance trial 49 of 256
+^CTraceback (most recent call last):
+  File "pipe.py", line 1273, in <module>
+    ahat_sdss, a_sigma_sdss = do_single_eval(act_pipe, gal_pipe, r_fkp=1.56, r_lwidth=0.62, ntrial=256, suppl_mask=sdss_footprint)
+  File "pipe.py", line 1138, in do_single_eval
+    ahat, a_sigma = compute_estimator(act_pipes, gal_pipe, r_lwidth=r_lwidth, do_mc=True, ntrial=ntrial)
+  File "pipe.py", line 1061, in compute_estimator
+    t_alm = pipe.get_cl_tilde_alm()
+  File "pipe.py", line 566, in get_cl_tilde_alm
+    ret_alm = rand_alm(self.cl_tt_sim[:self.lmax + 1])
+  File "/home/aroman/anaconda3/envs/ksz/lib/python3.8/site-packages/pixell/curvedsky.py", line 62, in rand_alm
+    alm = rand_alm_white(ainfo, pre=[wps.shape[0]], seed=seed, dtype=dtype, m_major=m_major)
+  File "/home/aroman/anaconda3/envs/ksz/lib/python3.8/site-packages/pixell/curvedsky.py", line 654, in rand_alm_white
+    fill_gauss(alm)
+  File "/home/aroman/anaconda3/envs/ksz/lib/python3.8/site-packages/pixell/curvedsky.py", line 635, in fill_gauss
+    arr[i:i+bsize] = np.random.standard_normal(min(bsize,arr.size-i))
+KeyboardInterrupt
+^C

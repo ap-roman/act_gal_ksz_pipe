@@ -1,5 +1,6 @@
 import os
-from os.path import isfile
+from os import listdir
+from os.path import isfile, join
 
 import h5py
 from astropy.io import fits
@@ -29,6 +30,11 @@ def get_ext(path):
     return path.split('.')[-1]
 
 
+def get_files(basedir, ext='h5'):
+    paths = os.listdir(basedir)
+    return [join(basedir,p) for p in paths if get_ext(p) == ext]
+
+
 def import_gals(gal_cat, zerr_cut=0.05):
         print(f'importing galaxy catalog {gal_cat}')
 
@@ -39,9 +45,17 @@ def import_gals(gal_cat, zerr_cut=0.05):
         # TODO add old fits handler?
         z_mask = None
         with h5py.File(gal_cat, 'r') as f:
-            vr_s = f['vr_smoothed'][:]
-            vr_u = f['vr_unsmoothed'][:]
-            zerrs = f['zerr'][:]
+            # handle legacy v00 files
+            if 'vr_smoothed' in f:
+                vr_s = f['vr_smoothed'][:]
+                vr_u = f['vr_unsmoothed'][:]
+                zerrs = f['zerr'][:]
+            else:
+                vr_s = f['vr'][:]
+                vr_u = vr_s.copy()
+                zerrs = vr_s.copy()
+                zerrs[:] = 0.
+
             decs =  f['dec_deg'][:] * (np.pi / 180)
             ras =  f['ra_deg'][:] * (np.pi / 180)
 
@@ -158,17 +172,63 @@ def save_gal_summaries(ref_map_path, catalog_files, gal_out_path):
         inds_dset[:,:] = inds_all
     # fin
 
+
+cat_base = '/home/aroman/data/vr_source/v01/desils/'
+sdss_base = '/home/aroman/data/vr_source/v01/sdss/'
+
+v0_base = '/home/aroman/data/vr_source/v00/'
+v0_set = get_files(v0_base)
+north_cmass = cat_base + 'v01_desils_north_cmass.h5'
+south_cmass = cat_base + 'v01_desils_south_cmass.h5'
+north_lowz = cat_base + 'v01_desils_north_lowz.h5'
+south_lowz = cat_base + 'v01_desils_south_lowz.h5'
+
+v0_north_cmass = v0_base + 'v00_sdss_cmass_north.h5'
+v0_south_cmass = v0_base + 'v00_sdss_cmass_south.h5'
+v0_north_lowz = v0_base + 'v00_sdss_lowz_north.h5'
+v0_south_lowz = v0_base + 'v00_sdss_lowz_south.h5'
+
+sdss_cmass_north = sdss_base + 'v01_sdss_cmass_north.h5'
+sdss_cmass_south = sdss_base + 'v01_sdss_cmass_south.h5'
+sdss_lowz_north = sdss_base + 'v01_sdss_lowz_north.h5'
+sdss_lowz_south = sdss_base + 'v01_sdss_lowz_south.h5'
+
+# catalog_sets = [[north_cmass, north_lowz, south_cmass, south_lowz],
+#                 [north_cmass, north_lowz],
+#                 [south_cmass, south_lowz],
+#                 [north_cmass, south_cmass],
+#                 [north_lowz, south_lowz],
+#                 [south_cmass,],
+#                 [north_cmass,],
+#                 v0_set,
+#                 [v0_north_cmass,],
+#                 [v0_south_cmass,],
+#                 [v0_north_lowz,],
+#                 [v0_south_lowz,]]
+
+catalog_sets = [[sdss_cmass_north, sdss_cmass_south, sdss_lowz_north, sdss_lowz_south],
+                [sdss_cmass_north, sdss_cmass_south],
+                [sdss_lowz_north, sdss_lowz_south],
+                [sdss_cmass_north, sdss_lowz_north],
+                [sdss_cmass_south, sdss_lowz_south]]
+
+set_names = ['sdss_all', 'sdss_cmass', 'sdss_lowz', 'sdss_north', 'sdss_south']
+
+# set_names = ['all', 'north', 'south', 'cmass', 'lowz', 'south_cmass', 'north_cmass',
+#              'v0_all', 'v0_cmass_north', 'v0_cmass_south', 'v0_lowz_north', 'v0_lowz_south']
+
 # TODO: move this to a script folder
 def do_gal_summaries():
-    cat_base = '/home/aroman/data/vr_source/v01/desils/'
-    catalog_files = [cat_base + 'v01_desils_north_cmass.h5',
-                     cat_base + 'v01_desils_south_cmass.h5',
-                     cat_base + 'v01_desils_north_lowz.h5',
-                     cat_base + 'v01_desils_south_lowz.h5']
-    # catalog_files = [cat_base + 'v01_desils_north_cmass.h5',]
+    # catalog_files = [cat_base + 'v01_desils_north_cmass.h5',
+    #                  cat_base + 'v01_desils_south_cmass.h5',
+    #                  cat_base + 'v01_desils_north_lowz.h5',
+    #                  cat_base + 'v01_desils_south_lowz.h5']
+    gal_out_base = '/home/aroman/data/vr_summaries/v01_'
     ref_map_path = '/home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
-    gal_out_path = '/home/aroman/data/vr_summaries/vr_summaries.h5'
-    save_gal_summaries(ref_map_path, catalog_files, gal_out_path)
+    # catalog_files = [cat_base + 'v01_desils_north_cmass.h5',]
+    for cat_set, set_name in zip(catalog_sets, set_names):
+        gal_out_path = gal_out_base + set_name + '.h5'
+        save_gal_summaries(ref_map_path, cat_set, gal_out_path)
 
 
 def make_map_sims(ntrial, cl_ref, gal_file, out_path):

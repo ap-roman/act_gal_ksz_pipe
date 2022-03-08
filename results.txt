@@ -1,0 +1,12 @@
+v00 reruns (analytic variance)
+
+sdss cmass north: 6.6
+sdss cmass south: 6.19
+sdss lowz north: 4.88
+sdss lowz south: 4.38
+combined: 11.08 (11.18 analytic)
+
+v01 reruns:
+north (combined): 0.90
+south (combined): 10.68
+combined: 10.34 (?)

@@ -1,0 +1,5 @@
+TODO:
+
+Footprint constrained noise comparison
+MC Database
+Make scripts directory/write scripts
