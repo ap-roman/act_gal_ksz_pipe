@@ -156,12 +156,13 @@ def get_ext(path):
 
 
 class GalCat:
-    def __init__(self, name, gal_inds, vr_s, vr_u, zerrs):
+    def __init__(self, name, gal_inds, vr_s, vr_u, zerrs, zs):
         self.name = name
         self.gal_inds = gal_inds
         self.vr_s = vr_s
         self.vr_u = vr_u
         self.zerrs = zerrs
+        self.zs = zs
 
         self.ngal = self.gal_inds.shape[0]
 
@@ -207,7 +208,7 @@ class GalPipe:
                 grp = summaries[fname]
                 gal_cat = GalCat(fname, grp['gal_inds'][:,:],
                                  grp['vr_s'][:], grp['vr_u'][:],
-                                 grp['zerr'][:])
+                                 grp['zerr'][:], grp['z'][:])
                 self.gal_summaries[fname] = gal_cat
                 self.ngal += gal_cat.ngal
                 
@@ -1046,7 +1047,7 @@ def compute_estimator(act_pipes, gal_pipe, r_lwidth=1., do_mc=False, ntrial=64):
     # plt.savefig('plots/cl_xz_binned.png')
     # plt.close()
     if not do_mc:
-        return 0.5 * (a_ksz / a_std_sq + a_ksz / a_std_ind)
+        return 0.5 * a_ksz * (1/a_std_sq + 1/a_std_ind), 2 * (a_std_sq * a_std_ind) / (a_std_sq + a_std_ind)
     else:
         a_samples = np.zeros(ntrial)
 
@@ -1339,12 +1340,12 @@ if __name__ == "__main__":
     # ahat, a_sigma = do_single_eval(act_pipe, gal_pipe, r_fkp=1.56, r_lwidth=0.62, ntrial=256, suppl_mask=None)
     # print(f'SDSS footprint constrained ahat: {ahat_sdss:.2f}, a_sigma: {a_sigma_sdss:.3e}')
     # print(f'SDSS footprint constrained ahat: {ahat:.2f}, a_sigma: {a_sigma:.3e}')
-    # do_parameter_loop(act_pipe, gal_pipe, range_fkp=[1.56, 1.56], n_fkp=1,
-    #                   range_lwidth=[0.62, 0.62], n_width=1)
+    do_parameter_loop(act_pipe, gal_pipe, range_fkp=[1.56, 1.56], n_fkp=1,
+                      range_lwidth=[0.62, 0.62], n_width=1)
     # make_xz_plot(act_pipe, gal_pipe, r_fkp=0.62, ncl_bins=256,
                    # do_trials=False, ntrial=512, lmax_plot=8000)
 
     # check_xz_gaussian('cl_xz_averaged_256.npy', act_pipe.beam[:,1])
     # check_xz_gaussian('cl_xz_averaged_256.npy')
 
-    plot_zz(act_pipe, gal_pipe)
+    # plot_zz(act_pipe, gal_pipe)

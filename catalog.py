@@ -44,6 +44,7 @@ def import_gals(gal_cat, zerr_cut=0.05):
 
         # TODO add old fits handler?
         z_mask = None
+        # WARN: DESI and SDSS data has different formats!!!
         with h5py.File(gal_cat, 'r') as f:
             # handle legacy v00 files
             if 'vr_smoothed' in f:
@@ -55,6 +56,7 @@ def import_gals(gal_cat, zerr_cut=0.05):
                 vr_u = vr_s.copy()
                 zerrs = vr_s.copy()
                 zerrs[:] = 0.
+            zs = f['z'][:]
 
             decs =  f['dec_deg'][:] * (np.pi / 180)
             ras =  f['ra_deg'][:] * (np.pi / 180)
@@ -79,13 +81,13 @@ def import_gals(gal_cat, zerr_cut=0.05):
         assert z_mask is not None
         print("done")
 
-        return gal_pos, vr_s[z_mask], vr_u[z_mask], zerrs[z_mask]
+        return gal_pos, vr_s[z_mask], vr_u[z_mask], zerrs[z_mask], zs[z_mask]
 
 
-def make_vr_list(ref_map_t, gal_pos, vr_s, vr_u, zerr):
+# Using a reference ACT map, keep only galaxies that are within the field
+def make_vr_list(ref_map_t, gal_pos, vr_s, vr_u, zerr, zs):
     gal_inds = []
     vr_list = []
-
 
     n_gal = len(vr_s)
 
@@ -105,7 +107,7 @@ def make_vr_list(ref_map_t, gal_pos, vr_s, vr_u, zerr):
 
     assert len(gal_inds) == len(vr_s[in_bounds])
 
-    return gal_inds, vr_s[in_bounds], vr_u[in_bounds], zerr[in_bounds]
+    return gal_inds, vr_s[in_bounds], vr_u[in_bounds], zerr[in_bounds], zs[in_bounds]
 
 
 # generate a fixed-format summary file to streamline the handling of 
@@ -116,10 +118,10 @@ def make_gal_summaries(ref_map_path, catalog_files, zerr_cut=0.05):
 
     summaries = {}
     for cat in catalog_files:
-        gal_pos, vr_s_raw, vr_u_raw, zerr_raw = import_gals(cat, zerr_cut=0.05)
-        gal_inds, vr_s, vr_u, zerr = make_vr_list(ref_map_t, gal_pos, vr_s_raw, vr_u_raw, zerr_raw)
+        gal_pos, vr_s_raw, vr_u_raw, zerr_raw, zs_raw = import_gals(cat, zerr_cut=0.05)
+        gal_inds, vr_s, vr_u, zerr, zs = make_vr_list(ref_map_t, gal_pos, vr_s_raw, vr_u_raw, zerr_raw, zs_raw)
         fname = get_fname(cat)
-        summaries[fname] = [gal_inds, vr_s, vr_u, zerr]
+        summaries[fname] = [gal_inds, vr_s, vr_u, zerr, zs]
 
     return summaries
 
@@ -143,7 +145,7 @@ def save_gal_summaries(ref_map_path, catalog_files, gal_out_path):
 
             print(f'loading summary: {fname}')
 
-            gal_inds, vr_s, vr_u, zerr = summaries[fname]
+            gal_inds, vr_s, vr_u, zerr, zs = summaries[fname]
             n_gal = len(gal_inds)
             n_gal_total += n_gal
 
@@ -162,6 +164,9 @@ def save_gal_summaries(ref_map_path, catalog_files, gal_out_path):
             print('loading unsmoothed velocities')
             vr_u_ds = gal_grp.create_dataset('vr_u', (n_gal,), dtype=float)
             vr_u_ds[:] = vr_u
+            print('loading redshifts')
+            z_ds = gal_grp.create_dataset('z', (n_gal,), dtype=float)
+            z_ds[:] = zs
             print('loading redshift errors')
             zerr_ds = gal_grp.create_dataset('zerr', (n_gal,), dtype=float)
             zerr_ds[:] = zerr
