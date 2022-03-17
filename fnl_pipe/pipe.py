@@ -156,8 +156,10 @@ def get_ext(path):
 
 
 class GalCat:
-    def __init__(self, name, gal_inds, vr_s, vr_u, zerrs, zs):
+    def __init__(self, name, gal_pos, gal_inds,
+                 vr_s, vr_u, zerrs, zs):
         self.name = name
+        self.gal_pos = gal_pos
         self.gal_inds = gal_inds
         self.vr_s = vr_s
         self.vr_u = vr_u
@@ -165,6 +167,7 @@ class GalCat:
         self.zs = zs
 
         self.ngal = self.gal_inds.shape[0]
+
 
 def make_sky_map(data, filename, title=''):
     plt.figure(dpi=300.)
@@ -206,7 +209,7 @@ class GalPipe:
 
             for fname in fnames:
                 grp = summaries[fname]
-                gal_cat = GalCat(fname, grp['gal_inds'][:,:],
+                gal_cat = GalCat(fname, grp['gal_pos'][:,:], grp['gal_inds'][:,:],
                                  grp['vr_s'][:], grp['vr_u'][:],
                                  grp['zerr'][:], grp['z'][:])
                 self.gal_summaries[fname] = gal_cat
@@ -229,19 +232,24 @@ class GalPipe:
 
     def make_vr_list(self):
         self.gal_inds = np.empty((self.ngal,2), dtype=int)
+        self.gal_pos = np.empty((self.ngal,2))
         self.vr_list = np.empty(self.ngal)
+        self.zs = np.empty(self.ngal)
 
         i = 0
         for fname in self.gal_summaries.keys():
             gal_cat = self.gal_summaries[fname]
             ngal = gal_cat.ngal
             self.gal_inds[i:i+ngal] = gal_cat.gal_inds
+            self.gal_pos[i:i+ngal] = gal_cat.gal_pos
             self.vr_list[i:i+ngal] = gal_cat.vr_s
+            self.zs[i:i+ngal] = gal_cat.zs
             i += ngal
 
         self.gal_inds = self.gal_inds.T
-        self.vr_list = self.vr_list.T
+        self.gal_pos = self.gal_pos.T
         self.ngal_in = self.ngal # rename ngal_in?
+
     # def make_vr_list(self, ref_map_t, make_alm=False):
     #     if make_alm:
     #         self.vr_alm = make_zero_alm(ref_map_t, lmax=self.lmax)
@@ -342,7 +350,7 @@ class GalPipe:
         print('Fraction of out-of-bounds galaxies: {:.2f}'.format(float(n_ob + 1) / ntrial))
 
 
-class ActCMBPipe:
+class ActPipe:
     def __init__(self, map_path, ivar_path, beam_path, fid_ksz_path, fid_cmb_path, planck_mask_path,
                  custom_l_weight=None,
                  fid_cib_path=None, diag_plots=False, l_fkp=3000, l_ksz=3000, lmax=LMAX, lmax_sim=LMAX_SIM):
@@ -737,6 +745,7 @@ class ActCMBPipe:
         # WARN: incompatible with custom l-weight?
         self.l_weight[:1500] = 0.
 
+    # TODO: test to make sure this agrees with the current MC sim maps
     def get_sim_map(self, l_weight=None):
         if l_weight is None:
             assert self.l_weight is not None
@@ -756,6 +765,10 @@ class ActCMBPipe:
         t_pseudo = self.process_t_map(t_map, l_weight)
         return t_pseudo
 
+    # helper function to extract the weighted map
+    def get_t_pseudo_hp(self):
+        assert self.l_weight is not None
+        return self.process_t_map(self.imap_t, l_weight=self.l_weight)
 
 def reproj_planck_map(map_inpath, mask_inpath, outpath, mode='GAL090', nside=PLANCK_NSIDE):
     imap = enmap.read_map(map_inpath)
@@ -773,33 +786,6 @@ def reproj_planck_map(map_inpath, mask_inpath, outpath, mode='GAL090', nside=PLA
     plt.savefig('plots/mask_test.pdf')
 
 
-# ksz spectrum source: https://arxiv.org/pdf/1301.0776.pdf
-# just a single-use throwaway function to generate an approximate kSZ spectrum
-def explore_pksz(r):
-    # n = 1025
-    # l = np.linspace(0,12000,n)
-    l = np.arange(LMAX)
-    y = 2.25*(1 - np.exp(-r*l))
-
-    plt.figure(dpi=300)
-    plt.plot(l,y)
-    plt.title('fiducial kSZ power')
-    plt.yscale('log')
-    plt.xlabel('l')
-    plt.axhline(1.)
-    plt.axvline(3000)
-    ax = plt.gca()
-    ax.set_aspect((1./6) * 11000)
-    plt.ylabel(r'$\frac{l(l+1)}{2\pi}C_l$')
-    plt.savefig('plots/ksz_power.pdf')
-
-    # out = np.empty((n-1,2))
-    out = np.empty((LMAX,2))
-    out[:,0] = l
-    out[:,1] = y # l (l+1)/2pi normalized
-    np.save(cl_ksz_path, out)
-
-
 def one_time_setup(data_path='/data/'):
     reproj_planck_map(map_path, planck_mask_inpath, planck_enmask_path, mode='GAL080')
 
@@ -807,6 +793,7 @@ def one_time_setup(data_path='/data/'):
 setup = False
 
 
+# TODO: should become a script
 def make_xz_plot(act_pipe, gal_pipe, r_fkp=0.62, r_lweight=1.56, 
                  do_trials=False, ntrial=4, ncl_bins=128, lmax_plot=None):
     pipe = act_pipe
@@ -1317,11 +1304,11 @@ if __name__ == "__main__":
 
     # TODO: loop over freqs
 
-    # act_pipe = ActCMBPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,
+    # act_pipe = ActPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,
     #                       planck_enmask_path,
     #                       custom_l_weight='cl_xz_averaged_256.npy', diag_plots=True, lmax=LMAX)
 
-    act_pipe = ActCMBPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,    
+    act_pipe = ActPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,    
                           planck_enmask_path,
                           custom_l_weight=None, diag_plots=True, lmax=LMAX)
 

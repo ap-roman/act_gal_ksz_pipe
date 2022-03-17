@@ -107,7 +107,7 @@ def make_vr_list(ref_map_t, gal_pos, vr_s, vr_u, zerr, zs):
 
     assert len(gal_inds) == len(vr_s[in_bounds])
 
-    return gal_inds, vr_s[in_bounds], vr_u[in_bounds], zerr[in_bounds], zs[in_bounds]
+    return gal_pos[in_bounds], gal_inds, vr_s[in_bounds], vr_u[in_bounds], zerr[in_bounds], zs[in_bounds]
 
 
 # generate a fixed-format summary file to streamline the handling of 
@@ -119,9 +119,9 @@ def make_gal_summaries(ref_map_path, catalog_files, zerr_cut=0.05):
     summaries = {}
     for cat in catalog_files:
         gal_pos, vr_s_raw, vr_u_raw, zerr_raw, zs_raw = import_gals(cat, zerr_cut=0.05)
-        gal_inds, vr_s, vr_u, zerr, zs = make_vr_list(ref_map_t, gal_pos, vr_s_raw, vr_u_raw, zerr_raw, zs_raw)
+        gal_pos, gal_inds, vr_s, vr_u, zerr, zs = make_vr_list(ref_map_t, gal_pos, vr_s_raw, vr_u_raw, zerr_raw, zs_raw)
         fname = get_fname(cat)
-        summaries[fname] = [gal_inds, vr_s, vr_u, zerr, zs]
+        summaries[fname] = [gal_pos, gal_inds, vr_s, vr_u, zerr, zs]
 
     return summaries
 
@@ -145,9 +145,13 @@ def save_gal_summaries(ref_map_path, catalog_files, gal_out_path):
 
             print(f'loading summary: {fname}')
 
-            gal_inds, vr_s, vr_u, zerr, zs = summaries[fname]
+            gal_pos, gal_inds, vr_s, vr_u, zerr, zs = summaries[fname]
             n_gal = len(gal_inds)
             n_gal_total += n_gal
+
+            print('loading galaxy positions')
+            pos = gal_grp.create_dataset('gal_pos', (n_gal, 2), dtype=float)
+            pos[:,:] = gal_pos
 
             print('loading galaxy indices')
             inds = gal_grp.create_dataset('gal_inds', (n_gal, 2), dtype=int)
@@ -215,9 +219,10 @@ catalog_sets = [[sdss_cmass_north, sdss_cmass_south, sdss_lowz_north, sdss_lowz_
                 [sdss_cmass_north, sdss_cmass_south],
                 [sdss_lowz_north, sdss_lowz_south],
                 [sdss_cmass_north, sdss_lowz_north],
-                [sdss_cmass_south, sdss_lowz_south]]
+                [sdss_cmass_south, sdss_lowz_south],
+                [sdss_cmass_north,]]
 
-set_names = ['sdss_all', 'sdss_cmass', 'sdss_lowz', 'sdss_north', 'sdss_south']
+set_names = ['sdss_all', 'sdss_cmass', 'sdss_lowz', 'sdss_north', 'sdss_south', 'sdss_cmass_north']
 
 # set_names = ['all', 'north', 'south', 'cmass', 'lowz', 'south_cmass', 'north_cmass',
 #              'v0_all', 'v0_cmass_north', 'v0_cmass_south', 'v0_lowz_north', 'v0_lowz_south']
