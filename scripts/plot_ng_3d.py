@@ -31,6 +31,7 @@ kszpipe_d0_path = kszpipe_path + 'delta0_DR12v5_CMASS_North.h5'
 # Parameters chosen ahead of time to maximize snr with this particular dataset
 R_FKP = 1.56
 R_LWIDTH = 0.62
+NTRIAL = 4
 
 if __name__ == "__main__":
     act_pipe = ActPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,    
@@ -77,4 +78,20 @@ if __name__ == "__main__":
     print('=============================================')
     print('3D pipeline results:')
     print(f'a_ksz: {alpha_3d / a_std:3e}, a_ksz_nonnorm: {alpha_3d:3e}')
+    print(f'2D/3D ratio: {alpha_2d/alpha_3d:3e}')
     print('=============================================')
+
+
+    res_2d = np.empty((NTRIAL,2))
+    res_3d = np.empty((NTRIAL,2))
+    for itrial in range(NTRIAL):
+        t_sim_map = act_pipe.get_sim_map()
+        t_sim_list = gal_pipe.get_t_list(t_sim_map)
+        a_ksz_2d = gal_pipe.compute_a_ksz(t_sim_map)
+        real_pipe.add_galaxies(t_list=t_sim_list, wipe=True)
+        a_ksz_3d = real_pipe.do_harmonic_sum()
+
+        print('=============================================')
+        print('trial results:')
+        print(f'a_ksz_2d: {a_ksz_2d / a_std:3e} a_ksz_3d: {a_ksz_3d / a_std:3e} 2d/3d: {a_ksz_2d / a_ksz_3d:3e}')
+        print('=============================================')

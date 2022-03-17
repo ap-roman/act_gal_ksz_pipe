@@ -57,6 +57,7 @@ class Padded3DPipe:
         self.box = None
         self.cosmology = cosmology
         self.init_real = False
+        self.init_d0 = False
     
     def _sky_to_comoving(self, ra, dec, z):
         r_co = self.cosmology.chi_z(z, check=True)
@@ -125,6 +126,7 @@ class Padded3DPipe:
         ki[2] = self.box.get_k_component(2, one_dimensional=True)[None, None, :] * k_grid
         self.ki = ki
         self.k_pre = 1j * self.ki / self.box.get_k2()[None, ...]
+
         # WARN: NAN!
         self.k_pre = np.nan_to_num(self.k_pre)
 
@@ -195,12 +197,14 @@ class Padded3DPipe:
         else:
             unit_r_list = unit_r(pos_list)
 
+        # TODO: check pos_list t_list shape compatibility
+
 
         ngal = pos_list.shape[1]
         if t_list is None:
             t_list = np.ones(ngal)
 
-        inds = np.floor(self.pos_to_ind(pos_list)).astype(int)
+        inds = (self.pos_to_ind(pos_list) + 0.5).astype(int)
 
         if wipe:
             self._init_buffers()
