@@ -1,5 +1,12 @@
 TODO:
 
 Footprint constrained noise comparison
-MC Database
-Make scripts directory/write scripts
+# MC Database
+	add estimator "hash" value
+	add fkp parameter field
+# Make scripts directory/write scripts
+
+# make transfer function
+
+Do a full accounting of how different datasets influence computation
+	figure out when to throw pre-generated data away/introduce checksums

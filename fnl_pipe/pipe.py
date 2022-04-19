@@ -23,6 +23,9 @@ from scipy import interpolate
 from scipy.interpolate import splev, splrep
 from scipy.optimize import minimize
 
+import os
+import time
+
 
 data_path = '/home/aroman/data/'
 act_path = data_path + 'act/'
@@ -155,9 +158,10 @@ def get_ext(path):
     return path.split('.')[-1]
 
 
+# TODO: streamline via fromfile/tofile methods
 class GalCat:
     def __init__(self, name, gal_pos, gal_inds,
-                 vr_s, vr_u, zerrs, zs):
+                 vr_s, vr_u, zerrs, zs, *, temp_sims=None):
         self.name = name
         self.gal_pos = gal_pos
         self.gal_inds = gal_inds
@@ -168,6 +172,14 @@ class GalCat:
 
         self.ngal = self.gal_inds.shape[0]
 
+        self.nsims = None
+        self.temp_sims = temp_sims
+        if self.temp_sims is not None:
+            self.nsims = len(self.temp_sims)
+
+    def has_sims(self, ):
+        return self.temp_sims is not None
+
 
 def make_sky_map(data, filename, title=''):
     plt.figure(dpi=300.)
@@ -175,7 +187,6 @@ def make_sky_map(data, filename, title=''):
     plt.imshow(data[::-1,:])
 
     print(plt.get_xticks())
-
 
     plt.savefig(filename)
     plt.close()
@@ -188,7 +199,10 @@ class GalPipe:
         self.catalog_path = catalog_path
         self.diag_plots = diag_plots
         self.ngal = 0
+        self.nsims = None
         self.ref_map_t = act_pipe.imap_t
+
+        self.init_lists = False
 
         if(import_now):
             self.import_data()
@@ -209,11 +223,19 @@ class GalPipe:
 
             for fname in fnames:
                 grp = summaries[fname]
+
+                temp_sims = None
+                if 'temp_sims' in grp:
+                    temp_sims = grp['temp_sims'][:]
+
                 gal_cat = GalCat(fname, grp['gal_pos'][:,:], grp['gal_inds'][:,:],
                                  grp['vr_s'][:], grp['vr_u'][:],
-                                 grp['zerr'][:], grp['z'][:])
+                                 grp['zerr'][:], grp['z'][:], temp_sims=temp_sims)
                 self.gal_summaries[fname] = gal_cat
                 self.ngal += gal_cat.ngal
+
+                if self.nsims is None: self.nsims = gal_cat.nsims
+                else: assert gal_cat.nsims == self.nsims
                 
                 if self.diag_plots and do_fkp_sum:
                     inds = grp['gal_inds'][:,:]
@@ -230,79 +252,82 @@ class GalPipe:
 
         print("done")
 
+    # Assumes either all summaries have sims with same nsims, or none do
     def make_vr_list(self):
         self.gal_inds = np.empty((self.ngal,2), dtype=int)
         self.gal_pos = np.empty((self.ngal,2))
         self.vr_list = np.empty(self.ngal)
         self.zs = np.empty(self.ngal)
 
+        if self.nsims is not None:
+            self.temp_sims = np.empty((self.nsims, self.ngal))
+        else:
+            self.temp_sims = None
+        self.summary_inds = {}
+
         i = 0
+
         for fname in self.gal_summaries.keys():
             gal_cat = self.gal_summaries[fname]
             ngal = gal_cat.ngal
+
+            these_inds = np.arange(i, i + ngal, 1)
+            self.summary_inds[fname] = these_inds
+
             self.gal_inds[i:i+ngal] = gal_cat.gal_inds
             self.gal_pos[i:i+ngal] = gal_cat.gal_pos
             self.vr_list[i:i+ngal] = gal_cat.vr_s
             self.zs[i:i+ngal] = gal_cat.zs
+
+            if self.nsims is not None:
+                self.temp_sims[:,i:i + ngal] = gal_cat.temp_sims
+
             i += ngal
 
         self.gal_inds = self.gal_inds.T
         self.gal_pos = self.gal_pos.T
         self.ngal_in = self.ngal # rename ngal_in?
 
-    # def make_vr_list(self, ref_map_t, make_alm=False):
-    #     if make_alm:
-    #         self.vr_alm = make_zero_alm(ref_map_t, lmax=self.lmax)
+        self.init_lists = True
 
-    #     self.vr_map = make_zero_map(ref_map_t)
+    # TODO: consider expanding scope to operate over specific summaries ?
+    def add_sims(self, act_pipe, nsims):
+        assert self.init_lists
 
-    #     angular_res = ref_map_t.wcs.wcs.cdelt[0] * np.pi / 180.
+        self.nsims = nsims
+        self.temp_sims = np.empty((nsims, self.ngal))
 
-    #     ngal = len(self.gal_pos)
+        # with h5py.File(self.catalog_path, 'rw') as f:
+        #     for fname in self.gal_summaries.keys()
+        #         grp = f[fname]
+        #         assert 'temp_sims' not in grp
 
-    #     corners = ref_map_t.corners()
+        for i in np.arange(nsims):
+            print(f'generating temp list {i} of {nsims}...')
+            t_list = self.get_t_list(act_pipe.get_sim_map())
 
-    #     if self.diag_plots:
-    #         plt.figure(dpi=300)
-    #         plt.scatter(self.gal_pos[:,1] * 180 / np.pi, self.gal_pos[:,0] * 180 / np.pi,
-    #                     marker='+', s=1)
-    #         plt.axhline(corners[0,0] * 180 / np.pi, color='red')
-    #         plt.axhline(corners[1,0] * 180 / np.pi, color='red')
-    #         # plt.axvline(corners[1,0] * 180 / np.pi, color='red')
-    #         # plt.axvline(corners[1,1] * 180 / np.pi, color='red')
-    #         plt.ylabel('Declination (deg)')
-    #         plt.xlabel('Right Ascension (deg)')
-    #         plt.savefig('plots/galaxy_locs.png')
-    #         plt.close()
+            for fname in self.gal_summaries.keys():
+                these_inds = self.summary_inds[fname]
+                self.temp_sims[i, these_inds] = t_list[these_inds]
 
-    #     gal_inds = []
-    #     vr_list = []
+        with h5py.File(self.catalog_path, 'r+') as f:
+            for fname in self.gal_summaries.keys():
+                grp = f['summaries'][fname]
 
-    #     n_ob = 0
+                # WARN: absolutely need to test the append code
+                i0 = 0
+                if 'temp_sims' in grp:
+                    ds = grp['temp_sims']
+                    i0 += ds.shape[0]
+                else:
+                    ds = grp.create_dataset('temp_sims', (nsims, self.ngal), 
+                                            maxshape=(None, self.ngal), dtype=float)
 
-    #     for i, (v_r, pos) in enumerate(zip(self.v_rad, self.gal_pos)):
-    #         dec, ra = pos
-    #         idec, ira = iround(ref_map_t.sky2pix((dec,ra)))
-    #         # idec, ira = self.vr_map.sky2pix((dec,ra))
+                if i0 + nsims >= ds.shape[0]:
+                    ds.resize(i0 + nsims, axis=0)
 
-    #         if not bounds_check((idec,ira), ref_map_t.shape):
-    #             # print(dec, ra, idec, ira)
-    #             n_ob += 1
-    #         else:
-    #             # TODO: check galaxy overlap?
-    #             gal_inds.append([idec, ira])
-    #             vr_list.append(v_r)
-    #             self.vr_map[idec, ira] += v_r
-    #             # this method is super inefficient
-    #             # self.vr_alm[:self.lmax + 1] += v_r * sph_harm(ms, ls, ra, dec)
-    #         # print('Processed galaxy {} of {}'.format(i + 1, ngal))
-    #     self.gal_inds = np.array(gal_inds).T
-    #     self.vr_list = np.array(vr_list)
-    #     self.ngal_in = ngal - n_ob
-    #     print('Fraction of out-of-bounds galaxies: {:.2f}'.format(float(n_ob + 1) / ngal))
-    #     if make_alm:
-    #         pixel_area = angular_res**2
-    #         self.vr_alm = map2alm(self.vr_map / pixel_area, lmax=self.lmax)
+                these_inds = self.summary_inds[fname]
+                ds[i0:i0 + nsims, these_inds] = self.temp_sims[:, these_inds]
 
     def get_t_list(self, t_map):
         return t_map[self.gal_inds[0,:], self.gal_inds[1,:]]
@@ -310,13 +335,6 @@ class GalPipe:
     def get_xz_list(self, t_map):
         t_gal_list = t_map[self.gal_inds[0,:], self.gal_inds[1,:]]
         return t_gal_list * self.vr_list
-
-    # def get_xz_map(self, t_map):
-    #     # ret_map = make_zero_map(t_map)
-    #     # # WARN: this is unsafe
-    #     # ret_map[self.gal_inds[0,:], self.gal_inds[1,:]] += self.vr_list
-    #     # ret_map *= t_map
-    #     return self.vr_map * t_map
 
     def compute_a_ksz(self, t_map):
         return self.get_xz_list(t_map).sum()
@@ -350,6 +368,116 @@ class GalPipe:
         print('Fraction of out-of-bounds galaxies: {:.2f}'.format(float(n_ob + 1) / ntrial))
 
 
+def ave_fl(fl, nave_fl=1):
+    lmax = len(fl) - 1
+    lmax_floor = nave_fl * (lmax // nave_fl)
+    fl_short = fl[1:lmax_floor + 1]
+    fl_ave = fl_short.reshape(lmax_floor // nave_fl, nave_fl).sum(axis=1) / nave_fl
+    ret_fl = np.empty(lmax + 1)
+
+    ret_fl[1:lmax_floor + 1] = np.repeat(fl_ave, nave_fl)
+    ret_fl[0] = fl_ave[0]
+
+    # WARN: problematic?
+    ret_fl[lmax_floor + 1:lmax + 1] = ret_fl[lmax_floor]
+
+    return ret_fl
+
+
+class Metadata2D:
+    def __init__(self, r_fkp, r_lwidth, cmb_fname, gal_fname):
+        self.r_fkp = r_fkp
+        self.r_lwidth = r_lwidth
+        self.cmb_fname = cmb_fname
+        self.gal_fname = gal_fname
+
+    @classmethod
+    def file_eq(cls, a, b):
+        return a.cmb_fname == b.cmb_fname and a.gal_fname == b.gal_fname
+
+    @classmethod
+    def transfer_eq(cls, a, b):
+        return a.r_fkp == b.r_fkp and cls.file_eq(a,b) 
+
+    @classmethod
+    def from_h5(cls, h5_file):
+        h5_grp = h5_file['sky_pipe_metadata']
+        attrs = h5_grp.attrs
+        r_fkp = attrs['r_fkp']
+        r_lwidth = attrs['r_lwidth']
+        cmb_fname = attrs['cmb_fname']
+        gal_fname = attrs['gal_fname']
+        return Metadata2D(r_fkp, r_lwidth, cmb_fname, gal_fname)
+
+    @classmethod
+    def to_h5(cls, metadata, h5_file):
+        grp = h5_file.create_group('sky_pipe_metadata')
+        grp.attrs['r_fkp'] = metadata.r_fkp
+        grp.attrs['r_lwidth'] = metadata.r_lwidth
+        grp.attrs['cmb_fname'] = metadata.cmb_fname
+        grp.attrs['gal_fname'] = metadata.gal_fname 
+
+
+# TODO: in general, make a better accounting of how different datasets influence
+# the computation and create metadata structures to make it impossible to
+# mix intermediate data products from different datasets
+
+
+# The transfer function depends on the FKP map
+class TransferFunction:
+    def __init__(self, nl, nl_tilde, ntrial_nl, fl,
+                 nave_fl, ntrial_fl, metadata, bl2=None, do_ave=False):
+        assert metadata is not None # need the metadata for recordkeeping
+        assert len(fl.shape) == 1
+
+        if do_ave:
+            self.fl = ave_fl(fl, nave_fl)
+        else:
+            self.fl = fl
+        self.nl = nl
+        self.nl_tilde = nl_tilde
+        self.ntrial_nl = ntrial_nl
+        self.lmax = len(fl) - 1
+        self.nave_fl = nave_fl
+        self.ntrial_fl = ntrial_fl
+        self.metadata = metadata
+
+        if bl2 is None: bl2 = np.ones(lmax + 1)
+        self.bl2 = bl2
+
+    @classmethod
+    def from_file(cls, fl_path):
+        with h5py.File(fl_path, 'r') as f:
+            metadata = Metadata2D.from_h5(f)
+            
+            fl = f['fl'][:]
+            nl = f['nl'][0,:]
+            nl_tilde = f['nl'][1,:]
+            bl2 = f['bl2'][:]
+            nave_fl = f.attrs['nave_fl']
+            lmax = f.attrs['lmax']
+            ntrial_fl = f.attrs['ntrial_fl']
+            ntrial_nl = f.attrs['ntrial_nl']
+            assert lmax == len(fl) - 1
+            return TransferFunction(nl, nl_tilde, ntrial_nl, fl, nave_fl, ntrial_fl, metadata, bl2)
+
+    @classmethod
+    def to_file(cls, path, tfun, fmode='w-'):
+        with h5py.File(path, fmode) as f:
+            Metadata2D.to_h5(tfun.metadata, f)
+            fl = f.create_dataset('fl', (tfun.lmax + 1,), dtype=float)
+            fl[:] = tfun.fl[:]
+            nl = f.create_dataset('nl', (2,tfun.lmax + 1), dtype=float)
+            nl[0,:] = tfun.nl[:]
+            nl[1,:] = tfun.nl_tilde[:]
+            bl2 = f.create_dataset('bl2', (tfun.lmax + 1,), dtype=float)
+            bl2[:] = tfun.bl2[:]
+            f.attrs['lmax'] = tfun.lmax
+            f.attrs['nave_fl'] = tfun.nave_fl
+            f.attrs['ntrial_fl'] = tfun.ntrial_fl
+            f.attrs['ntrial_nl'] = tfun.ntrial_nl
+
+
 class ActPipe:
     def __init__(self, map_path, ivar_path, beam_path, fid_ksz_path, fid_cmb_path, planck_mask_path,
                  custom_l_weight=None,
@@ -381,7 +509,21 @@ class ActPipe:
         self.sim_map = None
         self.l_weight = None
 
-    def import_data(self, r_lwidth=1.):
+        self.init_data = False
+        self.init_fl_nl = False
+        self.init_fkp = False
+        self.init_spectra = False
+        self.init_lweight = False
+
+        self.metadata = None
+
+    def update_metadata(self, r_fkp, r_lwidth, gal_path):
+        self.metadata = Metadata2D(r_fkp, r_lwidth, get_fname(self.map_path), get_fname(gal_path))
+
+    def import_data(self):
+        # TODO: add a "id.h5" file to store a uuid to make sure that all generated arrays
+        # were created locally (e.g. not copied accidentally)
+
         print("importing map: {}".format(self.map_path))
         self.imap = enmap.read_map(self.map_path)
         self.imap_t = self.imap[0]
@@ -399,7 +541,11 @@ class ActPipe:
         print("importing mask: {}".format(self.planck_mask_path))
         #TODO: investigate weird mask normalization
         planck_mask_ar = np.load(self.planck_mask_path)
-        print(f'planck mask range: {planck_mask_ar.min()} {planck_mask_ar.max()}')
+        mmin = planck_mask_ar.min()
+        mmax = planck_mask_ar.max()
+        print(f'planck mask range: {mmin} {mmax}')
+        assert mmin >= 0. and mmax <= 1 * (1 + 1e-6) # Check that one_time_setup was run
+
         self.mask_t = enmap.ndmap(planck_mask_ar, self.imap_t.wcs)
         self.mask_t = np.minimum(np.maximum(self.mask_t, 0.),1.)
         print("done")
@@ -444,6 +590,8 @@ class ActPipe:
             plt.savefig('plots/beam.png')
             plt.close()
 
+        self.init_data = True
+
     def get_empty_map(self):
         return enmap.empty(self.imap_t.shape, self.imap_t.wcs)
 
@@ -456,7 +604,12 @@ class ActPipe:
     # compute w_fkp_theta (FKP weight considering inverse var and mask)
     # map form: map_fkp
     # r_fkp is a weight factor that modifies the fk weighting
-    def compute_pixel_weight(self, r_fkp=1., suppl_mask=None, l0=None):
+    def compute_pixel_weight(self, suppl_mask=None, l0=None):
+        assert self.init_data
+        assert self.metadata is not None
+
+        r_fkp = self.metadata.r_fkp
+
         if l0 is None:
             l0 = self.l_fkp
             print(f"No FKP l scale provided, using l_fkp={self.l_fkp}")
@@ -504,6 +657,8 @@ class ActPipe:
         plt.savefig('plots/fkp_weighted_t_map.png')
         plt.close()
 
+        self.init_fkp = True
+
     # estimate whether mode-mixing is a serious concern with w_fkp
     def compare_mode_mixing(self, l_cut=3000):
         # construct a "left" power spectrum without noise (l<1500)
@@ -536,6 +691,7 @@ class ActPipe:
     # convert to map space and return 
     # @profile
     def process_t_map(self, t_map, l_weight=None):
+        assert self.init_fkp
         if l_weight is None:
             assert self.l_weight is not None
             l_weight =  self.l_weight
@@ -551,6 +707,7 @@ class ActPipe:
 
     # @profile
     def process_t_alm(self, t_map, l_weight=None):
+        assert self.init_fkp
         if l_weight is None:
             assert self.l_weight is not None
             l_weight =  self.l_weight
@@ -584,13 +741,29 @@ class ActPipe:
             bl = np.ones(self.lmax + 1)
         return cl[:self.lmax + 1] * self.fl[:self.lmax + 1] * bl + noise * self.nl_tilde[:self.lmax + 1]
 
-    def compute_sim_spectra(self, ntrial_fl=8, make_plots=False):
+    def compute_fl_nl(self, ntrial_nl=8, ntrial_fl=8, nave_fl=32, fl_path=None):
+        assert self.init_data
+        assert self.init_fkp
+        assert self.metadata is not None
 
-        noisemap = self.get_noise_map()
-        self.nl = map2cl(noisemap, lmax=self.lmax_sim)
+        nl = np.zeros(self.lmax_sim + 1)
+        nl_tilde = np.zeros(self.lmax_sim + 1)
+        t0 = time.time()
+        for i in range(ntrial_nl):
+            print(f'nl trial iteration {i+1} of {ntrial_nl}')
 
-        # WARN: Noise map should not be beamed
-        self.nl_tilde = map2cl(self.map_fkp * noisemap, lmax=self.lmax_sim)
+            noisemap = self.get_noise_map()
+            nl += map2cl(noisemap, lmax=self.lmax_sim)
+            # WARN: Noise map should not be beamed
+            nl_tilde += map2cl(self.map_fkp * noisemap, lmax=self.lmax_sim)
+
+            tnow = time.time()
+            print(f'time per iter: {(tnow - t0)/(i + 1):.3e}')
+
+        nl = nl/ntrial_nl
+        nl_tilde = nl_tilde/ntrial_nl
+        self.nl = nl
+        self.nl_tilde = nl_tilde
 
 
         beam_sim2 = self.beam[:self.lmax_sim + 1,1]**2
@@ -600,16 +773,18 @@ class ActPipe:
         cl_test[0] = 0.
 
         cl_tilde = np.zeros(self.lmax_sim + 1)
+        t0 = time.time()
         for i in range(ntrial_fl):
-            # cl_test = self.cl_cmb.copy()
+            print(f'fl trial iteration {i+1} of {ntrial_fl}')
+
             t_map = self.get_empty_map()
             t_alm = rand_alm(cl_test)
-
             t_alm = almxfl(t_alm, self.beam[:self.lmax_sim + 1,1])
-
-            # t_alm = almxfl(t_alm, self.beam[:self.lmax_sim + 1,1])
             t_map = alm2map(t_alm, t_map) # look into pixel second arg
             cl_tilde += map2cl(t_map * self.map_fkp, lmax=self.lmax_sim)
+
+            tnow = time.time()
+            print(f'time per iter: {(tnow - t0)/(i + 1):.3e}')
         cl_tilde /= ntrial_fl
 
         # perform a pseudo/regular nl comparison
@@ -630,13 +805,39 @@ class ActPipe:
         # self.fl_actual = (self.cl_tt_pseudo[:self.lmax + 1] - self.nl_tilde[:self.lmax + 1])/self.cl_cmb[:self.lmax + 1]
         # self.fl_actual[:50] = 0.
 
-        self.fl = cl_tilde / cl_test
-        self.fl[0] = self.fl[2000] # TODO: hack
-        # self.fl[:50] = 0.
+        fl = cl_tilde / cl_test
+
+        bl2 = beam_sim2
+        self.tf = TransferFunction(nl, nl_tilde, ntrial_nl, fl, nave_fl, ntrial_fl, self.metadata, bl2, do_ave=True)
+        if fl_path is not None:
+            TransferFunction.to_file(fl_path, self.tf)
+        self.fl = self.tf.fl
+
+        self.init_fl_nl = True
+
+
+    def import_fl_nl(self, fl_path):
+        assert self.init_data
+        assert self.metadata is not None
+
+        tf = TransferFunction.from_file(fl_path)
+        assert Metadata2D.transfer_eq(tf.metadata, self.metadata)
+        self.tf = tf
+
+        self.fl = tf.fl[:]
+        self.nl = tf.nl[:]
+        self.nl_tilde = tf.nl_tilde[:]
+
+        self.init_fl_nl = True
+
+
+    def compute_sim_spectra(self, make_plots=False):
+        assert self.init_data
+        assert self.init_fkp
+        assert self.init_fl_nl
 
         self.cl_tt_sim = (self.cl_tt_pseudo[:self.lmax + 1] - self.nl_tilde[:self.lmax + 1]) / self.fl[:self.lmax + 1]
         self.cl_tt_sim[0] = 0.
-        # self.cl_tt_sim[:50] = 0.
 
         # self.cl_cmb_tilde = self.fl * self.cl_cmb + self.nl_tilde
         # self.nl_sim = self.nl_tilde[:self.lmax + 1] / self.fl[:self.lmax + 1]
@@ -660,6 +861,8 @@ class ActPipe:
         plt.close()
 
         assert fequal_either(cl_xfer[50:], self.cl_tt_pseudo[50:], tol=1e-2), f'max diff: {np.max(np.abs(cl_xfer[50:] - self.cl_tt_pseudo[50:]))}'
+
+        beam_sim2 = self.beam[:self.lmax_sim + 1,1]**2
 
         if make_plots:
             norm = self.ells * (self.ells + 1) / 2 / np.pi
@@ -702,12 +905,22 @@ class ActPipe:
             plt.legend()
             plt.savefig('plots/cl_pseudo_compare.png')
 
+        self.init_spectra = True
+
         # TODO: remove        
         # self.fl = self.fl_actual.copy()
 
         # cl_zz_obs = map2cl(self.z_theta, self.lmax)
 
-    def compute_l_weight(self, r_lwidth=1., s=0):
+    def compute_l_weight(self, s=0):
+        assert self.init_data
+        assert self.init_fl_nl
+        assert self.init_fkp
+        assert self.init_spectra
+        assert self.metadata is not None
+
+        r_lwidth = self.metadata.r_lwidth
+
         ells_sim = np.arange(self.lmax_sim + 1)
         cl_ksz_th = np.exp(-(self.ells_sim / r_lwidth / 5500.)**2)
 
@@ -745,6 +958,8 @@ class ActPipe:
         # WARN: incompatible with custom l-weight?
         self.l_weight[:1500] = 0.
 
+        self.init_lweight = True
+
     # TODO: test to make sure this agrees with the current MC sim maps
     def get_sim_map(self, l_weight=None):
         if l_weight is None:
@@ -774,7 +989,7 @@ def reproj_planck_map(map_inpath, mask_inpath, outpath, mode='GAL090', nside=PLA
     imap = enmap.read_map(map_inpath)
     imap_t = imap[0]
 
-    this_mask = np.array(fits.getdata(mask_inpath, ext=0)[mode]).astype(bool)
+    this_mask = np.array(fits.getdata(mask_inpath, ext=1)[mode]).astype(bool)
     this_mask = hp.pixelfunc.reorder(this_mask, n2r=True)
     enmap_mask = enmap_from_healpix_interp(this_mask, imap_t.shape,
                             imap_t.wcs, interpolate=True)
@@ -794,7 +1009,7 @@ setup = False
 
 
 # TODO: should become a script
-def make_xz_plot(act_pipe, gal_pipe, r_fkp=0.62, r_lweight=1.56, 
+def make_xz_plot(act_pipe, gal_pipe, r_fkp=0.62,
                  do_trials=False, ntrial=4, ncl_bins=128, lmax_plot=None):
     pipe = act_pipe
 
@@ -955,7 +1170,7 @@ def compute_estimator(act_pipes, gal_pipe, r_lwidth=1., do_mc=False, ntrial=64):
     # plt.savefig('plots/l_weight.png')
     # plt.close()
 
-    pipe.compute_l_weight(r_lwidth=r_lwidth, s=0.)
+    pipe.compute_l_weight(s=0.)
     l_weight = pipe.l_weight
 
     t_fkp_est = pipe.process_t_map(pipe.imap_t, l_weight)
@@ -1300,7 +1515,7 @@ if __name__ == "__main__":
 
     # do_sdss_field_noise_comparison()
 
-    map_freq = ['090', '150']
+    # map_freq = ['090', '150']
 
     # TODO: loop over freqs
 

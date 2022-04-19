@@ -4,26 +4,9 @@ import camb
 import kszpipe
 from kszpipe.Box import Box
 
-# # basically a camb wrapper
-# class Cosmology:
-#     def __init__(self):
-#         pars = camb.CAMBparams()
-#         pars.set_cosmology(H0=67.5, ombh2=0.022, omch2=0.122, mnu=0.06, omk=0, tau=0.06)
-#         pars.InitPower.set_params(As=2e-9, ns=0.965, r=0)
-#         res = camb.get_results(pars)
-
-#         self.pars = pars
-#         self.res = res
 
 def unit_r(pos_list):
-    return pos_list / np.sqrt(pos_list[0]**2 + pos_list[1]**2 + pos_list[2]**2)[None,:]
-
-
-# An wrapper for a bare array to transparently map between array space and 
-# (padded) comoving space (Mpc)
-# TODO: implement
-class PaddedArray:
-    pass
+    return pos_list / np.sqrt(pos_list[0]**2 + pos_list[1]**2 + pos_list[2]**2)[None, :]
 
 
 def plot_2d_function(ar_2d, xlabel, ylabel, path_base, var_label, lims):
@@ -48,6 +31,156 @@ def ind_reshape(ind, shape):
     return ret
 
 
+def ensure_list(intlike):
+    return [intlike,]
+
+
+def concat_shape(shape0, shape1):
+    ar = [shape0, shape1]
+    llist = []
+
+    for ilike in ar:
+        if isinstance(ilike, int): ilike = ensure_list(ilike)
+        llist.append(list(ilike))
+
+    return tuple(llist[0] + llist[1])
+
+
+def step_roll(ar, step=1):    
+    assert len(ar.shape) == 2
+    n = ar.shape[0]
+
+    if n==1: return ar
+    else:
+        assert n % 2 == 0
+        n2 = n // 2
+        return np.concatenate((step_roll(ar[:n2], step), 
+                        step_roll(np.roll(ar[n2:], n2 * step, axis=1), step)))
+
+
+def diag_inds(ar, offset=0, axis=0):
+    assert len(ar.shape) == 2
+    assert axis == 0 or axis == 1
+
+    ind_oset = np.array((0,0),dtype=int)
+    ind_oset[axis] = offset
+
+    return np.diag_indices(ar) + ind_oset
+
+# A very limited single-purpose class to implement and verify each linear step 
+# of the 3D and 2D computations and their adjoints
+class PipeAdjoint:
+    def __init__(self, pipe):
+        self.pipe = pipe
+        self.init = False
+
+    def init_all(self, box, d0_path, init_gal=False):
+        self.pipe.init_from_box(box, init_gal=init_gal)
+        self.box = box
+        self.pipe.init_d0_k(box.read_grid(d0_path, fourier=True))
+        self.init = True
+
+    def interp(self, v, gal_pos=None):
+        if gal_pos is None:
+            gal_pos = self.pipe.gal_pos_3d
+
+        return self.box.interpolate(v, gal_pos.T, periodic=False)
+
+    def extirp(self, w):
+        gal_pos = self.pipe.gal_pos_3d.T
+        grid = np.zeros(self.pipe.box.rshape)
+        self.box.extirpolate(grid=grid, coords=gal_pos, weights=w, periodic=False)
+        return grid
+
+    # maps 3 vec over gal space to scalar over gal space
+    def three_dot(self, v, r=None):
+        if r is None:
+            r = self.pipe.gal_unit_r
+
+        assert v.shape == concat_shape(3, self.pipe.gal_pipe.ngal)
+        assert r.shape == v.shape
+        return (v * r).sum(axis=0)
+
+    def three_dot_adj(self, w, r=None):
+        if r is None:
+            r = self.pipe.gal_unit_r
+
+        assert w.shape == (self.pipe.gal_pipe.ngal,)
+        assert r.shape == concat_shape(3, self.pipe.gal_pipe.ngal)
+
+        ret = np.repeat(w,3).reshape(concat_shape(self.pipe.gal_pipe.ngal, 3)).T
+        return ret * r
+
+    # B maps the three-velocity to interpolated vr
+    # three-vel component -> interp -> dot with rhat
+    def B(self, v):
+        assert v.shape == concat_shape(3, self.box.rshape)
+        gal_pos = self.pipe.gal_pos_3d
+        ngal = self.pipe.gal_pipe.ngal
+        unit_r = self.pipe.gal_unit_r
+
+        v_interp = np.empty((3, ngal))
+        for j in range(3):
+            v_interp[j] = self.interp(v[j], gal_pos=gal_pos)
+
+        return self.three_dot(v_interp)
+
+    # transpose dot -> extirp -> v
+    def B_adj(self, w):
+        unit_r = self.pipe.gal_unit_r
+        ngal = self.pipe.gal_pipe.ngal
+
+        assert w.shape == (ngal,)
+
+        wadj = self.three_dot_adj(w)
+        
+        ret = np.empty(concat_shape(3, self.pipe.box.rshape))
+        for j in range(3):
+            ret[j] = self.extirp(wadj[j])
+        return ret
+
+    # A maps the fourier grid to a three-vector field in real space, applying
+    # the inverse del operator
+    # i.e. A maps d0(k) -> fahD * \del_i\del^{-2}d0(x)
+    # A: F(I)^3 \to F(R)^3  
+    def A(self, v, l):
+        assert self.init # necessary to  ensure the presence of certain arrays
+        assert self.box.is_fourier_space(v)
+
+        ar_k = -1j * self.pipe.ki[l] * v / self.box.get_k2()
+        ar_k = np.nan_to_num(ar_k)
+        
+        return -self.box.fft(ar_k) * self.pipe.fahd
+
+    # the adjoint of A
+    # A^{T}: R^3 \to I^3 
+    def A_adj(self, w, l):
+
+        ar = 1j * self.box.fft(-w * self.pipe.fahd) * self.pipe.ki[l] / self.box.get_k2()
+
+        return np.nan_to_num(ar)
+
+    # A simpler version of A (returns the inv del of d0; easy code check since 
+    # the laplacian is self-adjoint)
+    def Aprime(self, v):
+        assert self.init # necessary to  ensure the presence of certain arrays
+        assert self.box.is_fourier_space(v)
+
+        ar_k = - v / self.box.get_k2()
+        ar_k = np.nan_to_num(ar_k)
+
+        return self.pipe.fahd * self.box.fft(ar_k)
+
+    def Aprime_adj(self, w):
+        assert self.box.is_real_space(w)
+
+        v = self.box.fft(self.pipe.fahd * w)
+        v = - v / self.box.get_k2()
+        v = np.nan_to_num(v)
+
+        return v
+
+
 # unit of comoving distance is Mpc
 class Padded3DPipe:
     # Requires a reference galaxy pipeline to define the geometry
@@ -58,15 +191,19 @@ class Padded3DPipe:
         self.cosmology = cosmology
         self.init_real = False
         self.init_d0 = False
+
+        # TODO: separate adjoint debug structure?
+        self.init_vr_grid = False
+        self.init_vr_list = False
     
-    def _sky_to_comoving(self, ra, dec, z):
+    def _sky_to_comoving(self, *, ra, dec, z):
         r_co = self.cosmology.chi_z(z, check=True)
         return r_co * np.array([np.cos(dec) * np.cos(ra), np.cos(dec) * np.sin(ra), np.sin(dec)])        
 
     def _init_gal(self):
         pos = self.gal_pipe.gal_pos
         zs = self.gal_pipe.zs
-        self.gal_pos_3d = self._sky_to_comoving(pos[1], pos[0], zs)
+        self.gal_pos_3d = self._sky_to_comoving(ra=pos[1], dec=pos[0], z=zs)
         self.gal_unit_r = unit_r(self.gal_pos_3d)
 
     def _init_buffers(self):
@@ -76,8 +213,9 @@ class Padded3DPipe:
         self.a_k = None # not initialized yet
         self.ngal = np.zeros((nx,ny,nz))
 
-    def init_from_box(self, box):
-        self._init_gal()
+    def init_from_box(self, box, init_gal=True):
+        if init_gal: self._init_gal()
+
         self.box = box
         self.dims = box.npix
         self.boxsize = self.box.boxsize
@@ -90,14 +228,14 @@ class Padded3DPipe:
         self.pixel_centers = self.pos[:, None, None, None] + self.box.pixsize[:, None, None, None] * (self.indices + 0.5)
         
         self.chi_grid = np.sqrt(self.pixel_centers[0]**2 + self.pixel_centers[1]**2 + self.pixel_centers[2]**2) 
-        
-        # debug the apparent missing zero chi issue
+
         chi_min = np.min(self.chi_grid)
         min_ind = ind_reshape(np.argmin(self.chi_grid), self.chi_grid.shape)
 
         print(f'chi_min: {chi_min:3e}, zero_ind {self.ind0}, min_ind {min_ind}')
 
         # WARN: check fails!!!
+        # TODO: address failed checks
         self.z_grid = self.cosmology.z_chi(self.chi_grid, check=False)
         assert np.all(self.chi_grid.shape == self.z_grid.shape)
         assert np.all(self.chi_grid.shape == self.dims)
@@ -117,17 +255,39 @@ class Padded3DPipe:
         hx = self.cosmology.H_z(self.z_grid, check=False)
         dx = self.cosmology.D_z(self.z_grid, check=False)
         self.fahd = self.a_grid * fx * hx * dx
+        print(fx.shape, hx.shape, dx.shape, self.fahd.shape)
 
         # harmonic space constants
         k_grid = np.ones(self.box.fshape, dtype=np.complex)
-        ki = np.empty([3,] + list(self.box.fshape), dtype=np.complex)
+        ki = np.empty(concat_shape(3, self.box.fshape), dtype=np.complex)
         ki[0] = self.box.get_k_component(0, one_dimensional=True)[:, None, None] * k_grid
         ki[1] = self.box.get_k_component(1, one_dimensional=True)[None, :, None] * k_grid
         ki[2] = self.box.get_k_component(2, one_dimensional=True)[None, None, :] * k_grid
-        self.ki = ki
-        self.k_pre = 1j * self.ki / self.box.get_k2()[None, ...]
 
-        # WARN: NAN!
+        # for iax, axis in zip(range(3), ['x', 'y', 'z'])
+        plt.figure(dpi=300)
+        plt.imshow(np.abs(ki[0, :, :, 0]))
+        plt.colorbar()
+        plt.savefig('plots/kx.png')
+
+        plt.figure(dpi=300)
+        plt.imshow(np.abs(ki[1, :, :, 0]))
+        plt.colorbar()
+        plt.savefig('plots/ky.png')
+
+        plt.figure(dpi=300)
+        plt.imshow(np.abs(ki[2, 0, :, :]))
+        plt.colorbar()
+        plt.savefig('plots/kz.png')
+
+
+        self.ki = ki
+
+        k2 = self.box.get_k2()
+        # zero_mask = (k2 == 0)
+        # k2[zero_mask] = 1.
+        self.k_pre = 1j * self.ki / k2[None, ...] # WARN: should be negative??
+        # self.k_pre[np.broadcast_to(zero_mask, concat_shape(3, zero_mask.shape))] = 0. # avoid div by 0, k=0 signal is missing anyway
         self.k_pre = np.nan_to_num(self.k_pre)
 
         self.init_real = True
@@ -142,50 +302,40 @@ class Padded3DPipe:
 
         self.init_d0 = True
 
-    # def init(self, nx, ny, nz, dist_pad):
-    #     assert dist_pad >= 0
-    #     self._init_gal()
+    def make_vr_grid(self):
+        assert self.init_real
+        assert self.init_d0
 
-    #     self.dist_pad = dist_pad
-    #     self.dims = np.array((nx, ny, nz))
-    #     self.pos_min = np.min(self.gal_pos_3d, axis=1)
-    #     self.pos_max = np.max(self.gal_pos_3d, axis=1)
-    #     self.pos_min_pad = self.pos_min - self.dist_pad
-    #     self.pos_max_pad = self.pos_max + self.dist_pad
-    #     self.pos_corner = self.pos_min_pad
-    #     # self.lim = np.array(self.pos_min, self.pos_max).T
-    #     # self.lim_pad = np.array(self.pos_min_pad, self.pos_max_pad).T
-    #     self.delta_pos = self.pos_max - self.pos_min
-    #     self.delta_pos_pad = self.delta_pos + 2 * self.dist_pad
+        del_inv_d0_k = -self.d0_k / self.box.get_k2()
+        del_inv_d0_k = np.nan_to_num(del_inv_d0_k)
+        di_d2_d0_k = 1j * self.ki * del_inv_d0_k[None,...]
 
-    #     self.volume_real = np.prod(self.delta_pos)
-    #     self.volume_real_pad = np.prod(self.delta_pos_pad)
+        di_d2_d0 = np.empty(concat_shape(3, self.box.rshape))
+        for i in range(3):
+            di_d2_d0[i] = self.box.fft(di_d2_d0_k[i])
 
-    #     print(f'real space volume (unpadded/padded) {self.volume_real:.3e} {self.volume_real_pad:.3e}')
+        self.vi_grid = -self.fahd[None, ...] * di_d2_d0
 
-    #     self.edge_length = max(self.delta_pos)
-    #     self.edge_length_pad = max(self.delta_pos_pad)
+        self.init_vr_grid = True
 
-    #     self.lim = np.array((self.pos_min, self.pos_min + self.edge_length)).T
-    #     self.lim_pad = np.array((self.pos_min_pad, self.pos_min_pad + self.edge_length_pad)).T
+    def make_vr_list(self, pos_list=None):
+        assert self.init_real
+        assert self.init_vr_grid
 
-    #     # TODO: switch to padded array
-    #     self.ar_3d = np.zeros((3,nx,ny,nz))
-    #     self.ngal = np.zeros((nx,ny,nz))
+        if pos_list is None:
+            pos_list = self.gal_pos_3d
+            unit_r_list = self.gal_unit_r
+        else:
+            unit_r_list = unit_r(pos_list)
 
-    #     print(f'unpadded box dimensions {self.delta_pos}')
-    #     print(f'padded box dimensions {self.delta_pos_pad}')
+        self.vi_list = np.empty(unit_r_list.shape)
 
-    #     # make a box to manipulate the data
-    #     npix = np.array((nx, ny, nz), dtype=int)
-    #     pos = self.pos_corner
-    #     pixsize = self.delta_pos_pad / npix
-    #     boxsize = self.delta_pos_pad
+        for i in range(3):
+            self.vi_list[i] = self.box.interpolate(self.vi_grid[i], self.gal_pos_3d.T,
+                                                   periodic=True)
+        self.vr_list = np.sum(self.vi_list * unit_r_list, axis=0)
 
-    #     # challenge the consistency check by specifying pixel size and pos
-    #     self.box = Box(npix, pixsize=pixsize, boxsize=boxsize, pos=pos)
-
-    #     self.init_real = True
+        self.init_vr_list = True
 
     # add galaxies by comoving coordinates, with an optional CMB temp list
     def add_galaxies(self, *, pos_list=None, t_list=None, wipe=False):
@@ -199,10 +349,10 @@ class Padded3DPipe:
 
         # TODO: check pos_list t_list shape compatibility
 
-
         ngal = pos_list.shape[1]
         if t_list is None:
             t_list = np.ones(ngal)
+            print('WARN: no t_list provided, using all ones')
 
         inds = (self.pos_to_ind(pos_list) + 0.5).astype(int)
 
@@ -211,8 +361,9 @@ class Padded3DPipe:
 
         # ngal is included for diagnostic purposes
         self.ngal[inds[0], inds[1], inds[2]] += 1
-        self.a_j[:, inds[0], inds[1], inds[2]] += t_list[None, :] * unit_r_list
-        self.a_j *= -self.fahd[None, :]
+        fahd_interp = self.box.interpolate(self.fahd, inds.T, periodic=False)
+        self.a_j[:, inds[0], inds[1], inds[2]] += t_list[None, :] * unit_r_list * fahd_interp[None, :]
+        self.a_j *= -self.fahd[None, ...] # WARN: why was this commented?
 
         self.a_k = np.empty([3,] + list(self.box.fshape), dtype=np.complex)
         for i in range(3):
@@ -224,7 +375,7 @@ class Padded3DPipe:
         if len(pos3d.shape) == 1:
             return self.dims * (pos3d - self.pos) / self.box.boxsize
         else:
-            return self.dims[:,None] * (pos3d - self.pos[:,None]) / self.box.boxsize[:, None]
+            return self.dims[:, None] * (pos3d - self.pos[:, None]) / self.box.boxsize[:, None]
 
     def do_harmonic_sum(self):
         assert self.init_real
@@ -232,10 +383,28 @@ class Padded3DPipe:
 
         sum_i = np.empty((3,),dtype=float)
         for i in range(3):
-            sum_i[i] = self.box.dot(self.d0_k, self.k_pre[i] * self.a_k[i])
+            sum_i[i] = self.box.dot(self.d0_k, self.k_pre[i] * self.a_k[i], normalize=True)
         a_ksz_nonnorm = sum_i.sum()
 
         return a_ksz_nonnorm
+
+    def do_harmonic_sum_adj(self, t_hp, pa):
+        assert self.init_real
+        assert self.init_d0
+
+        interim_x = pa.B_adj(t_hp)
+
+        vg_k = np.zeros(self.box.fshape, dtype=complex)
+
+        # TODO: do a trial where this sum is done incorrectly
+        # expect suppressed SNR
+        for l in range(3):
+            vg_k += pa.A_adj(interim_x[l], l)
+
+        a_ksz_nonnorm = self.box.dot(self.d0_k, vg_k, normalize=True)
+        # return self.d0_k
+
+        return a_ksz_nonnorm, vg_k * self.d0_k
 
     def plot_3d(self, ar, outpath_stem, *, mode='sum', var_label='', **kwargs):
         assert self.init_real
@@ -259,6 +428,3 @@ class Padded3DPipe:
             plot_2d_function(ar[ix,:,:], 'y', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, y0, y1])
             plot_2d_function(ar[:,iy,:], 'x', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, x0, x1])
             plot_2d_function(ar[:,:,iz], 'x', 'y', outpath_stem, var_label=var_label, lims=[y0, y1, x0, x1])
-        
-# def get_bounding_box(, x_corr=None):
-# def analyze_galaxy_survey(gal_pipe):
