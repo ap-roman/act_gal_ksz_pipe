@@ -70,7 +70,7 @@ if __name__ == "__main__":
     real_pipe.init_from_box(box)
 
     pa = PipeAdjoint(real_pipe) # WARN: superfluous adjoint structure... should get integrated into Padded3DPipe
-    pa.box = box
+    pa.box = box # WARN: hack
 
     t_act_hp_list = gal_pipe.get_t_list(act_pipe.get_t_pseudo_hp())
 

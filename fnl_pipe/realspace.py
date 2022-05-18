@@ -147,18 +147,27 @@ class PipeAdjoint:
         assert self.init # necessary to  ensure the presence of certain arrays
         assert self.box.is_fourier_space(v)
 
-        ar_k = -1j * self.pipe.ki[l] * v / self.box.get_k2()
-        ar_k = np.nan_to_num(ar_k)
+
+        k2 = self.box.get_k2()
+        zero_mask = (k2 == 0)
+        k2[zero_mask] = 1.
+
+        ar_k = -1j * self.pipe.ki[l] * v / k2
+        ar_k[np.broadcast_to(zero_mask, zero_mask.shape)] = 0.
         
         return -self.box.fft(ar_k) * self.pipe.fahd
 
     # the adjoint of A
     # A^{T}: R^3 \to I^3 
     def A_adj(self, w, l):
+        k2 = self.box.get_k2()
+        zero_mask = (k2 == 0)
+        k2[zero_mask] = 1.
 
-        ar = 1j * self.box.fft(-w * self.pipe.fahd) * self.pipe.ki[l] / self.box.get_k2()
+        ar = 1j * self.box.fft(-w * self.pipe.fahd) * self.pipe.ki[l] / k2
+        ar[np.broadcast_to(zero_mask, zero_mask.shape)] = 0.
 
-        return np.nan_to_num(ar)
+        return ar
 
     # A simpler version of A (returns the inv del of d0; easy code check since 
     # the laplacian is self-adjoint)
@@ -284,11 +293,11 @@ class Padded3DPipe:
         self.ki = ki
 
         k2 = self.box.get_k2()
-        # zero_mask = (k2 == 0)
-        # k2[zero_mask] = 1.
+        zero_mask = (k2 == 0)
+        k2[zero_mask] = 1.
         self.k_pre = 1j * self.ki / k2[None, ...] # WARN: should be negative??
-        # self.k_pre[np.broadcast_to(zero_mask, concat_shape(3, zero_mask.shape))] = 0. # avoid div by 0, k=0 signal is missing anyway
-        self.k_pre = np.nan_to_num(self.k_pre)
+        self.k_pre[np.broadcast_to(zero_mask, concat_shape(3, zero_mask.shape))] = 0. # avoid div by 0, k=0 signal is missing anyway
+        # self.k_pre = np.nan_to_num(self.k_pre)
 
         self.init_real = True
 
@@ -404,7 +413,7 @@ class Padded3DPipe:
         a_ksz_nonnorm = self.box.dot(self.d0_k, vg_k, normalize=True)
         # return self.d0_k
 
-        return a_ksz_nonnorm, vg_k * self.d0_k
+        return a_ksz_nonnorm, vg_k
 
     def plot_3d(self, ar, outpath_stem, *, mode='sum', var_label='', **kwargs):
         assert self.init_real
@@ -419,11 +428,13 @@ class Padded3DPipe:
             plot_2d_function(ar.sum(axis=0), 'y', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, y0, y1])
             plot_2d_function(ar.sum(axis=1), 'x', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, x0, x1])
             plot_2d_function(ar.sum(axis=2), 'x', 'y', outpath_stem, var_label=var_label, lims=[y0, y1, x0, x1])
+        
         elif mode == 'slice':
             if 'slice_inds' in kwargs:
                 ix, iy, iz = kwargs['slice_inds']
             else:
                 ix, iy, iz = np.array(ar.shape) // 2
+
             print(f'plotting slice inds {ix, iy, iz}')
             plot_2d_function(ar[ix,:,:], 'y', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, y0, y1])
             plot_2d_function(ar[:,iy,:], 'x', 'z', outpath_stem, var_label=var_label, lims=[z0, z1, x0, x1])

@@ -6,6 +6,7 @@ from kszpipe.Cosmology import Cosmology
 from kszpipe.Box import Box
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 import time
 
@@ -39,6 +40,7 @@ fl_path = pipe_path + 'transfer_function.h5'
 R_FKP = 1.56
 R_LWIDTH = 0.62
 NTRIAL = 2048
+DELTA_K = 0.006
 
 
 def rel_error_inv_std(n):
@@ -75,27 +77,39 @@ if __name__ == "__main__":
     t_act_hp_list = gal_pipe.get_t_list(act_pipe.get_t_pseudo_hp())
 
     real_pipe.add_galaxies(t_list=t_act_hp_list)
-    # real_pipe.plot_3d(real_pipe.ngal, 'plots/ngal_', var_label=r'$n_{gal}$')
-
-    # This is a debug plot! plot comoving distance from origin
-    # real_pipe.plot_3d(real_pipe.chi_grid, 'plots/chi_grid_', mode='slice',
-    #                   slice_inds=real_pipe.ind0, var_label=r'$\chi$')
 
     d0_k = box.read_grid(kszpipe_d0_path, fourier=True)
     real_pipe.init_d0_k(d0_k)
 
     alpha_2d, a_std = compute_estimator([act_pipe,], gal_pipe, r_lwidth=R_LWIDTH)
-    # a_std = 1.
-    # alpha_2d = np.nan
 
     print('=============================================')
     print('2D pipeline results:')
     print(f'a_ksz: {alpha_2d:3e}, a_ksz_nonnorm: {alpha_2d * a_std:3e}')
     print('=============================================')
 
-    # for i in range(1):
+    # make edges for k-bins
+    kx = real_pipe.box.get_k_component(0, one_dimensional=True)
+    kmax = np.max(kx)
+    kmin = 0.
+    nk = int(np.floor((kmax - kmin) / DELTA_K))
+    assert nk > 0
+    k_edges = np.linspace(kmin, kmax, nk + 1)
+    k_centers = 0.5 * (k_edges[:-1] + k_edges[1:])
+ 
     real_pipe.add_galaxies(t_list=t_act_hp_list, wipe=True)
-    alpha_3d, ignore = real_pipe.do_harmonic_sum_adj(t_act_hp_list, pa)
+    alpha_3d, y_k = real_pipe.do_harmonic_sum_adj(t_act_hp_list, pa)
+    grids = np.array((y_k, real_pipe.d0_k), dtype=complex)
+
+    p_cross, counts = real_pipe.box.estimate_power_spectra(grids, k_edges, faxis=0)
+    p_delta_y = p_cross[:,1,0]
+
+    plt.figure(dpi=300.)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.bar(k_edges[:-1], -p_delta_y, width=DELTA_K, align='edge')
+    plt.savefig('plots/p_y_delta.png')
+
 
     print('=============================================')
     print('3D pipeline results:')
@@ -104,25 +118,21 @@ if __name__ == "__main__":
     print('=============================================')
 
 
-    # t_sim_map = act_pipe.get_sim_map()
-    # t_sim_list = gal_pipe.get_t_list(t_sim_map)
-    # res_2d = np.empty((NTRIAL,2))
     res_3d = np.zeros(NTRIAL)
     t0 = time.time()
 
-    res_2d = np.empty(NTRIAL)
+    p_samples = np.empty((NTRIAL, nk, 2, 2))
     # just resample if NTRIAL > available sims?
     assert gal_pipe.temp_sims is not None
     assert NTRIAL <= gal_pipe.nsims
     for itrial in range(NTRIAL):
-        # t_sim_map = act_pipe.get_sim_map()
         t_sim_list = gal_pipe.temp_sims[itrial]
-        # a_ksz_2d = gal_pipe.compute_a_ksz(t_sim_map)
-        a_ksz_2d = (gal_pipe.vr_list * t_sim_list).sum()
-        # real_pipe.add_galaxies(t_list=t_sim_list, wipe=True)
-        a_ksz_3d, ignore = real_pipe.do_harmonic_sum_adj(t_sim_list, pa)
+        a_ksz_3d, y_k = real_pipe.do_harmonic_sum_adj(t_sim_list, pa)
+        grids = np.array((y_k, real_pipe.d0_k), dtype=complex)
+        p_sample, bin_counts = real_pipe.box.estimate_power_spectra(grids, k_edges, faxis=0)
         res_3d[itrial] = a_ksz_3d
-        res_2d[itrial] = a_ksz_2d
+
+        p_samples[itrial] = p_sample
 
         tnow = time.time()
         time_per_iter = (tnow - t0) / (itrial + 1)
@@ -131,16 +141,32 @@ if __name__ == "__main__":
         print(f'time_per_iter: {time_per_iter:.3e}')
         print('trial results:')
         print(f'a_ksz_3d: {alpha_3d / res_3d[:itrial+1].std():3e}')
-        print(f'a_ksz_2d: {a_ksz_2d / a_std:3e} a_ksz_3d: {a_ksz_3d / a_std:3e} 2d/3d: {a_ksz_2d / a_ksz_3d:3e}')
+        # print(f'a_ksz_2d: {a_ksz_2d / a_std:3e} a_ksz_3d: {a_ksz_3d / a_std:3e} 2d/3d: {a_ksz_2d / a_ksz_3d:3e}')
         print('=============================================')
 
+    np.savez('data/crosspower_arrays.npz', k_edges, p_cross, p_samples)
+
+    p_dy_samples = p_samples[:,:,1,0]
+
+
+    # 95% conf interval
+    p_dy_lo = np.quantile(p_dy_samples, 0.025, axis=0)
+    p_dy_hi = np.quantile(p_dy_samples, 0.975, axis=0)
+
+    plt.figure(dpi=300)
+    plt.title(r'$-P_{\delta_0 Y}(k)$ binned in k')
+    plt.bar(k_edges[:-1], -p_delta_y, width=DELTA_K, align='edge', alpha=0.5)
+    plt.fill_between(k_centers, -(p_delta_y + p_dy_lo), -(p_delta_y + p_dy_hi), alpha=0.5)
+    plt.xlabel(r'$k$ (Mpc$^{-1}$)')
+    plt.ylabel(r'$-P_{\delta_0 Y}$, arbitrary')
+    plt.savefig('plots/p_y_delta_95_conf.png')
 
     a3d_stdev = res_3d.std()
     a3d_norm_est = alpha_3d / a3d_stdev
     a3d_lo, a3d_hi = a3d_norm_est * rel_error_inv_std(NTRIAL)
 
-    a2d_stdev = res_2d.std()
-    a2d_result = alpha_2d / a2d_stdev
-    a2d_lo, a2d_hi = a2d_result * rel_error_inv_std(NTRIAL)
-    print(f'MC normalized alpha_2d: {a2d_result:.2f} {a2d_lo:.2f} {a2d_hi:.2f}')
+    # a2d_stdev = res_2d.std()
+    # a2d_result = alpha_2d / a2d_stdev
+    # a2d_lo, a2d_hi = a2d_result * rel_error_inv_std(NTRIAL)
+    # print(f'MC normalized alpha_2d: {a2d_result:.2f} {a2d_lo:.2f} {a2d_hi:.2f}')
     print(f'MC normalized alpha_3d: {a3d_norm_est:.2f} (lo/hi) {a3d_lo:.2f} {a3d_hi:.2f}')
