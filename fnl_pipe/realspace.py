@@ -2,11 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import camb
 import kszpipe
-from kszpipe.Box import Box
+from kszpipe.Box import Box, BoxFilter
+from kszpipe import Cosmology
+from fnl_pipe.pipe import ActPipe
 
 
 def unit_r(pos_list):
     return pos_list / np.sqrt(pos_list[0]**2 + pos_list[1]**2 + pos_list[2]**2)[None, :]
+
+
+# expects two npix lists of positions (radians)
+def act_unit_r(decs, ras):
+    return np.array([np.cos(decs) * np.cos(ras), np.cos(decs) * np.sin(ras), np.sin(decs)])
 
 
 def plot_2d_function(ar_2d, xlabel, ylabel, path_base, var_label, lims):
@@ -66,6 +73,116 @@ def diag_inds(ar, offset=0, axis=0):
     ind_oset[axis] = offset
 
     return np.diag_indices(ar) + ind_oset
+
+
+# A class to organize presets for precomputation of various values
+class CoarseEvalPrefs:
+    def __init__(self, plin=False):
+        self.plin=plin
+
+
+# contains the relevant data for the coarse galaxy grid
+# check the normalization of dndv!
+class CoarseGal:
+    def __init__(self, box, dndv_norm, eval_prefs=None):
+        if eval_prefs is None:
+            eval_prefs = CoarseEvalPrefs()
+        assert isinstance(eval_prefs, CoarseEvalPrefs)
+
+        # expects a box, dndv throughout
+        # bD is the product of b(z) and D(z)
+        # fD is the product of f(z) (RSD) and D(z)
+        assert isinstance(box, Box)
+        assert np.all(dndv_norm >= 0.)
+        assert np.abs(box.box_integral(dndv_norm) - 1) <= 1e-10
+
+        self.box = box
+        self.dndv_norm = dndv_norm
+
+        self.k_grid = np.sqrt(self.box.get_k2())
+
+        # precompute relevant quantities
+        self.r_i = np.zeros(concat_shape(3, self.box.rshape), dtype=np.float64)
+        for i in range(3):
+            self.r_i[i] = self.box.get_r_component(i)
+
+        # precompute relevant quantities
+        self.k_i = np.zeros(concat_shape(3, self.box.fshape), dtype=np.complex64)
+        for i in range(3):
+            self.k_i[i] = self.box.get_k_component(i, zero_nyquist=True)
+
+        self.r2 = self.box.get_r2();
+
+        # Address failed bounds check!
+        self.z_grid = self.cosmology.z_chi(self.chi_grid, check=False)
+
+        self.d = self.cosmology.D_z(self.z_grid, check=False)
+
+        self.bD = 1.75 * self.get_ones_grid() # TODO: address this model thoroughly
+        self.fD = self.d * self.cosmology.frsd_z(self.z_grid, check=False)
+
+
+        self._plin_bf = BoxFilter(cgal.box, cosmology.Plin_k_z0, dc=0.)
+        # self._plin = self._plin_bf(self.get_ones_grid(real=False))
+
+        # right now we have <COUNT> times the real-space footprint in-memory
+
+    def get_ones_grid(self, real=True, vector=False):
+        if real:
+            dtype = np.float64
+            shape = self.box.rshape
+        else:
+            dtype = np.complex64
+            shape = self.box.fshape
+
+        if not vector:
+            return np.ones(shape, dtype=dtype)
+        return np.ones(concat_shape(3, shape), dtype=dtype)
+
+
+# class BispectrumPipe:
+#     def __init__(self, cgal, act_pipe):
+#         assert isinstance(act_pipe, ActPipe)
+#         assert isinstance(cgal, CoarseGal)
+
+#         self.cgal = cgal
+#         self.act_pipe = act_pipe
+
+    
+#     def _a(self, v):
+#         cgal = self.cgal
+#         box = self.box
+
+#         assert box.is_fourier_space(v)
+
+#         # TODO: add kmax zeroing?
+
+#         ret = box.zeros(fourier=False)
+#         for i in range(3):
+#             for j in range(i + 1):
+
+
+#         return ret
+
+
+#     def _atrans(self, v):
+
+#     # compute (ASA^T + N)v, where v is a vector defined on coarse-grained real space
+#     def _compute_gal_covar(self):
+
+
+#     # compute (ASA^T + N)^{-1}v, where v is a coarse grained real-space vector
+#     # we invert this matrix via the conjugate-gradient method
+#     def compute_gal_ivar(self, v):
+#         box = self.box
+
+#         assert box.is_real_space(v)
+#         vk = box.fft(v)
+
+#         # do conjugate gradient...
+
+#         # return
+
 
 # A very limited single-purpose class to implement and verify each linear step 
 # of the 3D and 2D computations and their adjoints

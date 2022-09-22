@@ -12,13 +12,17 @@ import time
 
 data_path = '/home/aroman/data/'
 act_path = data_path + 'act/'
+# act_path = data_path + 'act_pub/'
 planck_path = data_path + 'planck/'
 mask_path = data_path + 'mask/'
 pipe_path = data_path + 'pipe/'
 
-map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
-ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits'
-beam_path = act_path + 'beam_f150_daynight.txt'
+map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits' # private
+# map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
+ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits' # private
+# ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
+beam_path = act_path + 'beam_f150_daynight.txt' # proprietary beam file
+# beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
 
 cl_cmb_path = data_path + 'spectra/cl_cmb.npy'
 cl_ksz_path = data_path + 'spectra/cl_ksz.npy'
@@ -33,7 +37,9 @@ kszpipe_cosmo_path = kszpipe_path + 'cosmology.pkl'
 kszpipe_box_path = kszpipe_path + 'bounding_box.pkl'
 kszpipe_d0_path = kszpipe_path + 'delta0_DR12v5_CMASS_North.h5'
 
+
 fl_path = pipe_path + 'transfer_function.h5'
+# fl_path = pipe_path + 'transfer_function_pub.h5'
 
 
 # Parameters chosen ahead of time to maximize snr with this particular dataset

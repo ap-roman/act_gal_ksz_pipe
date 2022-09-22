@@ -4241,4 +4241,8210 @@ running variance trial 49 of 256
   File "/home/aroman/anaconda3/envs/ksz/lib/python3.8/site-packages/pixell/curvedsky.py", line 635, in fill_gauss
     arr[i:i+bsize] = np.random.standard_normal(min(bsize,arr.size-i))
 KeyboardInterrupt
+^Cimporting map: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits
+done
+generating zero_alm array
+done
+importing mask: /home/aroman/data/mask/planck_foreground.npy
+planck mask range: 0.0 1.0000000000000002
+done
+importing inverse variance mask: /home/aroman/data/act/act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits
+/home/aroman/ksz_repos/act_gal_ksz_pipe/fnl_pipe/pipe.py:556: RuntimeWarning: divide by zero encountered in true_divide
+  std_t = np.sqrt(1./self.ivar_t)
+done
+No FKP l scale provided, using l_fkp=3000
+Eta^-2 min/max: 0.000e+00 4.140e+05
+FKP min/max: 0.000e+00 7.332e-01
+starting process_t_map
+done
+trial 0 complete
+time per map 1.504e+01
+starting process_t_map
+done
+trial 1 complete
+time per map 1.425e+01
+starting process_t_map
+done
+trial 2 complete
+time per map 1.400e+01
+starting process_t_map
+done
+trial 3 complete
+time per map 1.387e+01
+starting process_t_map
+done
+trial 4 complete
+time per map 1.379e+01
+starting process_t_map
+done
+trial 5 complete
+time per map 1.374e+01
+starting process_t_map
+done
+trial 6 complete
+time per map 1.370e+01
+starting process_t_map
+done
+trial 7 complete
+time per map 1.367e+01
+starting process_t_map
+done
+trial 8 complete
+time per map 1.365e+01
+starting process_t_map
+done
+trial 9 complete
+time per map 1.364e+01
+starting process_t_map
+done
+trial 10 complete
+time per map 1.362e+01
+starting process_t_map
+done
+trial 11 complete
+time per map 1.361e+01
+starting process_t_map
+done
+trial 12 complete
+time per map 1.360e+01
+starting process_t_map
+done
+trial 13 complete
+time per map 1.360e+01
+starting process_t_map
+done
+trial 14 complete
+time per map 1.359e+01
+starting process_t_map
+done
+trial 15 complete
+time per map 1.358e+01
+starting process_t_map
+done
+trial 16 complete
+time per map 1.358e+01
+starting process_t_map
+done
+trial 17 complete
+time per map 1.357e+01
+starting process_t_map
+done
+trial 18 complete
+time per map 1.357e+01
+starting process_t_map
+done
+trial 19 complete
+time per map 1.357e+01
+starting process_t_map
+done
+trial 20 complete
+time per map 1.356e+01
+starting process_t_map
+done
+trial 21 complete
+time per map 1.356e+01
+starting process_t_map
+done
+trial 22 complete
+time per map 1.356e+01
+starting process_t_map
+done
+trial 23 complete
+time per map 1.355e+01
+starting process_t_map
+done
+trial 24 complete
+time per map 1.355e+01
+starting process_t_map
+done
+trial 25 complete
+time per map 1.355e+01
+starting process_t_map
+done
+trial 26 complete
+time per map 1.354e+01
+starting process_t_map
+done
+trial 27 complete
+time per map 1.354e+01
+starting process_t_map
+done
+trial 28 complete
+time per map 1.353e+01
+starting process_t_map
+done
+trial 29 complete
+time per map 1.352e+01
+starting process_t_map
+done
+trial 30 complete
+time per map 1.352e+01
+starting process_t_map
+done
+trial 31 complete
+time per map 1.351e+01
+starting process_t_map
+done
+trial 32 complete
+time per map 1.351e+01
+starting process_t_map
+done
+trial 33 complete
+time per map 1.350e+01
+starting process_t_map
+done
+trial 34 complete
+time per map 1.350e+01
+starting process_t_map
+done
+trial 35 complete
+time per map 1.349e+01
+starting process_t_map
+done
+trial 36 complete
+time per map 1.349e+01
+starting process_t_map
+done
+trial 37 complete
+time per map 1.348e+01
+starting process_t_map
+done
+trial 38 complete
+time per map 1.348e+01
+starting process_t_map
+done
+trial 39 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 40 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 41 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 42 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 43 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 44 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 45 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 46 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 47 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 48 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 49 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 50 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 51 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 52 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 53 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 54 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 55 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 56 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 57 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 58 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 59 complete
+time per map 1.348e+01
+starting process_t_map
+done
+trial 60 complete
+time per map 1.348e+01
+starting process_t_map
+done
+trial 61 complete
+time per map 1.348e+01
+starting process_t_map
+done
+trial 62 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 63 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 64 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 65 complete
+time per map 1.347e+01
+starting process_t_map
+done
+trial 66 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 67 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 68 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 69 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 70 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 71 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 72 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 73 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 74 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 75 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 76 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 77 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 78 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 79 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 80 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 81 complete
+time per map 1.346e+01
+starting process_t_map
+done
+trial 82 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 83 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 84 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 85 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 86 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 87 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 88 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 89 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 90 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 91 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 92 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 93 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 94 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 95 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 96 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 97 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 98 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 99 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 100 complete
+time per map 1.345e+01
+starting process_t_map
+done
+trial 101 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 102 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 103 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 104 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 105 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 106 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 107 complete
+time per map 1.344e+01
+starting process_t_map
+done
+trial 108 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 109 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 110 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 111 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 112 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 113 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 114 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 115 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 116 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 117 complete
+time per map 1.343e+01
+starting process_t_map
+done
+trial 118 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 119 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 120 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 121 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 122 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 123 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 124 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 125 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 126 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 127 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 128 complete
+time per map 1.342e+01
+starting process_t_map
+done
+trial 129 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 130 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 131 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 132 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 133 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 134 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 135 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 136 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 137 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 138 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 139 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 140 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 141 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 142 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 143 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 144 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 145 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 146 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 147 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 148 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 149 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 150 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 151 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 152 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 153 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 154 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 155 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 156 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 157 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 158 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 159 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 160 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 161 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 162 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 163 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 164 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 165 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 166 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 167 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 168 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 169 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 170 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 171 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 172 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 173 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 174 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 175 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 176 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 177 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 178 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 179 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 180 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 181 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 182 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 183 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 184 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 185 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 186 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 187 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 188 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 189 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 190 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 191 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 192 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 193 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 194 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 195 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 196 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 197 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 198 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 199 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 200 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 201 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 202 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 203 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 204 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 205 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 206 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 207 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 208 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 209 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 210 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 211 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 212 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 213 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 214 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 215 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 216 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 217 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 218 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 219 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 220 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 221 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 222 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 223 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 224 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 225 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 226 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 227 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 228 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 229 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 230 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 231 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 232 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 233 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 234 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 235 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 236 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 237 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 238 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 239 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 240 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 241 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 242 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 243 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 244 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 245 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 246 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 247 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 248 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 249 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 250 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 251 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 252 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 253 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 254 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 255 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 256 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 257 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 258 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 259 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 260 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 261 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 262 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 263 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 264 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 265 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 266 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 267 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 268 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 269 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 270 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 271 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 272 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 273 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 274 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 275 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 276 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 277 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 278 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 279 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 280 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 281 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 282 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 283 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 284 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 285 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 286 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 287 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 288 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 289 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 290 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 291 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 292 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 293 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 294 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 295 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 296 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 297 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 298 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 299 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 300 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 301 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 302 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 303 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 304 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 305 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 306 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 307 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 308 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 309 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 310 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 311 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 312 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 313 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 314 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 315 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 316 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 317 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 318 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 319 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 320 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 321 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 322 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 323 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 324 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 325 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 326 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 327 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 328 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 329 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 330 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 331 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 332 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 333 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 334 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 335 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 336 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 337 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 338 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 339 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 340 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 341 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 342 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 343 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 344 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 345 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 346 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 347 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 348 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 349 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 350 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 351 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 352 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 353 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 354 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 355 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 356 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 357 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 358 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 359 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 360 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 361 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 362 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 363 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 364 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 365 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 366 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 367 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 368 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 369 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 370 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 371 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 372 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 373 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 374 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 375 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 376 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 377 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 378 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 379 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 380 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 381 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 382 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 383 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 384 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 385 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 386 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 387 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 388 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 389 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 390 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 391 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 392 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 393 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 394 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 395 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 396 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 397 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 398 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 399 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 400 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 401 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 402 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 403 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 404 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 405 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 406 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 407 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 408 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 409 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 410 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 411 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 412 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 413 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 414 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 415 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 416 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 417 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 418 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 419 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 420 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 421 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 422 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 423 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 424 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 425 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 426 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 427 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 428 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 429 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 430 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 431 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 432 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 433 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 434 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 435 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 436 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 437 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 438 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 439 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 440 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 441 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 442 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 443 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 444 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 445 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 446 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 447 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 448 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 449 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 450 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 451 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 452 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 453 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 454 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 455 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 456 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 457 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 458 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 459 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 460 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 461 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 462 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 463 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 464 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 465 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 466 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 467 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 468 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 469 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 470 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 471 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 472 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 473 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 474 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 475 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 476 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 477 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 478 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 479 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 480 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 481 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 482 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 483 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 484 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 485 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 486 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 487 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 488 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 489 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 490 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 491 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 492 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 493 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 494 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 495 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 496 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 497 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 498 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 499 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 500 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 501 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 502 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 503 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 504 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 505 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 506 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 507 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 508 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 509 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 510 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 511 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 512 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 513 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 514 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 515 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 516 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 517 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 518 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 519 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 520 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 521 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 522 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 523 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 524 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 525 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 526 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 527 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 528 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 529 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 530 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 531 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 532 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 533 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 534 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 535 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 536 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 537 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 538 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 539 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 540 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 541 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 542 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 543 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 544 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 545 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 546 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 547 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 548 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 549 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 550 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 551 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 552 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 553 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 554 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 555 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 556 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 557 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 558 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 559 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 560 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 561 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 562 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 563 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 564 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 565 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 566 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 567 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 568 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 569 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 570 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 571 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 572 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 573 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 574 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 575 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 576 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 577 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 578 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 579 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 580 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 581 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 582 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 583 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 584 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 585 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 586 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 587 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 588 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 589 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 590 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 591 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 592 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 593 complete
+time per map 1.341e+01
+starting process_t_map
+done
+trial 594 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 595 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 596 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 597 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 598 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 599 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 600 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 601 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 602 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 603 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 604 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 605 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 606 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 607 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 608 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 609 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 610 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 611 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 612 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 613 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 614 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 615 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 616 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 617 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 618 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 619 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 620 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 621 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 622 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 623 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 624 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 625 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 626 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 627 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 628 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 629 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 630 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 631 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 632 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 633 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 634 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 635 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 636 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 637 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 638 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 639 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 640 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 641 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 642 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 643 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 644 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 645 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 646 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 647 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 648 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 649 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 650 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 651 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 652 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 653 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 654 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 655 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 656 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 657 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 658 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 659 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 660 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 661 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 662 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 663 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 664 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 665 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 666 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 667 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 668 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 669 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 670 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 671 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 672 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 673 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 674 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 675 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 676 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 677 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 678 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 679 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 680 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 681 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 682 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 683 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 684 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 685 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 686 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 687 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 688 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 689 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 690 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 691 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 692 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 693 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 694 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 695 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 696 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 697 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 698 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 699 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 700 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 701 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 702 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 703 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 704 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 705 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 706 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 707 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 708 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 709 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 710 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 711 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 712 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 713 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 714 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 715 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 716 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 717 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 718 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 719 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 720 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 721 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 722 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 723 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 724 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 725 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 726 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 727 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 728 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 729 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 730 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 731 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 732 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 733 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 734 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 735 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 736 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 737 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 738 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 739 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 740 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 741 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 742 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 743 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 744 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 745 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 746 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 747 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 748 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 749 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 750 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 751 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 752 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 753 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 754 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 755 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 756 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 757 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 758 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 759 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 760 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 761 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 762 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 763 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 764 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 765 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 766 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 767 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 768 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 769 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 770 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 771 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 772 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 773 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 774 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 775 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 776 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 777 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 778 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 779 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 780 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 781 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 782 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 783 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 784 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 785 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 786 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 787 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 788 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 789 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 790 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 791 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 792 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 793 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 794 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 795 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 796 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 797 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 798 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 799 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 800 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 801 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 802 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 803 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 804 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 805 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 806 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 807 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 808 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 809 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 810 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 811 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 812 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 813 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 814 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 815 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 816 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 817 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 818 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 819 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 820 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 821 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 822 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 823 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 824 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 825 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 826 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 827 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 828 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 829 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 830 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 831 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 832 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 833 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 834 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 835 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 836 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 837 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 838 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 839 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 840 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 841 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 842 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 843 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 844 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 845 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 846 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 847 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 848 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 849 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 850 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 851 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 852 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 853 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 854 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 855 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 856 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 857 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 858 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 859 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 860 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 861 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 862 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 863 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 864 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 865 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 866 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 867 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 868 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 869 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 870 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 871 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 872 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 873 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 874 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 875 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 876 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 877 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 878 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 879 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 880 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 881 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 882 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 883 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 884 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 885 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 886 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 887 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 888 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 889 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 890 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 891 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 892 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 893 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 894 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 895 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 896 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 897 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 898 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 899 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 900 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 901 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 902 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 903 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 904 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 905 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 906 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 907 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 908 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 909 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 910 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 911 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 912 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 913 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 914 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 915 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 916 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 917 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 918 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 919 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 920 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 921 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 922 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 923 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 924 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 925 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 926 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 927 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 928 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 929 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 930 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 931 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 932 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 933 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 934 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 935 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 936 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 937 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 938 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 939 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 940 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 941 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 942 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 943 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 944 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 945 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 946 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 947 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 948 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 949 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 950 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 951 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 952 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 953 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 954 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 955 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 956 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 957 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 958 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 959 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 960 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 961 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 962 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 963 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 964 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 965 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 966 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 967 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 968 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 969 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 970 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 971 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 972 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 973 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 974 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 975 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 976 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 977 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 978 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 979 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 980 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 981 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 982 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 983 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 984 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 985 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 986 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 987 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 988 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 989 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 990 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 991 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 992 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 993 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 994 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 995 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 996 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 997 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 998 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 999 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1000 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1001 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1002 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1003 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1004 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1005 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1006 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1007 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1008 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1009 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1010 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1011 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1012 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1013 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1014 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1015 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1016 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1017 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1018 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1019 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1020 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1021 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1022 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1023 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1024 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1025 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1026 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1027 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1028 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1029 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1030 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1031 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1032 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1033 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1034 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1035 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1036 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1037 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1038 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1039 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1040 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1041 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1042 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1043 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1044 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1045 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1046 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1047 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1048 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1049 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1050 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1051 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1052 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1053 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1054 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1055 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1056 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1057 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1058 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1059 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1060 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1061 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1062 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1063 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1064 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1065 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1066 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1067 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1068 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1069 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1070 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1071 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1072 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1073 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1074 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1075 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1076 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1077 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1078 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1079 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1080 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1081 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1082 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1083 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1084 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1085 complete
+time per map 1.338e+01
+starting process_t_map
+done
+trial 1086 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1087 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1088 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1089 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1090 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1091 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1092 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1093 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1094 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1095 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1096 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1097 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1098 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1099 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1100 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1101 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1102 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1103 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1104 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1105 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1106 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1107 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1108 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1109 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1110 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1111 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1112 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1113 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1114 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1115 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1116 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1117 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1118 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1119 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1120 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1121 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1122 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1123 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1124 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1125 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1126 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1127 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1128 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1129 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1130 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1131 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1132 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1133 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1134 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1135 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1136 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1137 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1138 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1139 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1140 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1141 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1142 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1143 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1144 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1145 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1146 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1147 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1148 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1149 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1150 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1151 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1152 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1153 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1154 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1155 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1156 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1157 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1158 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1159 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1160 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1161 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1162 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1163 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1164 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1165 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1166 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1167 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1168 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1169 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1170 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1171 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1172 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1173 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1174 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1175 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1176 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1177 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1178 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1179 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1180 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1181 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1182 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1183 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1184 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1185 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1186 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1187 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1188 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1189 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1190 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1191 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1192 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1193 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1194 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1195 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1196 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1197 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1198 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1199 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1200 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1201 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1202 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1203 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1204 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1205 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1206 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1207 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1208 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1209 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1210 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1211 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1212 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1213 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1214 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1215 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1216 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1217 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1218 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1219 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1220 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1221 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1222 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1223 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1224 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1225 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1226 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1227 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1228 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1229 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1230 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1231 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1232 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1233 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1234 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1235 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1236 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1237 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1238 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1239 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1240 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1241 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1242 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1243 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1244 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1245 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1246 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1247 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1248 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1249 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1250 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1251 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1252 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1253 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1254 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1255 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1256 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1257 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1258 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1259 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1260 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1261 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1262 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1263 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1264 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1265 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1266 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1267 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1268 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1269 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1270 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1271 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1272 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1273 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1274 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1275 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1276 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1277 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1278 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1279 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1280 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1281 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1282 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1283 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1284 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1285 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1286 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1287 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1288 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1289 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1290 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1291 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1292 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1293 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1294 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1295 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1296 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1297 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1298 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1299 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1300 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1301 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1302 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1303 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1304 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1305 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1306 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1307 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1308 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1309 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1310 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1311 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1312 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1313 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1314 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1315 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1316 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1317 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1318 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1319 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1320 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1321 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1322 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1323 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1324 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1325 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1326 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1327 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1328 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1329 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1330 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1331 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1332 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1333 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1334 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1335 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1336 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1337 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1338 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1339 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1340 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1341 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1342 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1343 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1344 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1345 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1346 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1347 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1348 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1349 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1350 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1351 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1352 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1353 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1354 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1355 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1356 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1357 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1358 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1359 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1360 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1361 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1362 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1363 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1364 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1365 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1366 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1367 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1368 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1369 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1370 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1371 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1372 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1373 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1374 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1375 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1376 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1377 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1378 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1379 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1380 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1381 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1382 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1383 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1384 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1385 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1386 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1387 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1388 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1389 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1390 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1391 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1392 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1393 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1394 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1395 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1396 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1397 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1398 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1399 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1400 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1401 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1402 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1403 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1404 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1405 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1406 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1407 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1408 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1409 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1410 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1411 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1412 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1413 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1414 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1415 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1416 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1417 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1418 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1419 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1420 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1421 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1422 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1423 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1424 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1425 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1426 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1427 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1428 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1429 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1430 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1431 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1432 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1433 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1434 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1435 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1436 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1437 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1438 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1439 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1440 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1441 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1442 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1443 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1444 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1445 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1446 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1447 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1448 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1449 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1450 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1451 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1452 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1453 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1454 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1455 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1456 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1457 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1458 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1459 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1460 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1461 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1462 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1463 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1464 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1465 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1466 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1467 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1468 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1469 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1470 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1471 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1472 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1473 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1474 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1475 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1476 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1477 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1478 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1479 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1480 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1481 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1482 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1483 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1484 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1485 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1486 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1487 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1488 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1489 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1490 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1491 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1492 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1493 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1494 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1495 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1496 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1497 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1498 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1499 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1500 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1501 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1502 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1503 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1504 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1505 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1506 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1507 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1508 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1509 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1510 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1511 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1512 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1513 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1514 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1515 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1516 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1517 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1518 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1519 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1520 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1521 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1522 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1523 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1524 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1525 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1526 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1527 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1528 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1529 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1530 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1531 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1532 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1533 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1534 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1535 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1536 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1537 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1538 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1539 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1540 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1541 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1542 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1543 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1544 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1545 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1546 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1547 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1548 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1549 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1550 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1551 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1552 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1553 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1554 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1555 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1556 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1557 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1558 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1559 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1560 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1561 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1562 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1563 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1564 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1565 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1566 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1567 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1568 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1569 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1570 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1571 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1572 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1573 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1574 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1575 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1576 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1577 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1578 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1579 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1580 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1581 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1582 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1583 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1584 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1585 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1586 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1587 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1588 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1589 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1590 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1591 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1592 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1593 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1594 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1595 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1596 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1597 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1598 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1599 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1600 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1601 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1602 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1603 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1604 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1605 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1606 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1607 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1608 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1609 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1610 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1611 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1612 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1613 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1614 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1615 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1616 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1617 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1618 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1619 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1620 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1621 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1622 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1623 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1624 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1625 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1626 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1627 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1628 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1629 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1630 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1631 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1632 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1633 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1634 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1635 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1636 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1637 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1638 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1639 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1640 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1641 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1642 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1643 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1644 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1645 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1646 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1647 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1648 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1649 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1650 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1651 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1652 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1653 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1654 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1655 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1656 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1657 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1658 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1659 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1660 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1661 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1662 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1663 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1664 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1665 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1666 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1667 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1668 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1669 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1670 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1671 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1672 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1673 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1674 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1675 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1676 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1677 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1678 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1679 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1680 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1681 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1682 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1683 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1684 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1685 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1686 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1687 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1688 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1689 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1690 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1691 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1692 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1693 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1694 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1695 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1696 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1697 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1698 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1699 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1700 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1701 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1702 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1703 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1704 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1705 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1706 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1707 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1708 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1709 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1710 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1711 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1712 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1713 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1714 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1715 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1716 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1717 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1718 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1719 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1720 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1721 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1722 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1723 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1724 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1725 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1726 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1727 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1728 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1729 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1730 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1731 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1732 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1733 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1734 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1735 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1736 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1737 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1738 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1739 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1740 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1741 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1742 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1743 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1744 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1745 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1746 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1747 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1748 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1749 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1750 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1751 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1752 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1753 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1754 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1755 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1756 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1757 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1758 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1759 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1760 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1761 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1762 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1763 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1764 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1765 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1766 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1767 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1768 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1769 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1770 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1771 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1772 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1773 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1774 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1775 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1776 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1777 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1778 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1779 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1780 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1781 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1782 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1783 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1784 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1785 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1786 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1787 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1788 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1789 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1790 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1791 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1792 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1793 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1794 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1795 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1796 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1797 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1798 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1799 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1800 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1801 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1802 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1803 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1804 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1805 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1806 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1807 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1808 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1809 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1810 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1811 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1812 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1813 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1814 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1815 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1816 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1817 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1818 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1819 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1820 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1821 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1822 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1823 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1824 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1825 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1826 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1827 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1828 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1829 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1830 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1831 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1832 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1833 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1834 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1835 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1836 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1837 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1838 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1839 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1840 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1841 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1842 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1843 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1844 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1845 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1846 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1847 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1848 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1849 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1850 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1851 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1852 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1853 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1854 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1855 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1856 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1857 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1858 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1859 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1860 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1861 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1862 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1863 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1864 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1865 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1866 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1867 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1868 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1869 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1870 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1871 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1872 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1873 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1874 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1875 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1876 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1877 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1878 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1879 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1880 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1881 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1882 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1883 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1884 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1885 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1886 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1887 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1888 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1889 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1890 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1891 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1892 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1893 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1894 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1895 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1896 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1897 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1898 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1899 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1900 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1901 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1902 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1903 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1904 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1905 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1906 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1907 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1908 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1909 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1910 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1911 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1912 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1913 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1914 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1915 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1916 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1917 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1918 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1919 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1920 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1921 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1922 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1923 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1924 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1925 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1926 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1927 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1928 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1929 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1930 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1931 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1932 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1933 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1934 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1935 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1936 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1937 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1938 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1939 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1940 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1941 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1942 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1943 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1944 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1945 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1946 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1947 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1948 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1949 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1950 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1951 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1952 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1953 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1954 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1955 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1956 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1957 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1958 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1959 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1960 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1961 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1962 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1963 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1964 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1965 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1966 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1967 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1968 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1969 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1970 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1971 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1972 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1973 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1974 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1975 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1976 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1977 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1978 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1979 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1980 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1981 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1982 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1983 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1984 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1985 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1986 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1987 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1988 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1989 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 1990 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1991 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1992 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1993 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1994 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1995 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1996 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1997 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1998 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 1999 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 2000 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 2001 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 2002 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 2003 complete
+time per map 1.339e+01
+starting process_t_map
+done
+trial 2004 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2005 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2006 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2007 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2008 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2009 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2010 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2011 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2012 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2013 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2014 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2015 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2016 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2017 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2018 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2019 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2020 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2021 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2022 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2023 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2024 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2025 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2026 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2027 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2028 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2029 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2030 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2031 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2032 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2033 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2034 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2035 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2036 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2037 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2038 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2039 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2040 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2041 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2042 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2043 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2044 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2045 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2046 complete
+time per map 1.340e+01
+starting process_t_map
+done
+trial 2047 complete
+time per map 1.340e+01
 ^C

@@ -26,6 +26,8 @@ from scipy.optimize import minimize
 import os
 import time
 
+import yaml
+
 
 data_path = '/home/aroman/data/'
 act_path = data_path + 'act/'
@@ -156,6 +158,32 @@ def get_fname(path):
 
 def get_ext(path):
     return path.split('.')[-1]
+
+
+# A class to contain basic path info
+class PipePath:
+    def __init__(self,):
+        pass
+
+    def __init__(self, *, gal_cat, cmb_map, cmb_ivar, fl_path):
+        self.gal_cat = gal_cat
+        self.cmb_map = cmb_map
+        self.cmb_ivar = cmb_ivar
+        self.fl_path = fl_path
+
+    def from_file(cls, path):
+        ret = None
+        
+        with open(path, 'r') as f:
+            yfile = yaml.safe_load(f.read())
+
+            ret = cls()
+            # check allowed keys?
+            # check completeness?
+            for key, val in yfile.items():
+                ret[key] = val
+
+        return ret
 
 
 # TODO: streamline via fromfile/tofile methods
@@ -445,6 +473,14 @@ class TransferFunction:
         if bl2 is None: bl2 = np.ones(lmax + 1)
         self.bl2 = bl2
 
+    def __str__(self,):
+        ret = f'Has metadata: {self.metadata is not None}\n'
+        ret += f'ntrial_nl: {self.ntrial_nl}\n'
+        ret += f'lmax: {self.lmax}\n'
+        ret += f'nave_fl: {self.nave_fl}\n'
+        ret += f'ntrial_fl: {self.ntrial_fl}\n'
+        return ret
+ 
     @classmethod
     def from_file(cls, fl_path):
         with h5py.File(fl_path, 'r') as f:
@@ -741,6 +777,8 @@ class ActPipe:
             bl = np.ones(self.lmax + 1)
         return cl[:self.lmax + 1] * self.fl[:self.lmax + 1] * bl + noise * self.nl_tilde[:self.lmax + 1]
 
+    # compute the fullsky <-> fkp masked transfer function fl and the pseudo noise
+    # power nl
     def compute_fl_nl(self, ntrial_nl=8, ntrial_fl=8, nave_fl=32, fl_path=None):
         assert self.init_data
         assert self.init_fkp
@@ -1094,6 +1132,7 @@ def make_xz_plot(act_pipe, gal_pipe, r_fkp=0.62,
 
 # @profile
 # TODO: extend to multi-frequency case!
+# TODO: could easily be a static method
 def compute_estimator(act_pipes, gal_pipe, r_lwidth=1., do_mc=False, ntrial=64):
 
     # set l weight

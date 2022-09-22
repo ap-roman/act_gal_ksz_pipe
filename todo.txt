@@ -10,3 +10,6 @@ Footprint constrained noise comparison
 
 Do a full accounting of how different datasets influence computation
 	figure out when to throw pre-generated data away/introduce checksums
+
+Sept 2022
+	Rename all scripts _ -> -

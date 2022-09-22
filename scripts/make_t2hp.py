@@ -6,17 +6,14 @@ from fnl_pipe.pipe import ActPipe, GalPipe
 
 
 data_path = '/home/aroman/data/'
-# act_path = data_path + 'act/'
-act_path = data_path + 'act_pub/'
+act_path = data_path + 'act/'
 planck_path = data_path + 'planck/'
 mask_path = data_path + 'mask/'
+pipe_path = data_path + 'pipe/'
 
-# map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
-# ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits'
-# map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map.fits'
-map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits'
-ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits'
-beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt'
+map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits'
+ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits'
+beam_path = act_path + 'beam_f150_daynight.txt'
 
 cl_cmb_path = data_path + 'spectra/cl_cmb.npy'
 cl_ksz_path = data_path + 'spectra/cl_ksz.npy'
@@ -31,12 +28,17 @@ kszpipe_cosmo_path = kszpipe_path + 'cosmology.pkl'
 kszpipe_box_path = kszpipe_path + 'bounding_box.pkl'
 kszpipe_d0_path = kszpipe_path + 'delta0_DR12v5_CMASS_North.h5'
 
+fl_path = pipe_path + 'transfer_function.h5'
+
+
 # Parameters chosen ahead of time to maximize snr with this particular dataset
 R_FKP = 1.56
 R_LWIDTH = 0.62
-NTRIAL_FL = 512
-NTRIAL_NL = 128
-NAVE_FL = 4
+# NSIMS = 2046
+
+NSIMS = 2048
+
+out_path = act_path + f'meta/t2_{NSIMS}.fits'
 
 if __name__ == "__main__":
     act_pipe = ActPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,    
@@ -46,5 +48,21 @@ if __name__ == "__main__":
     act_pipe.import_data()
     act_pipe.update_metadata(r_fkp=R_FKP, r_lwidth=R_LWIDTH, gal_path=catalog_path)
     act_pipe.compute_pixel_weight()
-    act_pipe.compute_fl_nl(ntrial_nl=NTRIAL_NL, ntrial_fl=NTRIAL_FL, nave_fl=NAVE_FL, 
-                                 fl_path='transfer_function_pub.h5')
+    act_pipe.import_fl_nl(fl_path)
+    act_pipe.compute_sim_spectra(make_plots=True)
+    act_pipe.compute_l_weight()
+
+    # gal_pipe = GalPipe(catalog_path, act_pipe, diag_plots=True)
+    # gal_pipe.import_data()
+    # gal_pipe.make_vr_list()
+
+    t0 = time.time()
+    t2_map = act_pipe.get_zero_map()
+    for itrial in range(NSIMS):
+        t_map = act_pipe.get_t_pseudo_hp()
+        t2_map += t_map**2/NSIMS
+        t1 = time.time()
+        print(f'trial {itrial} complete')
+        print(f'time per map {(t1 - t0)/(itrial + 1):.3e}')
+        # print(f'estimated duration remaining: {}')
+    t2_map.write(out_path)
