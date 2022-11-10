@@ -1,8 +1,6 @@
 from fnl_pipe.realspace import Padded3DPipe, PipeAdjoint
-from fnl_pipe.pipe import ActPipe, GalPipe, compute_estimator, plot_cl_comparison
-from fnl_pipe.util import OutputManager, import_config
-
-from pixell import enmap
+from fnl_pipe.pipe import ActPipe, GalPipe, compute_estimator
+from fnl_pipe.util import OutputManager
 
 import kszpipe
 from kszpipe.Cosmology import Cosmology 
@@ -12,30 +10,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import time
-import sys
-
 
 data_path = '/home/aroman/data/'
-
+# act_path = data_path + 'act/'
+act_path = data_path + 'act_pub/'
 planck_path = data_path + 'planck/'
 mask_path = data_path + 'mask/'
 pipe_path = data_path + 'pipe/'
 
+# map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits' # private
+map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
+# ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits' # private
+ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
+# beam_path = act_path + 'beam_f150_daynight.txt' # proprietary beam file
+beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
 
-act_path = data_path + 'act/'
-map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits' # private
-ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits' # private
-beam_path = act_path + 'beam_f150_daynight.txt' # proprietary beam file
-fl_path = pipe_path + 'transfer_function_short.h5'
-
-# act_path = data_path + 'act_pub/'
-# map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
-# ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
-# beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
-# fl_path = pipe_path + 'transfer_function_short_pub.h5'
-
-# gal_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
-gal_mask_path = None
+gal_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
 
 cl_cmb_path = data_path + 'spectra/cl_cmb.npy'
 cl_ksz_path = data_path + 'spectra/cl_ksz.npy'
@@ -50,10 +40,10 @@ kszpipe_cosmo_path = kszpipe_path + 'cosmology.pkl'
 kszpipe_box_path = kszpipe_path + 'bounding_box.pkl'
 kszpipe_d0_path = kszpipe_path + 'delta0_DR12v5_CMASS_North.h5'
 
-dump_fkp = True
-fkp_label = 'fkp_act_private_nomask.fits'
-# fkp_label = 'fkp_act_public.fits'
-fkp_path = 'data/' + fkp_label
+
+fl_path = pipe_path + 'transfer_function_short_pub.h5'
+# fl_path = pipe_path + 'transfer_function_pub.h5'
+
 
 # Parameters chosen ahead of time to maximize snr with this particular dataset
 R_FKP = 1.56
@@ -67,28 +57,7 @@ def rel_error_inv_std(n):
     return np.array([1./(1 + err_prop), 1./(1 - err_prop)])
 
 
-def verify_parameters(config_dict):
-    assert 'r_fkp' in config_dict
-    assert 'r_lwidth' in config_dict
-    assert 'ntrial' in config_dict
-
-    assert 'map_path' in config_dict
-    assert 'ivar_path' in config_dict
-    assert 'beam_path' in config_dict
-    assert 'gal_mask_path' in config_dict
-
-    for key, val in config_dict.items():
-        print(key + ': ' + val)
-
-
 if __name__ == "__main__":
-    # args = sys.argv
-    # assert len(args) == 2
-
-    # config_path = args[1]
-    # config_dict = import_config(config_path)
-    # verify_parameters(config_dict)
-
     om = OutputManager(base_path='output', title='make_xpower')
 
     act_pipe = ActPipe(map_path, ivar_path, beam_path, cl_ksz_path, cl_cmb_path,    
@@ -103,12 +72,7 @@ if __name__ == "__main__":
     act_pipe.compute_sim_spectra(make_plots=True)
     act_pipe.compute_l_weight()
 
-    if dump_fkp:
-        print('writing FKP map')
-        fkp_weight = act_pipe.map_fkp
-        enmap.write_map(fkp_path, fkp_weight)
-
-    gal_pipe = GalPipe(catalog_path, act_pipe.imap_t, diag_plots=True)
+    gal_pipe = GalPipe(catalog_path, act_pipe, diag_plots=True)
     gal_pipe.import_data()
     gal_pipe.make_vr_list()
 
@@ -130,9 +94,6 @@ if __name__ == "__main__":
     real_pipe.init_d0_k(d0_k)
 
     alpha_2d, a_std = compute_estimator([act_pipe,], gal_pipe, r_lwidth=R_LWIDTH)
-
-    # compare sim cl to observed
-    plot_cl_comparison(act_pipe, om)
 
     print('=============================================')
     print('2D pipeline results:')
@@ -177,7 +138,6 @@ if __name__ == "__main__":
     assert gal_pipe.temp_sims is not None
     assert NTRIAL <= gal_pipe.nsims
     for itrial in range(NTRIAL):
-
         t_sim_list = gal_pipe.temp_sims[itrial]
         a_ksz_3d, y_k = real_pipe.do_harmonic_sum_adj(t_sim_list, pa)
         grids = np.array((y_k, real_pipe.d0_k), dtype=complex)

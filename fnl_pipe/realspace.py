@@ -16,6 +16,7 @@ def act_unit_r(decs, ras):
     return np.array([np.cos(decs) * np.cos(ras), np.cos(decs) * np.sin(ras), np.sin(decs)])
 
 
+# TODO: add a general "sky plot" function
 def plot_2d_function(ar_2d, xlabel, ylabel, path_base, var_label, lims):
     plt.figure(dpi=300)
     plt.title(var_label + f' {xlabel}{ylabel} cross section')

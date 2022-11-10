@@ -23,11 +23,12 @@ from scipy import interpolate
 from scipy.interpolate import splev, splrep
 from scipy.optimize import minimize
 
-import os
+from .util import OutputManager
+
 import time
+import os
 
 import yaml
-
 
 data_path = '/home/aroman/data/'
 act_path = data_path + 'act/'
@@ -222,13 +223,13 @@ def make_sky_map(data, filename, title=''):
 
 # WARN: assumes rigid reference geometry across maps
 class GalPipe:
-    def __init__(self, catalog_path, act_pipe, import_now=False, diag_plots=True, lmax=LMAX):
+    def __init__(self, catalog_path, ref_map_t, import_now=False, diag_plots=True, lmax=LMAX):
         self.lmax = int(lmax)
         self.catalog_path = catalog_path
         self.diag_plots = diag_plots
         self.ngal = 0
         self.nsims = None
-        self.ref_map_t = act_pipe.imap_t
+        self.ref_map_t = ref_map_t
 
         self.init_lists = False
 
@@ -515,9 +516,10 @@ class TransferFunction:
 
 
 class ActPipe:
-    def __init__(self, map_path, ivar_path, beam_path, fid_ksz_path, fid_cmb_path, planck_mask_path,
+    def __init__(self, map_path, ivar_path, beam_path, fid_ksz_path, fid_cmb_path, planck_mask_path, output_manager,
                  custom_l_weight=None,
-                 fid_cib_path=None, diag_plots=False, l_fkp=3000, l_ksz=3000, lmax=LMAX, lmax_sim=LMAX_SIM):
+                 fid_cib_path=None, diag_plots=False, l_fkp=3000, l_ksz=3000, lmax=LMAX, lmax_sim=LMAX_SIM,
+                 gal_mask_path=None):
         self.lmax = int(lmax)
         self.lmax_sim = int(lmax_sim)
         self.lmax_internal = max(lmax, lmax_sim)
@@ -532,6 +534,7 @@ class ActPipe:
         self.ivar_path = ivar_path
         self.beam_path = beam_path
         self.planck_mask_path = planck_mask_path
+        self.gal_mask_path = gal_mask_path
 
         # paths to fiducial power spectra for simulation
         self.fid_cmb_path = fid_cmb_path
@@ -552,6 +555,7 @@ class ActPipe:
         self.init_lweight = False
 
         self.metadata = None
+        self.output_manager = output_manager
 
     def update_metadata(self, r_fkp, r_lwidth, gal_path):
         self.metadata = Metadata2D(r_fkp, r_lwidth, get_fname(self.map_path), get_fname(gal_path))
@@ -568,6 +572,25 @@ class ActPipe:
         # useful for imshow masking
 
         print("done")
+
+        if self.gal_mask_path is not None:
+            print(f'importing galaxy mask {self.gal_mask_path}')
+
+            mask_name = get_fname(self.gal_mask_path)
+
+            self.gal_mask = enmap.read_map(self.gal_mask_path)
+
+            plt.figure(dpi=300)
+            plt.title(f'Galaxy mask: {mask_name}')
+            plt.imshow(self.gal_mask[::-1,:])
+
+            self.output_manager.savefig(f'gal_mask_{mask_name}.png')
+            plt.close()
+
+            print('done')
+        else:
+            self.gal_mask = self.get_zero_map() + 1.
+
 
         print("generating zero_alm array")
         zero_map = self.get_empty_map()
@@ -623,7 +646,7 @@ class ActPipe:
             plt.plot(self.beam[:,0], self.beam[:,1])
             plt.xlabel('l')
             plt.ylabel('amplitude')
-            plt.savefig('plots/beam.png')
+            self.output_manager.savefig('beam.png')
             plt.close()
 
         self.init_data = True
@@ -662,6 +685,9 @@ class ActPipe:
 
         # zero masked pixels
         eta_n2 *= self.mask_t
+
+        # apply galaxy mask
+        eta_n2 *= self.gal_mask
 
         if suppl_mask is not None:
             print('Applying supplemental mask')
@@ -898,6 +924,7 @@ class ActPipe:
         plt.savefig('plots/compare_cl_sim_obs.png')
         plt.close()
 
+        # checks that the get_pseudo_cl function works properly
         assert fequal_either(cl_xfer[50:], self.cl_tt_pseudo[50:], tol=1e-2), f'max diff: {np.max(np.abs(cl_xfer[50:] - self.cl_tt_pseudo[50:]))}'
 
         beam_sim2 = self.beam[:self.lmax_sim + 1,1]**2
@@ -963,6 +990,8 @@ class ActPipe:
         cl_ksz_th = np.exp(-(self.ells_sim / r_lwidth / 5500.)**2)
 
         if self.custom_l_weight:
+            print('loading l-weight function')
+
             cl_ave = np.load(self.custom_l_weight)
             print(cl_ave)
             ells_sparse = cl_ave[0] + 1 # the ells are shifted implicitly
@@ -981,6 +1010,8 @@ class ActPipe:
 
             self.l_weight = cl_eval
         else:
+            print('setting optimal l-weight')
+
             # WARN: noise-free
             cl_xx_weight = self.get_pseudo_cl(self.cl_tt_sim, beam=True, noise=True)
 
@@ -990,11 +1021,19 @@ class ActPipe:
 
             self.l_weight = cl_ksz_th / (cl_xx_weight * cl_zz)
 
+        # choose a normalization
         self.l_weight /= self.l_weight[self.l_ksz]
+
+
 
         # WARN: l_weight cut
         # WARN: incompatible with custom l-weight?
         self.l_weight[:1500] = 0.
+
+        plt.figure(dpi=300.)
+        plt.plot(self.ells, self.l_weight)
+        self.output_manager.savefig('l_weight.png')
+        plt.close()
 
         self.init_lweight = True
 
@@ -1044,6 +1083,66 @@ def one_time_setup(data_path='/data/'):
 
 
 setup = False
+
+
+def plot_cl_comparison(act_pipe, output_manager):
+    # pipe = act_pipe
+    # t_map_plot = act_pipe.imap_t * pipe.map_fkp
+
+    # # make diagnostic plot to compare cl
+    # cl_tilde_sim = map2cl(t_map_plot, lmax=pipe.lmax)
+    # cl_pseudo_sim = map2cl(t_pseudo, lmax=pipe.lmax)
+    # plt.figure(dpi=300)
+    # plt.title('Comparison of noise map vs ACT power spectra')
+    # plt.yscale('log')
+    # norm = pipe.ells * (1 + pipe.ells) / 2 / np.pi
+    # plt.plot(pipe.ells, cl_pseudo_sim * norm, label='cl from weighted map')
+    # plt.plot(pipe.ells, pipe.cl_tt_pseudo[:pipe.lmax + 1] * norm * l_weight[:pipe.lmax + 1]**2,
+    #          label='expected cl_tt for weighted map')
+    # plt.plot(pipe.ells, cl_tilde_sim * norm, label='cl from noise map')
+    # plt.plot(pipe.ells, pipe.cl_tt_pseudo[:pipe.lmax + 1] * norm, label='cl_tt_pseudo')
+    # plt.xlabel('l')
+    # plt.ylabel(u'$\Delta_l$')
+    # plt.legend()
+
+    # output_manager.savefig('cl_sim_compare.png')
+    # plt.close()
+
+    # plt.figure(dpi=300)
+    # plt.title('Ratio of ACT pseudo cl to sim map cl')
+    # cl_ratio = pipe.cl_tt_pseudo[:pipe.lmax + 1] / cl_tilde_sim
+    # cl_ratio[0] = 1.
+    # plt.plot(pipe.ells[50:], pipe.cl_tt_pseudo[50:pipe.lmax + 1] / cl_tilde_sim[50:])
+    # plt.xlabel('l')
+
+    assert act_pipe.init_fkp
+    assert act_pipe.init_spectra
+    assert act_pipe.init_lweight # double check that the l-weight was initialized properly
+
+    ells = act_pipe.ells
+    norm = ells * (ells + 1) / 2 / np.pi
+
+    # do not l-weight the sim data for the plot
+    l_weight = np.zeros(act_pipe.lmax_sim + 1) + 1.
+    l_weight[0] = 0.
+
+    cl_tt_obs = act_pipe.cl_tt_pseudo
+    cl_tt_sim_pseudo = act_pipe.get_pseudo_cl(act_pipe.cl_tt_sim, beam=True, noise=True)
+    cl_tt_mc = map2cl(act_pipe.get_sim_map(l_weight=l_weight), act_pipe.lmax)
+
+    plt.figure(dpi=300)
+    plt.title('map cl and sim cl comparison (both pseudo)')
+
+    plt.yscale('log')
+
+    plt.plot(ells, cl_tt_obs * norm, label='observed pseudo cl')
+    plt.plot(ells, cl_tt_sim_pseudo * norm, label='sim pseudo cl')
+    plt.plot(ells, cl_tt_mc * norm,  label='mc pseudo cl')
+
+    plt.legend()
+
+    output_manager.savefig('cl_sim_map.png')
+    plt.close()
 
 
 # TODO: should become a script
