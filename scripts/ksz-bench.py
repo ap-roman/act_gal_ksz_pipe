@@ -63,7 +63,7 @@ if __name__ == "__main__":
 		dest_map += np.random.normal(size=map_t.shape) * std_t
 
 		dt_single = time.time() - ti
-		print(f'this trial took {dt_single:.3e} s')
+		print(f'\tthis trial took {dt_single:.3e} s')
 
 	dt_cum = time.time() - t0
 	time_per = dt_cum / NTRIAL
