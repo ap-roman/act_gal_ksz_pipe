@@ -1,5 +1,6 @@
 output/*
 plots/*
+notebooks/output/*
 data
 logs
 notes

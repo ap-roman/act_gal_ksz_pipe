@@ -10,11 +10,7 @@ import numpy as np
 import pixell
 from pixell import enmap
 
-
-def iround(f_ind):
-    sgn = np.sign(f_ind).astype(int)
-    ind_abs = (np.abs(f_ind) + 0.5).astype(int)
-    return sgn * ind_abs
+from fnl_pipe.util import iround
 
 
 def bounds_check(ipos, shape):

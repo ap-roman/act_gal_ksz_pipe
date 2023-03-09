@@ -232,6 +232,8 @@ class GalPipe:
         self.ref_map_t = ref_map_t
 
         self.init_lists = False
+        self.init_map = False
+        self.init_harmonic = False
 
         if(import_now):
             self.import_data()
@@ -318,6 +320,18 @@ class GalPipe:
         self.ngal_in = self.ngal # rename ngal_in?
 
         self.init_lists = True
+
+    def get_zero_map(self):
+        return enmap.ndmap(np.zeros(self.ref_map_t.shape), self.ref_map_t.wcs)
+
+    def make_vr_map(self):
+        assert self.init_lists
+
+        self.vr_map = self.get_zero_map()
+        np.add.at(self.vr_map, (self.gal_inds[0,:], self.gal_inds[1,:]), self.vr_list)
+
+        self.init_map = True
+        self.init_harmonic = True
 
     # TODO: consider expanding scope to operate over specific summaries ?
     def add_sims(self, act_pipe, nsims):

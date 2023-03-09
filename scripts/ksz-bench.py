@@ -26,7 +26,7 @@ def masked_inv(ar):
 	return ret
 
 
-NTRIAL = 16
+NTRIAL = 512
 LMAX = 12000
 R_LWIDTH = 0.62
 ells = np.arange(1 + LMAX)

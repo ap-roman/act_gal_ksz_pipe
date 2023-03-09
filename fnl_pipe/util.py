@@ -1,11 +1,17 @@
 import time
 
+import mpi4py
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 import os
 from os import path, listdir
 
 import yaml
+
+from pixell.curvedsky import alm2cl, map2alm
+from pixell import enplot
 
 
 # NOT thread safe
@@ -84,16 +90,44 @@ def ensure_dir(dirpath):
         os.mkdir(dirpath)
 
 
+class LogFile:
+    def __init__(self, path):
+        self.path = path
+
+    def write(self, dat):
+        with open(self.path, 'a') as f:
+            f.write(dat)
+
+
 # Manages output directory. Not parallel
+# logs is a list of tuples (logname, logpath)
 class OutputManager:
-    def __init__(self, title, base_path='output', subdirs=['plots', 'logs']):
+    def __init__(self, title, base_path='output', subdirs=['plots', 'logs'], logs=None,
+                 mpi_rank=None, mpi_comm=None):
         assert title != ''
+        assert 'logs' in subdirs
 
         self.base_path = base_path
         self.subdirs = subdirs
 
-        label = get_sequential_label(base_path, title)
-        label = title + '_' + label
+        self.mpi_rank = mpi_rank
+        self.mpi_comm = mpi_comm
+        self.is_mpi = (mpi_rank is not None)
+
+        if self.is_mpi:
+            label = None
+            if self.mpi_rank ==0:
+                label = title + '_' + get_sequential_label(base_path, title)
+                ensure_dir(path.join(base_path, str(label)))
+
+            label = mpi_comm.bcast(label, root=0)
+
+            # if self.mpi_rank != 0:
+            label += f'/rank_{self.mpi_rank}/'
+            ensure_dir(path.join(base_path, str(label)))
+        else:
+            label = get_sequential_label(base_path, title)
+            label = title + '_' + label
 
         self.working_dir = path.join(base_path, str(label))
         ensure_dir(path.join(base_path, str(label)))
@@ -103,11 +137,40 @@ class OutputManager:
             this_path = path.join(self.working_dir, sd)
             ensure_dir(this_path)
 
-    def savefig(self, name):
+        if logs is None:
+            logs = [title,]
+        
+        self.log_names = logs
+        self.logs = {log:LogFile(os.path.join(self.working_dir, 'logs', log + '.log')) for log in logs}
+
+    def log(self, line, log=None):
+        assert log in self.log_names or log is None
+        
+        if line[-1] != '\n' or line[-1] != '\r':
+            line += '\n'
+
+        if log is not None:
+            self.logs[log].write(line)
+        else:
+            for logname, log in self.logs.items():
+                log.write(line)
+
+    def printlog(self, line, log=None):
+        line = str(line)
+        print(line)
+        self.log(line, log)
+
+    def savefig(self, name, mode='matplotlib', fig=None):
         assert('plots' in self.subdirs)
+        assert(mode == 'matplotlib' or mode == 'pixell' )
 
         plot_path = path.join(self.working_dir, 'plots', name)
-        plt.savefig(plot_path)
+
+        if mode == 'matplotlib':
+            plt.savefig(plot_path)
+        elif mode == 'pixell':
+            assert fig is not None
+            enplot.write(plot_path, fig)
 
 
 def import_config(path):
@@ -117,6 +180,63 @@ def import_config(path):
         res = yaml.safe_load(f)
 
     return res
+
+
+def fequal(a,b,tol=1e-6):
+    return np.all(np.abs(a - b) <= tol)
+
+
+def fequal_either(a,b,tol=1e-3):
+    return np.all(np.logical_or(np.abs(a - b) <= tol, 2 * np.abs(a - b) / np.abs(a + b) <= tol))
+
+
+def map2cl(t_map, lmax):
+    return alm2cl(map2alm(t_map, lmax=lmax))
+
+
+def get_fname(path):
+    return '.'.join(path.split(os.sep)[-1].split('.')[:-1])
+
+
+def get_ext(path):
+    return path.split('.')[-1]
+
+
+def bounds_check(ipos, shape):
+    return np.all(ipos[0] >= 0) and np.all(ipos[0] < shape[0]) and np.all(ipos[1] >=0) \
+           and np.all(ipos[1] < shape[1])
+
+
+def iround(f_ind):
+    sgn = np.sign(f_ind).astype(int)
+    ind_abs = (np.abs(f_ind) + 0.5).astype(int)
+    return sgn * ind_abs
+
+
+def masked_inv(ar):
+    zeros = ar == 0.
+
+    ret = ar.copy()
+    ret[zeros] = 1.
+    ret = 1./ret
+    ret[zeros] = 0.
+
+    return ret
+
+
+def parse_act_beam(path):
+    line = None
+    with open(path, 'r') as f:
+        lines = f.readlines()
+
+    ret = []
+    for line in lines:
+        l = int(line[:6])
+        amp = float(line[6:])
+        ret.append((l,amp))
+
+    ar = np.array(ret)
+    return ar[:,0], ar[:,1]
 
 
 # def run_from_config(path):
