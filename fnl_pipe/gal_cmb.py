@@ -258,7 +258,7 @@ class CMBxGalPipe:
         
         fl = np.zeros(lmax + 1) # base xfer function
         nl_tilde = np.zeros(lmax + 1)
-        for i in range(ntrial_fl):
+        for itrial in range(ntrial_fl):
             t_proc = process_map(rand_map(shape=map_ref.shape, wcs=map_ref.wcs, ps=cl_ref))
             t_noise = process_map(cmb_pipe.make_noise_map())
             this_nl = map2cl(t_noise, lmax=lmax)
@@ -347,7 +347,7 @@ class CMBxGalPipe:
                 dt_per_iter = dt_total / (itrial + 1)
                 printlog(f'completed MC iteration, time per iter: {dt_per_iter:.2e} s')
 
-                if itrial >1:
+                if itrial > 1:
                     a_std_sofar = np.std(alphas[:itrial + 1])
                     printlog(f'a_ksz so far: {a_ksz_unnorm/a_std_sofar:.3e}')
 

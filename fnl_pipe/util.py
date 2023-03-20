@@ -203,8 +203,13 @@ def get_ext(path):
 
 
 def bounds_check(ipos, shape):
-    return np.all(ipos[0] >= 0) and np.all(ipos[0] < shape[0]) and np.all(ipos[1] >=0) \
+    return np.all(ipos[0] >= 0) and np.all(ipos[0] < shape[0]) and np.all(ipos[1] >= 0) \
            and np.all(ipos[1] < shape[1])
+
+
+# gives a mask of in-bounds galaxies
+def in_bounds(ipos, shape):
+    return (ipos[0] >= 0) * (ipos[0] < shape[0]) * (ipos[1] >= 0) * (ipos[1] < shape[1])
 
 
 def iround(f_ind):
