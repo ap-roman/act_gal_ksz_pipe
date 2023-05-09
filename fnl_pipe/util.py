@@ -16,67 +16,6 @@ from pixell import enplot
 import h5py
 
 
-# # An hdf5 buffered writer
-# class ChunkedWriter:
-#     def _init_file(self):
-#         with h5py.File(self.path, 'w') as f:
-#             f['complete'] = False
-#             f['iwrite'] = 0
-#             f.create_dataset(self.bufname, (self.chunk_size, self.ncol),
-#                              dtype=self.dtype, max_size=(self.max_size, self.ncol))
-
-#     def __init__(self, path, * , chunk_size, ncol, dtype='f', bufname=None, max_size=None):
-#         self.path = path
-
-#         self.fixed_size = max_size is not None
-#         self.max_size = max_size
-
-#         if bufname is None:
-#             bufname = 'ar'
-#         self.bufname = bufname
-
-#         self.buf = []
-
-#         self.ncol = ncol
-#         self.dtype = dtype
-
-#         self.iwrite = 0
-#         self.iwrite_chunk = 0
-#         self.current_size = self.chunk_size
-
-#         self._init_file()
-
-#     def _check_integrity(self, h5file):
-#         assert h5file['iwrite'] == self.iwrite
-#         assert h5file['complete'] == False
-#         dset = h5file[self.bufname]
-#         assert dset.size == self.current_size
-
-#     def _flush_to_disk(self, h5file):
-#         h5file.flush()
-
-#     def append_row(self, row):
-#         with h5py.File(self.path, 'a') as f:
-#             self._check_integrity()
-
-#             dset = f[self.bufname]
-#             dset[self.iwrite, :] = row
-
-#             self.iwrite += 1
-#             self.iwrite_chunk +=1
-#             if self.iwrite_chunk == self.chunk_size
-#                 self._flush_to_disk(f)
-#                 self.iwrite_chunk = 0
-
-#                 if self.iwrite == dset.size:
-#                     dset.resize(dset.size + self.chunk_size, axis=0)
-#                     self.current_size += self.chunk_size
-
-#     def finalize(self):
-#         with h5py.File(self.path, 'a') as f:
-#             f['complete'] = True
-#             self._flush_to_disk(f)
-
 # buffers a transposed chunk; fixed size
 class ChunkedTransposeWriter:
     def _init_file(self):
@@ -533,14 +472,37 @@ def parse_act_beam(path):
     return ar[:,0], ar[:,1]
 
 
-# def run_from_config(path):
-#     res = None
-#     with f as open(path, 'r'):
-#         res = yaml.safe_load(f)
+########## YAML config file stuff ###########
 
-#     assert res is not None
+def update_locals(local_dict, param_dict):
+    for key, value in param_dict.items():
+        local_dict[key] = value
 
-#     scripts = res.keys()
 
-#     for script, value in res.items()
-#         assert script in listdir('scripts')
+def validate_pass(yaml_dict):
+    pass
+
+
+def validate_config(yaml_dict, supported_scripts):
+    assert 'base_path' in yaml_dict.keys()
+    assert 'tmp_dir' in yaml_dict.keys()
+    assert 'scripts' in yaml_dict.keys()
+
+    scripts = yaml_dict['scripts']
+    for script in scripts.keys():
+        assert script in supported_scripts
+
+
+def validate_script_config(yaml_dict)
+    assert 'base_path' in yaml_dict.keys()
+
+
+def get_yaml_dict(path, vad_fun=validate_pass):
+    ret = None
+    with open(path, 'r') as file:
+        ret = yaml.safe_load(file)
+        vad_fun(ret)
+
+    return ret
+
+########## End YAML config file stuff ###########

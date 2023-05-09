@@ -1,0 +1,67 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  phack-bootstrap.py:
+    base_path: "scripts/"
+    NTRIAL_NL: 1024
+    NTRIAL_FL: 32
+    NAVE_FL: 60
+    NITER_FL: 40
+    NTRIAL_MCL: 0
+    plots: True
+    data_path: "/home/aroman/data/"
+    planck_enmap_path: "/home/aroman/data/mask/planck_foreground.npy"
+    map_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits"
+    ivar_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits"
+    beam_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+    nl_path: "/data/aroman/symmetry/desils/nl_desils_pub_4096.npy"
+    fl_path: "/data/aroman/symmetry/desils/fl_desils_pub_nfl_32_nave_60_niter_40.npy"
+    gal_mask_path: "/home/aroman/data/vr_source/desils/intersect_sdss_desi_mask.fits"
+    desils_v3_north: "/home/aroman/data/vr_source/desils/v03_desils_north_cmass.h5"
+    desils_v3_south: "/home/aroman/data/vr_source/desils/v03_desils_south_cmass.h5"
+
+# NTRIAL_NL = 1024
+
+# NTRIAL_FL = 32
+# NAVE_FL = 60
+# NITER_FL = 40
+
+# NTRIAL_MC = 0
+
+# plots = True
+
+
+# data_path = '/home/aroman/data/'
+# planck_path = data_path + 'planck/'
+# mask_path = data_path + 'mask/'
+# pipe_path = data_path + 'pipe/'
+
+# # act_path = data_path + 'act/'
+# # map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits' # private
+# # ivar_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_ivar.fits' # private
+# # beam_path = act_path + 'beam_f150_daynight.txt' # proprietary beam file
+# # # nl_path = f'data/nl_desils_{NTRIAL_NL}.npy'
+# # # fl_path = f'data/fl_desils_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+# # nl_path = f'data/nl_{NTRIAL_NL}.npy'
+# # fl_path = f'data/fl_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+
+
+# act_path = data_path + 'act_pub/'
+# map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
+# ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
+# beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
+# nl_path = f'data/nl_desils_pub_{NTRIAL_NL}.npy'
+# fl_path = f'data/fl_desils_pub_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+
+
+# gal_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
+
+
+# # gal_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
+# # gal_mask_path = data_path + 'vr_source/desi_ls/intersect_sdss_desi_mask.h5'
+# desils_v3_north = data_path + 'vr_source/desils/v03_desils_north_cmass.h5'
+# desils_v3_south = data_path + 'vr_source/desils/v03_desils_south_cmass.h5'
+
+
+# planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
+# planck_enmap_path = mask_path + 'planck_foreground.npy'

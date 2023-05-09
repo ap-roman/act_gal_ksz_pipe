@@ -6,6 +6,8 @@ logs
 notes
 products
 test
+tmp/*
+*.lprof
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
