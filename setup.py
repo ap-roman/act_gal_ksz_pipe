@@ -8,4 +8,5 @@ setup(
    author_email='aroman@perimeterinstitute.ca',
    packages=['fnl_pipe', 'scripts'],
    install_requires=[],
+   # install_requires=['pixell', 'numpy', 'matplotlib', 'healpy', 'h5py', 'astropy', 'mpi4py'],
 )

@@ -15,12 +15,12 @@ NTRIAL_FL = 32
 NAVE_FL = 60
 NITER_FL = 40
 
-NTRIAL_MC = 1025
+NTRIAL_MC = 1024
 
 plots = True
-make_nl = False
-make_fl = False
-compute_estimator = True
+make_nl = True
+make_fl = True
+compute_estimator = False
 
 
 data_path = '/home/aroman/data/'
@@ -43,7 +43,7 @@ nl_path = f'data/nl_desils_pub_{NTRIAL_NL}.npy'
 fl_path = f'data/fl_desils_pub_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
 
 # gal_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
-gal_mask_path = data_path + 'vr_source/desi_ls/intersect_sdss_desi_mask.fits'
+gal_mask_path = data_path + 'vr_source/desils/intersect_sdss_desi_mask.fits'
 
 planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
 planck_enmap_path = mask_path + 'planck_foreground.npy'
@@ -97,6 +97,9 @@ def compute_estimator_mpi(cross_pipe, ntrial_mc):
 
 if __name__ == "__main__":
     assert make_nl or make_fl or compute_estimator # we need to do something
+
+    ntrial_nl = NTRIAL_NL
+    ntrial_fl = NTRIAL_FL
 
     max_procs = int(mem_cap / max_mem_per_proc)
 

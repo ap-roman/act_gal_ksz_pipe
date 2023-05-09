@@ -1,0 +1,1 @@
+squeue slurm-script.sh

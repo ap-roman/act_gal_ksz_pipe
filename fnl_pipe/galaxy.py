@@ -24,7 +24,7 @@ class GalCut:
     # TODO: implement abstract class/abstractmethod?
 
 
-class NullCut:
+class NullCut(GalCut):
     def __call__(self, catfile):
         # pass ngal somehow?
         ngal = catfile['zerr'].size
@@ -73,7 +73,7 @@ class _LRGCut(GalCut):
 
         include_mask = np.bitwise_or(bitmask, ormask) == ormask 
 
-        print(f'include_mask includesum: {include_mask.sum()} of {len(bitmask)}')
+        # print(f'include_mask includesum: {include_mask.sum()} of {len(bitmask)}')
 
         c1, c2, c3, c4, c5, c6 = self.cvec
 
@@ -136,49 +136,59 @@ class AndCut(_LogicalCut):
 
 # Expects v3 desils files
 class GalPipe:
-    def __init__(self, cat_path, vr_dset, inds, ref_map):
+    def __init__(self, cat_path, vr_dset, cut_mask, ref_map):
         self.cat_path = cat_path
         self.cat_name = get_fname(cat_path)
         self.vr_dset = vr_dset
-        self.inds = inds.copy() # set of inclusion masks
+        self.cut_mask = cut_mask.copy() # set of inclusion masks
 
         self.ref_map = ref_map
 
-        # legacy fields
-        self.ngal_tot = len(inds)
+        self.ngal_cut = cut_mask.sum()
+        self.ngal_cat = len(cut_mask)
         self.init_lists = False
 
-    def import_data(self, inds=None):
-        if inds is None:
-            inds = self.inds
+    # the arrangement of members is fairly memory inefficient
+    def import_data(self, cut_mask=None):
+        if cut_mask is None:
+            cut_mask = self.cut_mask
 
-        print(f'importing gal data from {self.cat_name}')
+        # print(f'importing gal data from {self.cat_name}')
         with h5py.File(self.cat_path, 'r') as h5file:
             assert self.vr_dset in h5file.keys()
             assert 'dec_deg' in h5file.keys()
             assert 'ra_deg' in h5file.keys()
 
-            decs = h5file['dec_deg'][:][inds] * np.pi / 180.
-            ras = h5file['ra_deg'][:][inds] * np.pi / 180.
+            decs = h5file['dec_deg'][:] * np.pi / 180.
+            ras = h5file['ra_deg'][:] * np.pi / 180.
 
             dec_inds, ra_inds = iround(self.ref_map.sky2pix((decs, ras)))
             gal_inds = (dec_inds, ra_inds)
 
-            bounds_mask = in_bounds(gal_inds, self.ref_map.shape)
-            print(f'in_bounds: {bounds_mask.sum()} of {self.ngal_tot}')
+            inbounds_mask = in_bounds(gal_inds, self.ref_map.shape)
+            # print(f'in_bounds: {inbounds_mask.sum()} of {self.ngal_cut} of {self.ngal_cat} uncut')
 
-            self.vrs = h5file[self.vr_dset][:][inds][bounds_mask]
+            self.inbounds_mask = inbounds_mask
+            inbounds_cut_mask = np.logical_and(inbounds_mask, self.cut_mask)
+            self.inbounds_cut_mask = inbounds_cut_mask
+
+            # this field is used for MC list reads;
+            # the most general MC list is formed over the set of all
+            # in-bounds galaxies, which may be susequently cut to a shorter
+            # list for science (e.g. LRG)
+            self.cut_inbounds_mask = self.cut_mask[self.inbounds_mask]
+
+            self.vrs = h5file[self.vr_dset][:][inbounds_cut_mask]
             self.vr_list = self.vrs
 
-            self.bounds_mask = bounds_mask
-
-            self.decs = decs[bounds_mask]
-            self.ras = ras[bounds_mask]
-            self.dec_inds = dec_inds[bounds_mask]
-            self.ra_inds = ra_inds[bounds_mask]
+            self.decs = decs[inbounds_cut_mask]
+            self.ras = ras[inbounds_cut_mask]
+            self.dec_inds = dec_inds[inbounds_cut_mask]
+            self.ra_inds = ra_inds[inbounds_cut_mask]
             self.gal_inds = [self.dec_inds, self.ra_inds]
 
-            self.ngal_in = bounds_mask.sum()
+            self.ngal_in = inbounds_cut_mask.sum()
+            self.ngal_inbounds = inbounds_mask.sum()
 
             self.init_lists = True
 
@@ -190,62 +200,207 @@ class GalPipe:
         assert self.init_lists
         return self.vrs * map_t[self.dec_inds, self.ra_inds]
 
+    def get_desils_field(self, field):
+        assert self.init_lists
+        assert field in _v3_keys
 
+        ret = None
+        with h5py.File(self.cat_path, 'r') as h5file:
+            ret = h5file[field][:][self.inbounds_cut_mask]
+
+        return ret
+
+# Not an ideal solution since there's some manual input e.g. to list members and 
+# map array members to their corresponding lenghts, but it's better than
+# manually writing the entire class
 class MultiPipe(GalPipe):
-    def __init__(self, gal_pipes):
-        self.gal_pipes = gal_pipes
+    _add_members = ('ngal_in', 'ngal_inbounds', 'ngal_cut', 'ngal_cat')
+    _append_dic = {'decs':'ngal_in',
+                   'ras':'ngal_in',
+                   'dec_inds':'ngal_in',
+                   'ra_inds':'ngal_in',
+                   'vrs':'ngal_in',
+                   'cut_mask':'ngal_cat',
+                   'inbounds_mask':'ngal_cat',
+                   'cut_inbounds_mask':'ngal_inbounds'}
 
-        self.init_lists = False
+    def __init__(self, pipes):
+        self.pipes = pipes
+
+    def _get_concat_field(self, member, len_member, get_fun=getattr):
+            ret = None
+
+            for pipe in self.pipes:
+                if ret is None:
+                    ret = get_fun(pipe, member)
+                else:
+                    ret = np.concatenate((ret, get_fun(pipe, member)))
+
+            assert len(ret) == getattr(self, len_member)
+
+            return ret
 
     def import_data(self):
-        ngals = []
-        self.ngal_in = 0
-        for gp in self.gal_pipes:
-            gp.import_data()
+        for member in MultiPipe._add_members:
+            self.__dict__[member] = 0
 
-            ngals.append(gp.ngal_in)
-            self.ngal_in += gp.ngal_in
-        self.ngals = ngals
+            for pipe in self.pipes:
+                pipe.import_data()
 
-        decs = np.empty(self.ngal_in)
-        ras = np.empty(self.ngal_in)
-        dec_inds = np.empty(self.ngal_in, dtype=int)
-        ra_inds = np.empty(self.ngal_in, dtype=int)
-        vrs = np.empty(self.ngal_in)
+                self.__dict__[member] += getattr(pipe, member)
 
-        offset = 0
-        for gp, ngal in zip(self.gal_pipes, self.ngals):
-            decs[offset:offset + ngal] = gp.decs
-            dec_inds[offset:offset + ngal] = gp.dec_inds
-            ras[offset:offset + ngal] = gp.ras
-            ra_inds[offset:offset + ngal] = gp.ra_inds
-            vrs[offset:offset + ngal] = gp.vrs
-            offset += ngal
-
-        self.decs = decs
-        self.ras = ras
-        self.gal_inds = [dec_inds, ra_inds]
-        self.vrs = vrs
-        self.vr_list = vrs
-
+        for member, len_member in MultiPipe._append_dic.items():
+            self.__dict__[member] = self._get_concat_field(member, len_member)
+    
+        self.vr_list = self.vrs
+        self.gal_inds = [self.dec_inds, self.ra_inds]
+        self.init_lists = True
 
     def make_vr_list(self):
-        for gp in self.gal_pipes:
-            gp.make_vr_list()
-
-        self.init_lists = True
+        pass 
 
     def get_xz_list(self, map_t):
         assert self.init_lists
+        return self.vrs * map_t[self.dec_inds, self.ra_inds]
 
-        ret = np.empty(self.ngal_in)
-
-        offset = 0
-        for gp, ngal in zip(self.gal_pipes, self.ngals):
-            ret[offset:offset + ngal] = gp.get_xz_list(map_t)
-            offset += ngal
-
+    def get_desils_field(self, field):
+        ret = self._get_concat_field(field, 'ngal_in', get_fun=lambda x,y: x.get_desils_field(field))
+        # ret = self._get_concat_field(field, 'ngal_in')
         return ret
+
+
+# class MultiPipe(GalPipe):
+#     _gp_add_types = (int, np.int64)
+    
+#     def __init__(self, pipes):
+#         self.pipes = pipes
+#         self.init_lists = False
+
+#     def import_data(self):
+#         for pipe in self.pipes:
+#             pipe.import_data()
+
+#         p0 = self.pipes[0]
+#         # print(p0.__dict__)
+
+#         self.ref_map = p0.ref_map
+
+#         # for attr in dir(p0):
+#         #     print(attr, type(getattr(p0, attr)))
+
+#         # members = [attr for attr in dir(pipe) if not callable(getattr(pipe, attr)) and not attr.startswith('__')]
+#         ar_members = [attr for attr in dir(p0) if not attr.startswith('__') and type(getattr(p0, attr)) == np.ndarray and attr != 'gal_inds']
+#         add_members = [attr for attr in dir(p0) if not attr.startswith('__') and type(getattr(p0, attr)) in MultiPipe._gp_add_types]
+
+#         for member in add_members:
+#             # print(member)
+#             self.__dict__[member] = 0
+#             for pipe in self.pipes:
+#                 self.__dict__[member] += getattr(pipe, member)
+
+#         for member in ar_members:
+#             # each array member with name "member" must map to an integer
+#             # member called "ngal_member" in the corresponding gal pipe
+#             len_member = 'ngal_' + member[:-5]
+
+#             if member[-4:] == 'inds':
+#                 len_member = 'ngal_in'
+
+#             print(member, len_member)            
+
+#             size = self.__dict__[len_member]
+
+#             # self.__dict__[member] = np.empty(len_member, dtype=getattr(p0, member).dtype)
+#             # offset = 0
+#             # for pipe in self.pipes:
+#             #     self.
+#             #     offset += getattr(pipe, len_member)
+
+
+
+#         print(self.__dict__)
+
+#         self.gal_inds = [self.dec_inds, self.ra_inds]
+
+#         self.init_lists = True
+
+#     def make_vr_list(self):
+#         pass 
+
+#     def get_xz_list(self, map_t):
+#         assert self.init_lists
+#         return self.vrs * map_t[self.dec_inds, self.ra_inds]
+
+
+# class MultiPipe(GalPipe):
+#     def __init__(self, gal_pipes):
+#         self.gal_pipes = gal_pipes
+
+#         self.init_lists = False
+
+#     def import_data(self):
+#         ngal_ins = []
+#         n_inbounds_uncuts = []
+#         self.ngal_in = 0
+#         self.ngal_cat = 0
+#         self.n_inbounds_uncut = 0
+#         for gp in self.gal_pipes:
+#             gp.import_data()
+
+#             ngal_ins.append(gp.ngal_in)
+#             n_inbounds_uncuts.append(gp.n_inbounds_uncut)
+#             self.ngal_in += gp.ngal_in
+#             self.ngal_cat += gp.ngal_cat
+#             self.n_inbounds_uncut += gp.n_inbounds_uncut
+#         self.ngal_ins = ngal_ins
+
+#         inbounds_cut_mask = np.empty(self.n_inbounds_uncut, dtype=bool)
+#         decs = np.empty(self.ngal_in)
+#         ras = np.empty(self.ngal_in)
+#         dec_inds = np.empty(self.ngal_in, dtype=int)
+#         ra_inds = np.empty(self.ngal_in, dtype=int)
+#         vrs = np.empty(self.ngal_in)
+
+#         offset = 0
+#         offset_cat = 0
+#         for gp, ngal_in, n_inbounds_uncut in zip(self.gal_pipes, self.ngal_ins, n_inbounds_uncuts):
+#             # ind_mask_inbound = gp.inds[gp.inds][gp.bounds_mask]
+#             # n_mask_inbound = ind_mask_inbound.sum()
+#             # inbounds_cut_mask[offset_cat:offset_cat + n_inbounds_uncut] = inbounds_cut_mask
+#             decs[offset:offset + ngal_in] = gp.decs
+#             dec_inds[offset:offset + ngal_in] = gp.dec_inds
+#             ras[offset:offset + ngal_in] = gp.ras
+#             ra_inds[offset:offset + ngal_in] = gp.ra_inds
+#             vrs[offset:offset + ngal_in] = gp.vrs
+#             offset += ngal_in
+#             offset_cat += n_inbounds_uncut
+
+#         # cut mask?
+#         # self.inbounds_cut_mask = inbounds_cut_mask
+#         self.decs = decs
+#         self.ras = ras
+#         self.gal_inds = [dec_inds, ra_inds]
+#         self.vrs = vrs
+#         self.vr_list = vrs
+
+
+#     def make_vr_list(self):
+#         for gp in self.gal_pipes:
+#             gp.make_vr_list()
+
+#         self.init_lists = True
+
+#     def get_xz_list(self, map_t):
+#         assert self.init_lists
+
+#         ret = np.empty(self.ngal_in)
+
+#         offset = 0
+#         for gp, ngal in zip(self.gal_pipes, self.ngals):
+#             ret[offset:offset + ngal] = gp.get_xz_list(map_t)
+#             offset += ngal
+
+#         return ret
 
 
 # This class handles the conversion of input data files (specifically v3 desils era files)
@@ -281,10 +436,9 @@ class GalCat:
                 vr_dset = 'vr_smoothed'
 
             thiscut = cut(h5file)
-            print(f'included galaxies: {thiscut.sum()} of {self.ngal}')
-            inds = np.arange(self.ngal)[thiscut]
+            print(f'GalCat: included galaxies: {thiscut.sum()} of {self.ngal}')
 
-            return GalPipe(self.cat_path, vr_dset, inds, ref_map)
+            return GalPipe(self.cat_path, vr_dset, thiscut, ref_map)
         return None
 
 
