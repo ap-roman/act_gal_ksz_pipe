@@ -5,11 +5,8 @@ from fnl_pipe.galaxy import DESILSCat, AndCut, NullCut, LRGNorthCut, LRGSouthCut
 from fnl_pipe.catalog import get_files
 
 from pixell import enplot, enmap
-
 import itertools
-
 import numpy as np
-
 
 from mpi4py import MPI
 
@@ -177,6 +174,25 @@ if __name__ == "__main__":
     om = OutputManager(base_path='output', title='phack-mc', logs=['log-lrg', 'log-zerr', 'log-vr-width'],
                        mpi_rank=rank, mpi_comm=comm)
 
+    assert len(sys.argv) == 2
+    config_file = sys.argv[1]
+    printlog('got config file ' + config_file)
+    config_dict = get_yaml_dict(config_file)
+    local_dict = locals()
+    printlog('dumping config')
+    for key, value in config_dict.items():
+        printlog(key, value)
+        local_dict[key] = value
+    printlog('################## DONE ##################')
+
+
+
+    zerr_grid = 
+    do_cuts = 
+    vr_widths = "1.0"
+    param_set = list(itertools.product(zerr_grid, do_cuts, vr_widths))
+
+
     # do_study(om, params_lrg, 'log-lrg')
     # do_study(om, params_zerr, 'log-zerr')
-    do_study(om, params_vr_width, 'log-vr-width')
+    do_study(om, param_set, 'log-vr-width')

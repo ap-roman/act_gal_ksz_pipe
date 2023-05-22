@@ -25,6 +25,7 @@ if __name__ == "__main__":
         printlog(key, value)
         local_dict[key] = value
     printlog('################## DONE ##################')
+    
     act_md = ACTMetadata(r_fkp=1.56, r_lwidth=0.62)
 
     act_pipe_150 = ACTPipe(map_path, ivar_path, beam_path, planck_enmap_path,

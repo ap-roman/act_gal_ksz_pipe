@@ -39,8 +39,9 @@ kszpipe_d0_path = kszpipe_path + 'delta0_DR12v5_CMASS_North.h5'
 fl_path = pipe_path + 'transfer_function.h5'
 
 
-crosspower_path = 'data/crosspower_arrays.npz'
-
+# crosspower_path = 'data/crosspower_arrays.npz'
+# crosspower_path = 'data/crosspower_arrays_0.002.npz'
+crosspower_path = 'data/crosspower_arrays_old.npz'
 
 # Parameters chosen ahead of time to maximize snr with this particular dataset
 R_FKP = 1.56

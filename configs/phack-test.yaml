@@ -7,7 +7,7 @@ scripts:
     NTRIAL_FL: 32
     NAVE_FL: 60
     NITER_FL: 40
-    NTRIAL_MCL: 0
+    NTRIAL_MC: 0
     plots: True
     data_path: "/home/aroman/data/"
     planck_enmap_path: "/home/aroman/data/mask/planck_foreground.npy"

@@ -1,3 +1,10 @@
+from mpi4py import MPI
+
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+
 # run many scripts from a yaml config file
 # at the core, a valid config file has the structure:
 # 
@@ -21,7 +28,7 @@ import subprocess
 from fnl_pipe.util import get_yaml_dict, validate_script_config, validate_config
 
 
-supported_scripts = ['phack-bootstrap.py', 'explore-multifreq-bootstrap.py', 'make-paper.py']
+supported_scripts = ['phack-mc.py',]
 
 
 def run_single_config(yaml_config):
@@ -58,6 +65,10 @@ def run_single_config(yaml_config):
 
         with open(tmp_path, 'w') as file:
             file.write(yaml.dump(tmp_dict))
+
+
+        comm.Barrier()
+
 
         subprocess.call(["python3", script_path, tmp_path])
 

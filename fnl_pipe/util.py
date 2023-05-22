@@ -317,10 +317,18 @@ class LogFile:
             f.write(dat)
 
 
+def get_label(base_path, title, replace=False):
+    suffix=''
+    if not replace: suffix = '_' + get_sequential_label(base_path, title)
+    label = title + suffix
+
+    return str(label)
+
+
 # Manages output directory. Not parallel
 # logs is a list of tuples (logname, logpath)
 class OutputManager:
-    def __init__(self, title, base_path='output', subdirs=['plots', 'logs'], logs=None,
+    def __init__(self, title, base_path='output', subdirs=['plots', 'logs'], logs=None, replace=False,
                  mpi_rank=None, mpi_comm=None):
         assert title != ''
         assert 'logs' in subdirs
@@ -335,19 +343,17 @@ class OutputManager:
         if self.is_mpi:
             label = None
             if self.mpi_rank == 0:
-                label = title + '_' + get_sequential_label(base_path, title)
-                ensure_dir(path.join(base_path, str(label)))
+                label = get_label(base_path, title, replace)
+                ensure_dir(path.join(base_path, label))
 
             label = mpi_comm.bcast(label, root=0)
-
             label += f'/rank_{self.mpi_rank}/'
             ensure_dir(path.join(base_path, str(label)))
         else:
-            label = get_sequential_label(base_path, title)
-            label = title + '_' + label
+            label = get_label(base_path, title, replace)
 
-        self.working_dir = path.join(base_path, str(label))
-        ensure_dir(path.join(base_path, str(label)))
+        self.working_dir = path.join(base_path, label)
+        ensure_dir(path.join(base_path, label))
 
         # generate subdirs
         for sd in subdirs:
@@ -493,7 +499,7 @@ def validate_config(yaml_dict, supported_scripts):
         assert script in supported_scripts
 
 
-def validate_script_config(yaml_dict)
+def validate_script_config(yaml_dict):
     assert 'base_path' in yaml_dict.keys()
 
 

@@ -215,29 +215,38 @@ class ACTPipe:
 
         self.init_lweight_f = True
 
-    def init_fkp(self, plots=False):
+    def init_fkp(self, fkp=None, plots=False):
         assert self.init_data
         assert self.init_metadata
 
         printlog = self.output_manager.printlog
-        
-        plots = plots or self.plots
 
-        ctt_3k_act = 24.8 * 2 * np.pi / 3000 / (3000 + 1)
+        if fkp is None:
+            eta_n2 = self.eta_n2
+            # if ivar is not None:
+            #     assert ivar.shape == self.map_t.shape
+            #     eta_n2 = ivar / self.pixel_area
+            
+            plots = plots or self.plots
 
-        b2_l0 = self.beam[1]**2
+            ctt_3k_act = 24.8 * 2 * np.pi / 3000 / (3000 + 1)
 
-        r_fkp = self.metadata.r_fkp
+            b2_l0 = self.beam[1]**2
+
+            r_fkp = self.metadata.r_fkp
+
+            fkp = self.eta_n2 / (r_fkp/(b2_l0 * ctt_3k_act) + self.eta_n2)
+            del self.eta_n2
 
         planck_mask = self.get_planck_mask()
-        self.fkp = planck_mask * self.eta_n2 / (r_fkp/(b2_l0 * ctt_3k_act) + self.eta_n2)
-        del self.eta_n2
+
+        self.fkp = planck_mask * fkp
 
         printlog(f'FKP min/max: {np.min(self.fkp):.3e} {np.max(self.fkp):.3e}')
 
         # plot the fkp weight function, the cl
         if plots:
-            fig1 = enplot.plot(enmap.downgrade(self.fkp, 16), ticks=15, colorbar=True)
+            fig1 = enplot.plot(enmap.downgrade(np.nan_to_num(self.fkp), 16), ticks=15, colorbar=True)
             self.output_manager.savefig(f'fkp_map_{self.freq}', mode='pixell',
                                         fig=fig1)
 
@@ -251,9 +260,6 @@ class ACTPipe:
                                         fig=fig3)
 
         self.init_fkp_f = True
-
-    def make_xfer(self, plots=False):
-        pass
 
 
 class MultiFreqPipe:

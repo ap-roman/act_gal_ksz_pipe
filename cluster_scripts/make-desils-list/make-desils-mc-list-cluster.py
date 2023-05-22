@@ -16,13 +16,13 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-NTRIAL_NL = 4096
+NTRIAL_NL = 1024
 
 NTRIAL_FL = 32
 NAVE_FL = 60
 NITER_FL = 40
 
-NTRIAL_MC = 4096
+NTRIAL_MC = 1024
 
 plots = True
 
@@ -32,18 +32,18 @@ mask_path = data_path + 'mask/'
 pipe_path = data_path + 'pipe/'
 
 act_path = data_path + 'act_pub/'
-map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
-ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
-beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
-nl_path = data_path + f'desils/nl_desils_pub_{NTRIAL_NL}.npy'
-fl_path = data_path + f'desils/fl_desils_pub_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+map_path = act_path + 'act_dr5.01_s08s18_AA_f90_daynight_map_srcfree.fits' # public
+ivar_path = act_path + 'act_dr5.01_s08s18_AA_f90_daynight_ivar.fits' # public
+beam_path = act_path + 'act_planck_dr5.01_s08s18_f90_daynight_beam.txt' # public beam
+nl_path = data_path + f'desils/nl_desils_pub_actonly_90_{NTRIAL_NL}.npy'
+fl_path = data_path + f'desils/fl_desils_pub_actonly_90_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
 
 gal_mask_path = data_path + 'vr_source/desils/intersect_sdss_desi_mask.fits'
 
 desils_v3_north = data_path + 'vr_source/desils/v03_desils_north_cmass.h5'
 desils_v3_south = data_path + 'vr_source/desils/v03_desils_south_cmass.h5'
 
-mc_list_base = data_path + f'desils/desils_cmass_nmc_{NTRIAL_MC}'
+mc_list_base = data_path + f'desils/desils_cmass_actonly_90_nmc_{NTRIAL_MC}'
 
 planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
 planck_enmap_path = mask_path + 'planck_foreground.npy'

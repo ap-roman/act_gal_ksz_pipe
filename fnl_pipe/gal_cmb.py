@@ -102,6 +102,19 @@ class CMBxGalPipe:
 
         return ret
 
+    def make_t_hp(self, real_space=True):
+        cmb_pipe = self.cmb_pipe
+        assert cmb_pipe.init_data
+        assert cmb_pipe.init_metadata
+        assert cmb_pipe.init_fkp_f
+        assert cmb_pipe.init_lweight_f
+
+        t_alm = map2alm(cmb_pipe.fkp * cmb_pipe.map_t, lmax=cmb_pipe.lmax)
+        t_hp_alm = almxfl(t_alm, lfilter=cmb_pipe.l_weight)
+
+        if real_space: return alm2map(t_hp_alm, cmb_pipe.make_empty_map())
+        else: return t_hp_alm
+
     # process the map the old way and look for ringing
     def process_map_wrong(self, map_t, plots=False):
         cmb_pipe = self.cmb_pipe
@@ -426,16 +439,11 @@ class CMBxGalPipe:
     #         assert ntrial_mc 
 
     def _init_t_hp(self):
-        assert self.init_nl
-        assert self.init_fl
-
         self.t_hp = self.process_map(self.cmb_pipe.map_t) # the processed act map
         self.init_t_hp = True
     
     #@profile
-    def compute_estimator(self, ntrial_mc=32, buffered_reader=None):
-        assert self.init_nl
-        assert self.init_fl
+    def compute_estimator(self, ntrial_mc=0, buffered_reader=None, v_shuffle=False, verbose=True):
 
         cmb_pipe = self.cmb_pipe
         lmax = cmb_pipe.lmax
@@ -444,7 +452,6 @@ class CMBxGalPipe:
         vrs = gal_pipe.vr_list
         map_ref = self.cmb_pipe.map_t
         process_map = self.process_map
-        cl_act_sim = self.cl_act_sim
         printlog = self.output_manager.printlog
 
         if not self.init_t_hp:
@@ -452,20 +459,28 @@ class CMBxGalPipe:
         t_hp = self.t_hp
 
         t_hp_list = t_hp[gal_decs, gal_ras]
+        ngal_list = len(t_hp_list)
 
-        a_ksz_unnorm = gal_pipe.get_xz_list(t_hp).sum()
+        vr_list = gal_pipe.vrs
+        if v_shuffle: vr_list = vr_list[np.random.permutation(ngal_list)]
+
+        # a_ksz_unnorm = gal_pipe.get_xz_list(t_hp).sum()
+        a_ksz_unnorm = (vr_list * t_hp_list).sum()
         self.a_ksz_unnorm = a_ksz_unnorm # used by mpi version
         a_std_bootstrap = np.sqrt(gal_pipe.ngal_in * np.var(t_hp_list) * np.var(vrs))
         a_bootstrap = a_ksz_unnorm/a_std_bootstrap
         a_std_bootstrap_2 = np.sqrt(((vrs * t_hp_list)**2).sum())
         a_bootstrap_2 = a_ksz_unnorm/a_std_bootstrap_2
 
-        printlog(f'analytic estimator: {a_bootstrap:.3e}')
-        printlog(f'analytic estimator 2: {a_bootstrap_2:.3e}')
+        if verbose: printlog(f'analytic estimator: {a_bootstrap:.3e}')
+        if verbose: printlog(f'analytic estimator 2: {a_bootstrap_2:.3e}')
 
         ret = {'a_ksz_bootstrap': a_bootstrap, 'a_ksz_bootstrap_2': a_bootstrap_2}
         
         if ntrial_mc > 0:
+            cl_act_sim = self.cl_act_sim
+            assert self.init_nl
+            assert self.init_fl
             alphas = np.zeros(ntrial_mc, dtype=np.float64)
             t0 = time.time()
 
@@ -490,12 +505,12 @@ class CMBxGalPipe:
                 ngal = 0
                 while ngal < gal_pipe.ngal_in:
                     printlog(f'getting next chunk')
-                    gal_inds, t_hp = buffered_reader.get_next_chunk()
+                    gal_inds, t_hp_br = buffered_reader.get_next_chunk()
                     printlog(f'done')
                     ngal_this_chunk = t_hp.shape[0]
-                    assert t_hp.shape[0] == gal_inds[1] - gal_inds[0]
+                    assert t_hp_br.shape[0] == gal_inds[1] - gal_inds[0]
 
-                    alphas[:] += (vrs[gal_inds[0]:gal_inds[1], None] * t_hp).sum(axis=0)
+                    alphas[:] += (vrs[gal_inds[0]:gal_inds[1], None] * t_hp_br).sum(axis=0)
 
                     dt_total = time.time() - t0
                     dt_per_iter = dt_total / (ngal + ngal_this_chunk)
@@ -505,7 +520,8 @@ class CMBxGalPipe:
                     # printlog(f'completed {ngal} MC gals, time per iter: {dt_per_iter:.2e} s, expected total time: {dt_total_expected:.2e} s')
 
                 assert not buffered_reader.has_next_chunk
-                assert ngal == gal_pipe.ngal_in
+                # TODO: FIX!
+                assert ngal == gal_pipe.ngal_in, f'ngal: {ngal}, ngal_in: {gal_pipe.ngal_in}'
                 dt_total = time.time() - t0
                 printlog(f'completed entire galaxy mc loop in {dt_total:.2e} s')
 

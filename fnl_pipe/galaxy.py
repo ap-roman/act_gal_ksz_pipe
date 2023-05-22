@@ -186,6 +186,7 @@ class GalPipe:
             self.dec_inds = dec_inds[inbounds_cut_mask]
             self.ra_inds = ra_inds[inbounds_cut_mask]
             self.gal_inds = [self.dec_inds, self.ra_inds]
+            self.zs = h5file['z'][:][inbounds_cut_mask]
 
             self.ngal_in = inbounds_cut_mask.sum()
             self.ngal_inbounds = inbounds_mask.sum()
@@ -219,6 +220,7 @@ class MultiPipe(GalPipe):
                    'ras':'ngal_in',
                    'dec_inds':'ngal_in',
                    'ra_inds':'ngal_in',
+                   'zs':'ngal_in',
                    'vrs':'ngal_in',
                    'cut_mask':'ngal_cat',
                    'inbounds_mask':'ngal_cat',
