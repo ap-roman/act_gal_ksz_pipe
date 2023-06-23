@@ -1,0 +1,34 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  make-mf-bootstrap.py:
+    base_path: "scripts/"
+    NTRIAL_MC: 0
+    NTRIAL_BS: 8192 # ntrial bootstrap
+    NL_COARSE: 32 # cmb x gal multifrequency coarse-graining factor
+    LMAX: 12000
+    L_KSZ_SUM: 2000
+    plots: True
+    data_path: "/home/aroman/data/"
+    planck_mask_path: "/home/aroman/data/mask/planck_foreground_mask_GAL080.npy"
+    freqs: [90, 150, 220]
+    f_inds: [0, 1] # used to select frequencies for analysis
+    f_inds_ivar: [0, 1] # selects which ivar maps to include in the FKP weight function
+    maps:
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f090_daynight_map_srcfree.fits"
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits"
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f220_daynight_map_srcfree.fits"
+    ivars:
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f090_daynight_ivar.fits"
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f150_daynight_ivar.fits"
+      - "/home/aroman/data/act_pub/act_dr5.01_s08s18_AA_f220_daynight_ivar.fits"
+    beams:
+      - "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+      - "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+      - "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f220_daynight_beam.txt"
+    gal_mask_path: "/home/aroman/data/vr_source/desils/intersect_sdss_desi_mask.fits"
+    desils_v3_north: "/home/aroman/data/vr_source/desils/v03_desils_north_cmass.h5"
+    desils_v3_south: "/home/aroman/data/vr_source/desils/v03_desils_south_cmass.h5"
+    vr_width: '1.0'
+    zerr_max: 0.0225
+    do_cut: True

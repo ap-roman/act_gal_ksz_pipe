@@ -1,7 +1,7 @@
 import numpy as np
 import h5py
 
-from fnl_pipe.util import in_bounds, iround, get_fname
+from fnl_pipe.util import in_bounds, iround, get_fname, map2cl
 
 # A module to house galaxy-specific objects e.g. descriptors and manipulators
 # of galaxy catalogs.
@@ -211,6 +211,54 @@ class GalPipe:
 
         return ret
 
+    # TODO: plot a 3D visualization of the galaxy survey
+    def plot_3d(self):
+        assert self.init_lists
+        pass
+
+    # TODO: migrate polar plot logic from the make_paper.py script
+    def plot_vr_polar(self):
+        assert self.init_lists
+        pass
+
+    def get_gal_map(self):
+        assert self.init_lists
+
+        ret = self.ref_map.copy()
+        ret[:,:] = 0.
+        ret[self.dec_inds, self.ra_inds] = 1.
+
+        return ret
+
+    def get_map_list(self, map_t):
+        return map_t[self.dec_inds, self.ra_inds]
+
+    def get_bs_inds(self):
+        inds_bs = (np.random.rand(self.ngal_in) * self.ngal_in).astype(int)
+        return inds_bs
+
+    def get_bs_estimator(self, map_t):
+        inds_bs = self.get_bs_inds()
+        vrs = self.vrs[inds_bs]
+        thps = map_t[self.dec_inds, self.ra_inds][inds_bs]
+        return (vrs * thps).sum()
+
+    def get_bs_estimator_list(self, map_list):
+        inds_bs = self.get_bs_inds()
+        vrs = self.vrs[inds_bs]
+        thps = map_list[inds_bs]
+        return (vrs * thps).sum()
+
+
+    def get_cl(self, lmax):
+        assert self.init_lists
+
+        gal_field = self.get_gal_map()
+
+        cl = map2cl(gal_field, lmax=lmax)
+        return cl
+
+
 # Not an ideal solution since there's some manual input e.g. to list members and 
 # map array members to their corresponding lenghts, but it's better than
 # manually writing the entire class
@@ -228,6 +276,7 @@ class MultiPipe(GalPipe):
 
     def __init__(self, pipes):
         self.pipes = pipes
+        self.ref_map = pipes[0].ref_map
 
     def _get_concat_field(self, member, len_member, get_fun=getattr):
             ret = None
@@ -257,13 +306,6 @@ class MultiPipe(GalPipe):
         self.vr_list = self.vrs
         self.gal_inds = [self.dec_inds, self.ra_inds]
         self.init_lists = True
-
-    def make_vr_list(self):
-        pass 
-
-    def get_xz_list(self, map_t):
-        assert self.init_lists
-        return self.vrs * map_t[self.dec_inds, self.ra_inds]
 
     def get_desils_field(self, field):
         ret = self._get_concat_field(field, 'ngal_in', get_fun=lambda x,y: x.get_desils_field(field))

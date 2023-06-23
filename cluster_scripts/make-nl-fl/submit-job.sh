@@ -9,4 +9,4 @@
 
 # source /home/aroman/venv/bin/activate
 
-sbatch --partition=defq --ntasks=12 --cpus-per-task=20 slurm-script.sh
+sbatch --partition=defq --ntasks=16 --cpus-per-task=20 --mail-type=ALL --mail-user=aroman@perimeterinstitute.ca slurm-script.sh

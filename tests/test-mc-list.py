@@ -59,10 +59,6 @@ mc_list_out = '/data/aroman/tmp/test_mc.h5'
 planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
 planck_enmap_path = mask_path + 'planck_foreground.npy'
 
-# catalog_path = data_path + 'vr_summaries/v01_sdss_cmass_north.h5'
-catalog_base = data_path + 'vr_summaries/desils/'
-catalog_files = get_files(catalog_base)
-
 
 zerr_max = 0.05
 vr_width = '1.0'
@@ -83,8 +79,6 @@ if __name__ == "__main__":
     ref_map = act_pipe_150.map_t
     printlog(f'importing galaxy mask {get_fname(gal_mask_path)}')
     gal_mask = enmap.read_map(gal_mask_path)
-
-    printlog(f'importing catalog files {catalog_files}')
 
     desils_cat = DESILSCat(cat_north=desils_v3_north, cat_south=desils_v3_south)
     

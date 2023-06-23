@@ -16,6 +16,7 @@ if __name__ == "__main__":
     om = OutputManager(base_path='output', title='phack-bootstrap', logs=['log',])
     printlog = om.printlog
 
+    # YAML config file import
     config_file = sys.argv[1]
     printlog('got config file ' + config_file)
     config_dict = get_yaml_dict(config_file)
@@ -25,6 +26,7 @@ if __name__ == "__main__":
         printlog(key, value)
         local_dict[key] = value
     printlog('################## DONE ##################')
+    # end YAML snippet
     
     act_md = ACTMetadata(r_fkp=1.56, r_lwidth=0.62)
 

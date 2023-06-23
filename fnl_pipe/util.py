@@ -11,7 +11,7 @@ from os import path, listdir
 import yaml
 
 from pixell.curvedsky import alm2cl, map2alm
-from pixell import enplot
+from pixell import enplot, enmap
 
 import h5py
 
@@ -88,6 +88,7 @@ class ChunkedTransposeWriter:
 # probably quite slow!
 # could implement next-chunk async precaching
 # need to avoid python indexing
+# WARN: I believe there is still a bug here!
 class ChunkedMaskedReader:
     def _init_file(self):
         with h5py.File(self.path, 'r') as h5file:
@@ -333,6 +334,8 @@ class OutputManager:
         assert title != ''
         assert 'logs' in subdirs
 
+        self.title = title
+
         self.base_path = base_path
         self.subdirs = subdirs
 
@@ -365,7 +368,7 @@ class OutputManager:
         
         self.log_names = logs
         self.logs = {log:LogFile(os.path.join(self.working_dir, 'logs', log + '.log')) for log in logs}
-        self.default_log = 'log'
+        self.default_log = title
 
     def set_default_log(self, log=None):
         if log is None: log = 'log'
@@ -388,10 +391,12 @@ class OutputManager:
 
     def printlog(self, line, rank=None, *, log=None):
         line = str(line)
-        if rank is not None:
-            line = f'rank {rank}: ' + line
 
-        print(line)
+        pline = line
+        if rank is not None:
+            pline = f'rank {rank}: ' + line
+
+        print(pline)
         self.log(line, log)
 
     def savefig(self, name, mode='matplotlib', fig=None):
@@ -414,6 +419,14 @@ def import_config(path):
         res = yaml.safe_load(f)
 
     return res
+
+
+def has_nan(ar):
+    return np.isnan(np.sum(ar))
+
+
+def get_size_alm(lmax):
+    return int((lmax**2 + 3*lmax)/2 + 1)
 
 
 def fequal(a,b,tol=1e-6):
@@ -476,6 +489,81 @@ def parse_act_beam(path):
 
     ar = np.array(ret)
     return ar[:,0], ar[:,1]
+
+
+def get_planck_mask(mask_path, wcs):
+    planck_mask_ar = np.load(mask_path)
+
+    mmin = planck_mask_ar.min()
+    mmax = planck_mask_ar.max()
+
+    assert mmin >= 0. and mmax <= 1 * (1 + 1e-6) # Check that one_time_setup was run
+
+    planck_mask = enmap.ndmap(planck_mask_ar, wcs)
+    planck_mask = np.minimum(np.maximum(planck_mask, 0.), 1.)
+
+    return planck_mask
+
+
+def matmul(*args):
+    nargs = len(args)
+    assert nargs >= 2 
+    if nargs == 2:
+        return np.matmul(args[0], args[1])
+    else:
+        return np.matmul(args[0], matmul(*args[1:]))
+
+
+# smoothes the l=1 to lmax entries of fl
+# passes the value at l=0
+# strictly enforces that lmax is a multiple of nave_l
+def average_fl_strict(fl, nave_l):
+    lmax = len(fl) - 1
+    assert lmax % nave_l == 0
+    ret = np.empty(lmax + 1)
+    ret[0] = fl[0]
+    ret[1:] = np.repeat(fl[1:].reshape(lmax // nave_l, nave_l).sum(axis=-1)/nave_l, nave_l)
+    return ret
+
+
+# identical to average_fl but allows for a non-integer-multiple lmax
+# handles this case by averaging the last elements separately
+def average_fl(fl, nave):
+    lmax = len(fl) - 1
+    remainder = lmax % nave
+    if remainder == 0: 
+        return average_fl_strict(fl, nave)
+    else:
+        assert lmax > remainder
+        ret = np.empty(lmax + 1)
+        ret[:-remainder] = average_fl_strict(fl[:-remainder], nave)
+        ret[-remainder:] = fl[-remainder:].sum() / remainder
+        return ret
+
+
+# downgrades a function of l by averaging
+def downgrade_fl(fl, ndown):
+    lmax_in = len(fl) - 1
+    assert lmax_in % ndown == 0
+    lmax_out = lmax_in // ndown
+
+    ret = np.empty(lmax_out + 1)
+    ret[0] = fl[0]
+    ret[1:] = fl[1:].reshape(lmax_out, ndown).sum(axis=-1) / ndown
+
+    return ret
+
+
+# upgrades a function of l
+def upgrade_fl(fl, nup):
+    lmax_in = len(fl) - 1
+    lmax_out = nup * lmax_in
+
+    ret = np.empty(lmax_out + 1)
+    ret[0] = fl[0]
+    ret[1:] = np.repeat(fl[1:], nup)
+
+    return ret
 
 
 ########## YAML config file stuff ###########

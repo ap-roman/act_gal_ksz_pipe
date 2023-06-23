@@ -26,7 +26,7 @@ max_mem_per_proc = 40 # GB
 time_per_iter = 50. # seconds
 
 
-NTRIAL_NL = 4096
+NTRIAL_NL = 1024
 
 NTRIAL_FL = 32
 NAVE_FL = 60
@@ -35,33 +35,44 @@ NITER_FL = 40
 # NTRIAL_MC = 4096
 # NFILE_MC = 16 # number of mpi tasks that generated the mc lists
 
-NTRIAL_MC = 4096
+NTRIAL_MC = 1024
 NFILE_MC = 16 # number of mpi tasks that generated the mc lists
 
 
+freq_str = '150'
 
 plots = True
 
 # data_path = '/gpfs/aroman/data/'
-data_path = '/home/aroman/data/'
-data_alt = '/data/aroman/symmetry/'
+data_path = '/gpfs/aroman/data/'
+data_alt = '/gpfs/aroman/data/'
 planck_path = data_path + 'planck/'
 mask_path = data_path + 'mask/'
 pipe_path = data_path + 'pipe/'
 
 act_path = data_path + 'act_pub/'
-map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
-ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
-beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
-nl_path = data_alt + f'desils/nl_desils_pub_{NTRIAL_NL}.npy'
-fl_path = data_alt + f'desils/fl_desils_pub_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+# map_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits' # public
+# ivar_path = act_path + 'act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits' # public
+# beam_path = act_path + 'act_planck_dr5.01_s08s18_f150_daynight_beam.txt' # public beam
+# nl_path = data_alt + f'desils/nl_desils_pub_{NTRIAL_NL}.npy'
+# fl_path = data_alt + f'desils/fl_desils_pub_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+
+# mc_list_base = data_alt + f'desils/desils_cmass_nmc_{NTRIAL_MC}'
+
+map_path = act_path + f'act_dr5.01_s08s18_AA_f{freq_str}_daynight_map_srcfree.fits' # public
+ivar_path = act_path + f'act_dr5.01_s08s18_AA_f{freq_str}_daynight_ivar.fits' # public
+beam_path = act_path + f'act_planck_dr5.01_s08s18_f{freq_str}_daynight_beam.txt' # public beam
+
+nl_path = data_path + f'desils/nl_desils_pub_actonly_f{freq_str}_{NTRIAL_NL}.npy'
+fl_path = data_path + f'desils/fl_desils_pub_actonly_f{freq_str}_nfl_{NTRIAL_FL}_nave_{NAVE_FL}_niter_{NITER_FL}.npy'
+
+mc_list_base = data_alt + f'desils/desils_cmass_actonly_f{freq_str}_nmc_{NTRIAL_MC}'
 
 gal_mask_path = data_path + 'vr_source/desils/intersect_sdss_desi_mask.fits'
 
 desils_v3_north = data_path + 'vr_source/desils/v03_desils_north_cmass.h5'
 desils_v3_south = data_path + 'vr_source/desils/v03_desils_south_cmass.h5'
 
-mc_list_base = data_alt + f'desils/desils_cmass_nmc_{NTRIAL_MC}'
 
 planck_mask_inpath = planck_path + 'HFI_Mask_GalPlane-apo0_2048_R2.00.fits'
 planck_enmap_path = mask_path + 'planck_foreground.npy'
@@ -143,8 +154,8 @@ params_vr_zerr_simul = [[0.0375, True,  '1.0'],
 # vr_widths = ['0.5', '0.75', '1.0', '1.25',]
 # do_cuts = [True,]
 
-zerr_grid = np.linspace(0.022, 0.024, 10)
-vr_widths = ['0.5', '0.75', '1.0', '1.25',]
+zerr_grid = np.linspace(0.02, 0.03, 16)
+vr_widths = ['1.0',]
 do_cuts = [True,]
 
 # class ParamSet:

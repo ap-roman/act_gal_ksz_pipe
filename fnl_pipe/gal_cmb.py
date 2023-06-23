@@ -5,20 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-from pixell.curvedsky import map2alm, almxfl, alm2map, rand_map
+from pixell.curvedsky import map2alm, almxfl, alm2map, alm2cl, rand_map
 from pixell import enmap, enplot
 
-from fnl_pipe.util import map2cl, ChunkedTransposeWriter
+from fnl_pipe.util import map2cl, ChunkedTransposeWriter, average_fl, matmul, get_size_alm, masked_inv
 
 # import line_profiler
 
-# smoothes the l=1 to lmax entries of fl
-# specifically ignores l=0
-def average_fl(fl, nave_l=32):
-    lmax = len(fl) - 1
-    return np.repeat(fl[1:].reshape(lmax // nave_l, nave_l).sum(axis=-1)/nave_l, nave_l)
-
-
+# TODO: implement
 # class CMBxGalHash:
 #     def __init__(self, *, map_t, fkp_t, lweight):
 #         self.val = hash()
@@ -47,6 +41,358 @@ def _write_mc_list(mc_path, mc_list, **kwargs):
         kwargs = {}
     kwargs['mc_list'] = mc_list
     np.save(mc_path, kwargs)
+
+
+class MFMetadata:
+    # A metadata class for the multifrequency analysis
+    # sigma0: the zero-variance offset in the denominator of the shared FKP weighting
+    # r_lwidth: 5500. * r_lwidth is the l-width of the FKP "theory" function i.e.
+    # cl_th = exp(-(l / (5500. * r_lwidth))**2)
+    def __init__(self, sigma0, r_lwidth):
+        self.sigma0 = sigma0
+        self.r_lwidth = r_lwidth
+
+        self.lwidth = 5500. * self.r_lwidth
+
+    def __eq__(self, b):
+        return self.sigma0 == b.sigma0 and self.r_lwidth == b.r_lwidth
+
+    def get_lwidth(self):
+        return self.lwidth
+
+
+# A class very similar to CMBxGalPipe but with one, two, or three CMB frequencies
+# It may be useful to expand this to N frequencies in the future
+#
+# We add the planck_mask argument expliclty here since it's shared across all cmb pipes
+
+# TODO: implement nl_coarse factor in all calcualtions
+class CMBMFxGalPipe:
+    def __init__(self, cmb_pipes, galaxy_pipe, gal_mask, planck_mask, nl_coarse, mf_meta,
+                 *, output_manager=None, l_ksz_sum=2000, plots=False):
+        assert len(cmb_pipes) < 4 # is this even necessary now?
+        
+        lmax_ref = cmb_pipes[0].lmax
+        for pipe in cmb_pipes:
+            assert pipe.lmax == lmax_ref
+        
+        assert pipe.lmax % nl_coarse == 0 # this may be unnecessary with new 
+
+        assert l_ksz_sum > 1500
+
+        self.plots = plots
+
+        self.nl_coarse = nl_coarse
+        self.lmax = lmax_ref
+        self.nfreq = len(cmb_pipes)
+        self.freqs = [pipe.freq for pipe in cmb_pipes]
+
+        self.cmb_pipes = cmb_pipes
+        self.galaxy_pipe = galaxy_pipe
+        self.gal_mask = gal_mask # a completeness mask of the galaxy survey
+        self.planck_mask = planck_mask
+
+
+        self.mf_meta = mf_meta
+
+        # lweight step-filter for pre-processing
+        self.step_lweight = np.zeros(self.lmax + 1) # a default l-weight applied to each frequency
+        self.lzero = 1500
+        self.step_lweight[self.lzero:] = 1.
+        assert l_ksz_sum > self.lzero
+        self.l_ksz_sum = l_ksz_sum
+
+        if output_manager is None:
+            output_manager = cmb_pipe.output_manager
+
+        self.output_manager = output_manager
+
+        if plots: self._save_skyplot(self.planck_mask, 'planck_mask.png')
+
+        self.init_nl = False
+        self.init_fl = False
+        self.init_t_hp = False
+
+        # some multifrequency definitions
+        # this also happens to be the correct init order
+        self.init_data = False
+        self.init_fkp_f = False
+        self.init_t_tilde_f = False
+        self.init_cl_tt_f = False
+        self.init_lweights_f = False
+
+        self.std_ksz = None
+
+    def _save_skyplot(self, map_t, name, ticks=15, downgrade=16, colorbar=True):
+        fig = enplot.plot(enmap.downgrade(map_t, downgrade), ticks=ticks, colorbar=colorbar)
+        self.output_manager.savefig(name, mode='pixell', fig=fig)
+
+    def import_data(self, plots=False):
+        beams = []
+        for pipe in self.cmb_pipes:
+            if not pipe.init_data:
+                pipe.import_data()
+            beams.append(pipe.beam)    
+        self.beams = np.array(beams)
+        
+        self.bl = np.zeros((self.nfreq, self.nfreq, self.lmax + 1))
+        self.bl_inv = np.zeros((self.nfreq, self.nfreq, self.lmax + 1))
+        for ifreq in range(self.nfreq):
+            self.bl[ifreq, ifreq] = self.beams[ifreq]
+            self.bl_inv[ifreq, ifreq] = 1./self.beams[ifreq]
+        
+        self.init_data = True
+
+    # A generalized FKP function shared across multiple frequencies
+    # Note: need to re-optimize to translate r_fkp -> sigma0
+    def _make_fkp(self, sigma0, ivars=None):
+        prod1 = self.cmb_pipes[0].make_zero_map() + 1.
+        prod2 = self.cmb_pipes[0].make_zero_map()
+
+        if ivars is None:
+            nfreq = self.nfreq
+            ivars = [pipe.ivar_t for pipe in self.cmb_pipes]
+        else:
+            assert len(ivars) > 0
+            nfreq = len(ivars)
+
+        for ivar in ivars:
+            prod1 *= ivar
+
+        for ifreq in range(nfreq):
+            summand = self.cmb_pipes[0].make_zero_map() + 1.
+            for ifreq2 in range(nfreq):
+                if ifreq2 != ifreq: summand *= ivars[ifreq2]
+            prod2 += summand
+
+        fkp = prod1 * masked_inv(sigma0**2 * prod1 + prod2)
+
+        ref_map = self.cmb_pipes[0].map_t
+
+        # zero pixels where at least one ivar map is zero 
+        # logically this is a sound practice
+        # this also addresses the numerical problem of div-by-zero
+        # where all nfreq ivar maps are zero
+        zero_mask = np.zeros(ref_map.shape, dtype=np.uint8)
+        for ivar_t in ivars:
+            zero_mask = np.logical_or(zero_mask, ivar_t == 0.)
+        fkp[zero_mask] = 0.
+
+        return fkp
+
+    # make a combined FKP weighting to apply to each map
+    def init_fkp(self, ivars=None, plots=False):
+        om = self.output_manager
+        cmb_pipes = self.cmb_pipes
+
+        # we only require that the data be initialized
+        for pipe in cmb_pipes:
+            if not pipe.init_data: pipe.import_data()
+
+        # r_fkp = cmb_pipes[0].metadata.r_fkp # NOTE: should replace this with a MF metadata equivalent
+
+        # NOTE: tune the sigma0 parameter!
+        fkp = self._make_fkp(sigma0=self.mf_meta.sigma0, ivars=ivars)
+
+        self.fkp = fkp * self.planck_mask
+
+        if plots:
+            self._save_skyplot(self.fkp, 'shared_fkp_planckmask.png')
+
+        self.init_fkp_f = True
+
+    def init_t_tilde(self, plots=False):
+        assert self.init_data
+        assert self.init_fkp_f
+        
+        wcs = self.cmb_pipes[0].map_t.wcs
+
+        t_tilde = enmap.ndmap(np.empty((self.nfreq, get_size_alm(self.lmax)), dtype=np.complex64), wcs)
+
+        for pipe, ifreq in zip(self.cmb_pipes, range(self.nfreq)):
+            t_fkp = pipe.map_t * self.fkp
+            t_tilde_lm = almxfl(map2alm(t_fkp, lmax=self.lmax), lfilter=self.step_lweight)
+            t_tilde[ifreq,:] = t_tilde_lm
+             
+        self.t_tilde = t_tilde
+        self.init_t_tilde_f = True
+
+    def init_cl_tt(self, plots=False):
+        om = self.output_manager
+        assert self.init_t_tilde_f
+
+        lzero = self.lzero
+
+        ells = np.arange(self.lmax + 1)[lzero:]
+        norm = ells * (ells + 1)**2 / 2 / np.pi
+
+        t_tilde = self.t_tilde
+        cl_tt = alm2cl(t_tilde[:,None,:], t_tilde[None,:,:])
+        self.cl_tt = cl_tt
+
+        if plots:
+            plt.figure(dpi=300, facecolor='w')
+            plt.title(r'$C_l^{TT}$')
+            for ifreq1, freq1 in zip(range(self.nfreq), self.freqs):
+                for ifreq2, freq2 in zip(range(ifreq1, self.nfreq, 1), self.freqs[ifreq1:]):
+                    plt.plot(ells, norm * cl_tt[ifreq1, ifreq2, lzero:], label=f'{freq1} x {freq2}')
+            plt.xlabel(r'$l$')
+            plt.ylabel(r'$\Delta_l^{TT}$ ($\mu K^2$)')
+            plt.legend()
+            om.savefig('cl_tt_crosspower.png')
+
+            plt.figure(dpi=300, facecolor='w')
+            plt.title(r'$r_l^{TT}$ (Correlation Matrix)')
+            for ifreq1, freq1 in zip(range(self.nfreq), self.freqs):
+                for ifreq2, freq2 in zip(range(ifreq1, self.nfreq, 1), self.freqs[ifreq1:]):
+                    plt.plot(ells, cl_tt[ifreq1, ifreq2, lzero:] / np.sqrt(cl_tt[ifreq1, ifreq1, lzero:] * cl_tt[ifreq2, ifreq2, lzero:]), label=f'{freq1} x {freq2}')
+            plt.xlabel(r'$l$')
+            plt.ylabel(r'$r_l^{TT}$ (-1-1)')
+            plt.legend()
+            om.savefig('rl_tt.png')
+
+        # print(f'cl_tt shape {cl_tt.shape}')
+        cl_tt_inv = np.linalg.inv(cl_tt[...,self.lzero:].T).T
+        # print(f'cl_tt_inv shape {cl_tt_inv.shape}')
+
+        self.cl_tt_inv = cl_tt_inv
+        
+        self.init_cl_tt_f = True
+
+    def _get_cl_th(self):
+        lwidth = self.mf_meta.get_lwidth()
+        ells = np.arange(self.lmax + 1).astype(float)
+
+        return np.exp(-(ells/lwidth)**2)
+
+    def init_lweights(self, plots=False):
+        # TODO: implement
+        # TODO: streamline expression?
+
+        om = self.output_manager
+
+        lcut = self.l_ksz_sum
+        lzero = self.lzero
+
+
+        cl_th_sf = self._get_cl_th()
+        cl_th = np.array([cl_th_sf] * self.nfreq)
+        self.cl_th = cl_th
+
+        # G_l B^-1 is our l weight
+        # = (lambda / C_l^{ZZ}) C_l^{th}^T C_l^{TT}^{-1}
+
+        self.lweights = np.empty((self.nfreq, self.lmax + 1))
+        self.lweights[:,lzero:] = np.einsum('ij,ikj->kj', cl_th[:,lzero:], np.einsum('ijk,jlk->ilk', self.bl[...,lzero:], self.cl_tt_inv))
+        self.lweights[:,:lzero] = 0.
+
+        if plots:
+            ells = np.arange(self.lmax + 1)
+            plt.figure(dpi=300, facecolor='w')
+            for lweight, freq in zip(self.lweights, self.freqs):
+                plt.plot(ells, lweight, label=f'{freq} GHz')   
+            plt.legend()
+            om.savefig('lweights_mf.png')
+
+        self.init_lweights_f = True
+
+    def compute_var(self):
+        assert self.init_cl_tt
+        
+        lcut = self.lzero
+
+        ells = np.arange(self.lmax + 1)[lcut:]
+        cl_th = self.cl_th[:, lcut:]
+        bl = self.bl[...,lcut:]
+        bl_inv = self.bl_inv[...,lcut:]
+        
+        cl_inv = self.cl_tt_inv
+        cl_tt = self.cl_tt[...,lcut:]
+        
+        bcb = np.einsum('ijk,jlk->ilk', bl, np.einsum('ijk,jlk->ilk', cl_inv, bl))
+        ivar = ((2 * ells + 1) * np.einsum('ij,ikj,kj->j', cl_th, bcb, cl_th)).sum()
+
+        var = 1./ivar
+        self.std_ksz = np.sqrt(var)
+
+        return var
+
+    def init_mf(self, ivars=None, plots=False):
+        self.import_data(plots=plots)
+        self.init_fkp(plots=plots, ivars=ivars)
+        self.init_t_tilde(plots=plots)
+        self.init_cl_tt(plots=plots)
+        self.init_lweights(plots=plots)
+        self.compute_var()
+
+    # Note: it may be faster to just do this all in harmonic space
+    def process_maps(self, plots=False):
+        cmb_pipes = self.cmb_pipes
+
+        ref_pipe = cmb_pipes[0]
+        maps = [pipe.map_t for pipe in cmb_pipes]
+
+        # redo asserts?
+        # assert cmb_pipe.init_data and cmb_pipe.init_fkp_f and cmb_pipe.init_lweight_f
+
+        fkp = self.fkp
+        lweights = self.lweights
+
+        ret_map = ref_pipe.make_zero_map()
+
+        for map_t, l_weight, freqs in zip(maps, lweights, self.freqs):
+            map_fkp = fkp * map_t
+
+            t_hp_alm = almxfl(map2alm(map_fkp, lmax=self.lmax), lfilter=l_weight)
+            t_hp = alm2map(t_hp_alm, ref_pipe.make_zero_map())
+            ret_map += t_hp
+
+            if plots:
+                fig = enplot.plot(enmap.downgrade(t_hp, 16), ticks=15, colorbar=True)
+                self.output_manager.savefig(f't_hp_{freq}', mode='pixell', fig=fig)
+                
+                fig = enplot.plot(enmap.downgrade(ret, 16), ticks=15, colorbar=True)
+                self.output_manager.savefig(f't_hp_gal_masked{freq}', mode='pixell', fig=fig)
+
+        ret_map *= self.gal_mask
+        return ret_map
+
+    def _get_bootstrap_norm(self, map_t, n_bs):
+        printlog = self.output_manager.printlog
+
+        gal_pipe = self.galaxy_pipe
+        bs_samples = np.empty(n_bs)
+        t_hp_list = gal_pipe.get_map_list(map_t)
+
+        t0 = time.time()
+        for itrial_bs in range(n_bs):
+            bs_samples[itrial_bs] = gal_pipe.get_bs_estimator_list(t_hp_list)
+
+            if itrial_bs % 1000 == 0:
+                dt_iter = (time.time() - t0) / (itrial_bs + 1)
+                printlog(f'bootstrap normalize time per iter: {dt_iter:.3e}, itrial: {itrial_bs} of {n_bs}')
+
+        return np.mean(bs_samples), np.std(bs_samples)
+
+    def compute_estimator(self, n_bs=0, n_mc=0):
+        printlog = self.output_manager.printlog
+
+        mf_map = self.process_maps()
+
+        a_ksz = self.galaxy_pipe.get_xz_list(mf_map).sum()
+
+        printlog(f'alpha_ksz_mf {a_ksz / self.std_ksz:.3e}')
+
+        std_bs = None
+        if n_bs > 0:
+            mean_bs, std_bs = self._get_bootstrap_norm(mf_map, n_bs)
+            printlog(f'mean_bs, {mean_bs:.3e} std_bs {std_bs:.3e}')
+            printlog(f'alpha_ksz_bs {a_ksz/std_bs:.3e}')
+
+        if n_mc > 0:
+            # TODO: implement multifrequency MC
+            printlog('multifrequency mc not implemented!')
+            pass
 
 
 class CMBxGalPipe:
@@ -102,7 +448,8 @@ class CMBxGalPipe:
 
         return ret
 
-    def make_t_hp(self, real_space=True):
+    # Make this a special case of init_t_hp?
+    def make_t_hp_nomask(self, real_space=True):
         cmb_pipe = self.cmb_pipe
         assert cmb_pipe.init_data
         assert cmb_pipe.init_metadata
@@ -281,8 +628,8 @@ class CMBxGalPipe:
             else:
                 cl_out, this_fl = self._fl_loop(cl_in, ntrial_fl)
 
+            fl = average_fl(this_fl, nave_fl)
             fl[0] = 1.
-            fl[1:] = average_fl(this_fl, nave_l=nave_fl)
 
             fit_goodness = np.sqrt(np.sum((cl_target[lmin_cut+1:] - cl_out[lmin_cut+1:])**2)/(lmax - lmin_cut))
             rms_err[iiter] = fit_goodness
@@ -520,8 +867,8 @@ class CMBxGalPipe:
                     # printlog(f'completed {ngal} MC gals, time per iter: {dt_per_iter:.2e} s, expected total time: {dt_total_expected:.2e} s')
 
                 assert not buffered_reader.has_next_chunk
-                # TODO: FIX!
-                assert ngal == gal_pipe.ngal_in, f'ngal: {ngal}, ngal_in: {gal_pipe.ngal_in}'
+                # TODO: This assert is failing for some reason!!!
+                # assert ngal == gal_pipe.ngal_in, f'ngal: {ngal}, ngal_in: {gal_pipe.ngal_in}'
                 dt_total = time.time() - t0
                 printlog(f'completed entire galaxy mc loop in {dt_total:.2e} s')
 

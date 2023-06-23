@@ -126,7 +126,7 @@ if __name__ == "__main__":
     zerr_cut = ZerrCut(zerr_max)
     if do_cut:
         north_cut = AndCut([LRGNorthCut(), zerr_cut])
-        south_cut = AndCut([LRGNorthCut(), zerr_cut])
+        south_cut = AndCut([LRGSouthCut(), zerr_cut])
     else:
         north_cut = zerr_cut
         south_cut = zerr_cut

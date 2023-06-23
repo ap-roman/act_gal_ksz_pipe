@@ -21,7 +21,8 @@ import subprocess
 from fnl_pipe.util import get_yaml_dict, validate_script_config, validate_config
 
 
-supported_scripts = ['phack-bootstrap.py', 'explore-multifreq-bootstrap.py', 'make-paper.py']
+supported_scripts = ['phack-bootstrap.py', 'explore-multifreq-bootstrap.py', 'make-paper.py',
+                     'make-mf-bootstrap.py']
 
 
 def run_single_config(yaml_config):

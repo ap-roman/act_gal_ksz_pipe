@@ -68,6 +68,10 @@ class ACTPipe:
             self.metadata = metadata.copy()
             self.init_metadata = True
 
+
+        # long-term it may make sense to move all lweight, fkp, and xfer
+        # methods to the gal x cmb classes
+        # this is logically consistent with the multifrequency class
         self.init_lweight_f = False
         self.init_xfer = False
         self.init_fkp_f = False
@@ -81,6 +85,8 @@ class ACTPipe:
     #     self.init_lweight()
 
     def get_planck_mask(self):
+        assert self.planck_mask_path is not None
+
         printlog = self.output_manager.printlog
 
         printlog(f'importing planck foreground mask {self.planck_mask_path}')
@@ -95,7 +101,7 @@ class ACTPipe:
 
         return planck_mask
 
-    def import_data(self, plots=False, ntrial_nl=1):
+    def import_data(self, plots=False):
         printlog = self.output_manager.printlog
         plots = plots or self.plots
 
@@ -116,9 +122,13 @@ class ACTPipe:
         self.angular_res = self.adelt[0] # radians
         self.pixel_area = self.angular_res**2 # steridians
 
+        # TODO! fix pixel area bug - should depend on position!
+
         printlog(f'importing act ivar map {self.ivar_path}')
-        self.eta_n2 = enmap.read_map(self.ivar_path)[0] / self.pixel_area # trick to save ram
-        self.map_std = np.sqrt(masked_inv(self.eta_n2 * self.pixel_area))
+        # Note: this is expensive and I'm not sure we explicitly use eta_n2 anywhere
+        self.ivar_t = enmap.read_map(self.ivar_path)[0]
+        self.eta_n2 = self.ivar_t / self.pixel_area # WARN: eta_n2 is not calulcated correctly!
+        self.map_std = np.sqrt(masked_inv(self.ivar_t))
 
         # quality check on map_std?
         if plots:
@@ -168,15 +178,10 @@ class ACTPipe:
 
         if do_init: self.init()
 
-    def get_sim_map():
-        assert self.init_xfer and self.init_fkp_f
-        pass
-        #TODO
-
     def make_empty_map(self):
         return enmap.empty(self.map_t.shape, self.map_t.wcs)
 
-    def make_zero_map(self):
+    def make_zero_map(self,):
         return enmap.ndmap(np.zeros(self.map_t.shape), self.map_t.wcs)
 
     def make_noise_map(self):

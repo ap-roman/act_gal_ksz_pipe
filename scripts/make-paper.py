@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
     # make t_hp diagnostic plots
 
-    t_hp = cross_pipe.make_t_hp()
+    t_hp = cross_pipe.make_t_hp_nomask()
 
     fig1 = enplot.plot(enmap.downgrade(t_hp, 16), ticks=15, colorbar=True)
     om.savefig(f't_hp_nogalmask_{act_pipe_150.freq}', mode='pixell', fig=fig1)
