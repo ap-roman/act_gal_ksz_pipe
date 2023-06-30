@@ -18,9 +18,11 @@ import sys
 def get_inds(ar, inds):
     return [ar[i] for i in inds]
 
+def snr_theory(a, b, r):
+    return np.sqrt(a**2 + b**2 - 2 * r * a * b) / np.sqrt(1 - r**2)
 
 if __name__ == "__main__":
-    om = OutputManager(base_path='output', title='make-mf-bootstrap',)
+    om = OutputManager(base_path='output', title='mf-bootstrap-mapweight',)
     printlog = om.printlog
 
     # YAML config file import
@@ -101,12 +103,63 @@ if __name__ == "__main__":
     # only apply the index cut to the estimator pipes
     estimator_pipes = get_inds(cmb_pipes, f_inds)
 
-    cross_pipe = CMBMFxGalPipe(estimator_pipes, gal_pipe, gal_mask, planck_mask, NL_COARSE, mf_meta, 
-                               output_manager=om, l_ksz_sum=L_KSZ_SUM, plots=True)
-
+    # pull just the ivars we indend to use
     ivars_ksz = get_inds([pipe.ivar_t for pipe in cmb_pipes], f_inds_ivar)
-    cross_pipe.init_mf(plots=True, ivars=ivars_ksz)
 
-    cross_pipe.compute_estimator(n_bs=NTRIAL_BS)
+    nfreq = len(f_inds)
 
-    # cross_pipe.investigate_mf_estimator(n_bs=NTRIAL_BS)
+    assert nfreq > 1
+
+    # single frequency cross-pipes
+    sf_cross_pipes = []
+    maps = []
+    for cmb_pipe in estimator_pipes:
+        cross_pipe = CMBMFxGalPipe([cmb_pipe,], gal_pipe, gal_mask, planck_mask, NL_COARSE, mf_meta, 
+                                   output_manager=om, l_ksz_sum=L_KSZ_SUM, plots=True)
+        cross_pipe.init_mf(plots=True, ivars = ivars_ksz)
+        sf_cross_pipes.append(cross_pipe)
+        these_maps = cross_pipe.process_maps_list()
+        assert len(these_maps) == 1
+        this_map = these_maps[0]
+
+        maps.append(gal_pipe.get_map_list(this_map))
+    maps = np.array(maps)
+
+    vrs = gal_pipe.vrs
+    alphas_mf = np.empty((NTRIAL_BS, nfreq))
+    for itrial_bs in range(NTRIAL_BS):
+        bs_inds = gal_pipe.get_bs_inds()
+        alphas_mf[itrial_bs, :] = (vrs[None, bs_inds] * maps[:, bs_inds]).sum(axis=1)
+
+    alphas_mf = alphas_mf.T
+
+    alphas_cross = np.cov(alphas_mf)
+    printlog(alphas_cross)
+
+    alphas_norm = alphas_mf.copy()
+    for ifreq in range(nfreq):
+        alphas_norm[ifreq, :] /= np.sqrt(alphas_cross[ifreq, ifreq])
+    an_cov = np.cov(alphas_norm)
+    printlog(an_cov)
+
+    assert nfreq == 2
+
+    r = an_cov[0,1]
+
+    an_mean = np.mean(alphas_norm, axis=1)
+    snr_sf = an_mean / np.std(alphas_norm, axis=1)
+    printlog(f'single frequency SNR {snr_sf}')
+
+    icov = np.linalg.inv(an_cov)
+    printlog(f'alpha_mean array {an_mean}')
+
+    # map space weights
+    ms_weights = np.einsum('ij,j->i', icov, an_mean)
+    printlog(f'alpha weights {ms_weights}')
+
+    snr_mf_th = snr_theory(*snr_sf, r=r)
+    printlog(f'theoretical combined SNR: {snr_mf_th:.3e}')
+
+    alphas_mf = np.einsum('i,ij->j', ms_weights, alphas_norm)
+    snr_mf = np.mean(alphas_mf) / np.std(alphas_mf)
+    printlog(f'combined multifrequency SNR {snr_mf:.3e}')

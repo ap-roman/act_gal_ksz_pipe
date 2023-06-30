@@ -338,26 +338,54 @@ class CMBMFxGalPipe:
         fkp = self.fkp
         lweights = self.lweights
 
-        ret_map = ref_pipe.make_zero_map()
+        ret = ref_pipe.make_zero_map()
 
         for map_t, l_weight, freqs in zip(maps, lweights, self.freqs):
             map_fkp = fkp * map_t
 
             t_hp_alm = almxfl(map2alm(map_fkp, lmax=self.lmax), lfilter=l_weight)
             t_hp = alm2map(t_hp_alm, ref_pipe.make_zero_map())
-            ret_map += t_hp
+            ret += t_hp
 
             if plots:
                 fig = enplot.plot(enmap.downgrade(t_hp, 16), ticks=15, colorbar=True)
                 self.output_manager.savefig(f't_hp_{freq}', mode='pixell', fig=fig)
-                
-                fig = enplot.plot(enmap.downgrade(ret, 16), ticks=15, colorbar=True)
-                self.output_manager.savefig(f't_hp_gal_masked{freq}', mode='pixell', fig=fig)
+            
+        if plots:
+            fig = enplot.plot(enmap.downgrade(ret, 16), ticks=15, colorbar=True)
+            self.output_manager.savefig(f't_hp_gal_masked{freq}', mode='pixell', fig=fig)
 
-        ret_map *= self.gal_mask
-        return ret_map
+        ret *= self.gal_mask
+        return ret
 
-    def _get_bootstrap_norm(self, map_t, n_bs):
+    # provides a list of maps by frequency rather than summing
+    def process_maps_list(self, lweights=None, plots=False):
+        cmb_pipes = self.cmb_pipes
+
+        ref_pipe = cmb_pipes[0]
+        maps = [pipe.map_t for pipe in cmb_pipes]
+
+        # redo asserts?
+        # assert cmb_pipe.init_data and cmb_pipe.init_fkp_f and cmb_pipe.init_lweight_f
+
+        fkp = self.fkp
+        if lweights is None:
+            lweights = self.lweights
+        else:
+            assert len(lweights) == self.nfreq
+
+        ret_maps = []
+
+        for map_t, l_weight, freqs in zip(maps, lweights, self.freqs):
+            map_fkp = fkp * map_t
+
+            t_hp_alm = almxfl(map2alm(map_fkp, lmax=self.lmax), lfilter=l_weight)
+            t_hp = alm2map(t_hp_alm, ref_pipe.make_zero_map())
+            ret_maps.append(t_hp * self.gal_mask)
+
+        return ret_maps
+
+    def _get_bs_samples(self, map_t, n_bs):
         printlog = self.output_manager.printlog
 
         gal_pipe = self.galaxy_pipe
@@ -372,7 +400,60 @@ class CMBMFxGalPipe:
                 dt_iter = (time.time() - t0) / (itrial_bs + 1)
                 printlog(f'bootstrap normalize time per iter: {dt_iter:.3e}, itrial: {itrial_bs} of {n_bs}')
 
-        return np.mean(bs_samples), np.std(bs_samples)
+        return bs_samples
+
+    def _get_bs_mf(self, maps_list, n_bs):
+        assert len(maps_list) == self.nfreq
+        printlog = self.output_manager.printlog
+
+        gal_pipe = self.galaxy_pipe
+        bs_samples = np.empty((self.nfreq, n_bs))
+
+        t0 = time.time()
+        for itrial_bs in range(n_bs):
+            bs_inds = gal_pipe.get_bs_inds()
+            vr_bs = gal_pipe.vrs[bs_inds]
+
+            for ifreq in range(self.nfreq):
+                bs_samples[ifreq, itrial_bs] = (maps_list[ifreq][bs_inds] * vr_bs).sum()
+
+            if itrial_bs % 1000 == 0:
+                dt_iter = (time.time() - t0) / (itrial_bs + 1)
+                printlog(f'bootstrap normalize time per iter: {dt_iter:.3e}, itrial: {itrial_bs} of {n_bs}')
+
+        return bs_samples
+
+    def investigate_mf_estimator(self, n_bs):
+        printlog = self.output_manager.printlog
+        gal_pipe = self.galaxy_pipe
+        vrs = gal_pipe.vrs
+        assert self.nfreq > 1
+
+        maps = self.process_maps_list()
+        maps_list = [gal_pipe.get_map_list(map_t) for map_t in maps]
+
+        alphas_sig = [(map_t * vrs).sum() for map_t in maps_list]
+
+        alphas_bs = self._get_bs_mf(maps_list, n_bs)
+
+        # the covariance matrix of the individual frequency alpha estimators
+        covar_freqs = np.cov(alphas_bs)
+
+        alphas_norm = [ar / np.sqrt(covar_freqs[ifreq, ifreq]) for ar, ifreq in zip(alphas_bs, range(self.nfreq))]
+        covar_norm = np.cov(alphas_norm)
+
+        alphas_bs_sf = np.mean(alphas_norm, axis=1) / np.std(alphas_norm, axis=1)
+        printlog(f'single-frequency ksz estimators: {alphas_bs_sf}')
+
+        alphas_mean = np.mean(alphas_norm, axis=1)
+        assert alphas_mean.shape[0] == self.nfreq
+
+        optweight = np.einsum('ij,j->i', np.linalg.inv(covar_norm), alphas_mean)
+        alphas_mf_bf = np.einsum('i,ij->j', optweight, alphas_norm)
+
+        alpha_mf = np.mean(alphas_mf_bf) / np.std(alphas_mf_bf)
+
+        printlog(f'mf ksz estimator: {alpha_mf:.3e}')
 
     def compute_estimator(self, n_bs=0, n_mc=0):
         printlog = self.output_manager.printlog
@@ -385,7 +466,9 @@ class CMBMFxGalPipe:
 
         std_bs = None
         if n_bs > 0:
-            mean_bs, std_bs = self._get_bootstrap_norm(mf_map, n_bs)
+            bs_samples = self._get_bs_samples(mf_map, n_bs)
+            mean_bs = np.mean(bs_samples)
+            std_bs = np.std(bs_samples)
             printlog(f'mean_bs, {mean_bs:.3e} std_bs {std_bs:.3e}')
             printlog(f'alpha_ksz_bs {a_ksz/std_bs:.3e}')
 
@@ -393,6 +476,9 @@ class CMBMFxGalPipe:
             # TODO: implement multifrequency MC
             printlog('multifrequency mc not implemented!')
             pass
+
+    def make_nl(self, nmc):
+        
 
 
 class CMBxGalPipe:
