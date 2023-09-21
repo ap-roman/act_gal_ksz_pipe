@@ -1,0 +1,50 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  plot-cl-tz-mf.py:
+    base_path: "scripts/"
+
+    paths_f090:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+      cl_tt_act: "/data/aroman/symmetry/desils/cl_tt_act_kendrick_data_f090.npy"
+      cl_tt_sim: "/data/aroman/symmetry/desils/cl_tt_sim_kendrick_data_f090.npz"
+      cl_tz_sig: "/data/aroman/symmetry/desils/cl_tz_sig_kendrick_data_f090.npy"
+      cl_tz_mc: "/data/aroman/symmetry/desils/cl_tz_mc_kendrick_data_f090_nmc_1024.npy"
+      map_weight: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_90.fits"
+      fl: "/data/aroman/symmetry/desils/fl_apparent_camb_f090.npy"
+
+    paths_f090_vsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+      cl_tt_act: "/data/aroman/symmetry/desils/cl_tt_act_kendrick_data_f090.npy"
+      cl_tt_sim: "/data/aroman/symmetry/desils/cl_tt_sim_kendrick_data_f090.npz"
+      cl_tz_sig: "/data/aroman/symmetry/desils/cl_tz_sig_kendrick_data_vmeansub_f090.npy"
+      cl_tz_mc: "/data/aroman/symmetry/desils/cl_tz_mc_kendrick_data_vmeansub_f090_nmc_1024.npy"
+      map_weight: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_90.fits"
+      fl: "/data/aroman/symmetry/desils/fl_apparent_camb_f090.npy"
+
+    paths_f150:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+      cl_tt_act: "/data/aroman/symmetry/desils/cl_tt_act_kendrick_data_f150.npy"
+      cl_tt_sim: "/data/aroman/symmetry/desils/cl_tt_sim_kendrick_data_f150.npz"
+      cl_tz_sig: "/data/aroman/symmetry/desils/cl_tz_sig_kendrick_data_f150.npy"
+      cl_tz_mc: "/data/aroman/symmetry/desils/cl_tz_mc_kendrick_data_f150_nmc_1024.npy"
+      map_weight: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_150.fits"
+      fl: "/data/aroman/symmetry/desils/fl_apparent_camb_f150.npy"
+
+    paths_f150_vsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+      cl_tt_act: "/data/aroman/symmetry/desils/cl_tt_act_kendrick_data_f150.npy"
+      cl_tt_sim: "/data/aroman/symmetry/desils/cl_tt_sim_kendrick_data_f150.npz"
+      cl_tz_sig: "/data/aroman/symmetry/desils/cl_tz_sig_kendrick_data_vmeansub_f150.npy"
+      cl_tz_mc: "/data/aroman/symmetry/desils/cl_tz_mc_kendrick_data_vmeansub_f150_nmc_1024.npy"
+      map_weight: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_150.fits"
+      fl: "/data/aroman/symmetry/desils/fl_apparent_camb_f150.npy"
+   
+    NAVE_TZ: 500
+    NAVE_TT: 64
+    LMIN_PLOT: 501
+
+    LMIN_FIT: 2000
+    LMAX_FIT: 7000
+
+    NTRIAL_MC: 1024
