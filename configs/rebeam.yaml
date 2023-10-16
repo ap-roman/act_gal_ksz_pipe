@@ -1,0 +1,20 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  rebeam-diff.py:
+    base_path: "scripts/"
+
+    beam_090_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+    map_090_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f090_daynight_map_srcfree.fits"
+    ivar_090_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f090_daynight_ivar.fits"
+    weight_090: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_90.fits"
+
+    beam_150_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+    map_150_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits"
+    ivar_150_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits"
+    
+    weight_out_path: "/home/aroman/data/act_pub/derived/wfkp_150_090.fits"
+    map_out_path: "/home/aroman/data/act_pub/derived/act_diff_f090.fits"
+
+    lmax: 40000
+    cl0: 0.00001

@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     desils_cat = DESILSCat(cat_north=desils_v3_north, cat_south=desils_v3_south)
     zerr_grid = np.linspace(0.025, 0.1, 8)
-    vr_widths = ['0.25', '0.5', '0.75', '1.0', '1.25', '1.5', '1.75', '2.0']
+    vr_widths = ['0.75', '1.0', '1.25']
     do_cuts = [True, False]
 
     cut_labels = []
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         zerr_cut = ZerrCut(zerr_max)
         if do_cut:
             north_cut = AndCut([LRGNorthCut(), zerr_cut])
-            south_cut = AndCut([LRGNorthCut(), zerr_cut])
+            south_cut = AndCut([LRGSouthCut(), zerr_cut])
         else:
             north_cut = zerr_cut
             south_cut = zerr_cut

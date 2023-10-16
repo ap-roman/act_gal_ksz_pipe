@@ -64,6 +64,9 @@ zerr_max = 0.05
 vr_width = '1.0'
 
 
+# NOTE: There may still be a problem with size mismatch between the actual list/recovered list!
+
+
 if __name__ == "__main__":
     om = OutputManager(base_path='output', title='test-mc-list', logs=['log'])
     printlog = om.printlog

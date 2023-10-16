@@ -230,6 +230,16 @@ class GalPipe:
 
         return ret
 
+    def get_vr_map(self, v_offset=0., scale=1.):
+        assert self.init_lists
+
+        ret = self.ref_map.copy()
+        ret[:,:] = 0.
+        ret[self.dec_inds, self.ra_inds] = scale * (self.vrs - v_offset)
+        ret[self.dec_inds, self.ra_inds] /= self.ref_map.pixsizemap()[self.dec_inds, self.ra_inds]
+
+        return ret
+
     def get_map_list(self, map_t):
         return map_t[self.dec_inds, self.ra_inds]
 
@@ -463,21 +473,25 @@ class GalCat:
         self.ngal = ngal
 
     # returns a GalPipe object subject to the selection criterion (a list of GalCut)
-    def get_subcat(self, cut, ref_map, vr_zerr_width='1.0'):
+    def get_subcat(self, cut, ref_map, vr_zerr_width='1.0', *, vr_field=None):
         assert vr_zerr_width in self._valid_widths
         fwidth = float(vr_zerr_width)
 
         assert isinstance(cut, GalCut)
 
         with h5py.File(self.cat_path, 'r') as h5file:
-            v3_dset = 'vr_smoothed_' + vr_zerr_width
-            assert v3_dset in h5file.keys() or (vr_zerr_width == '1.0' and 'vr_smoothed' in h5file.keys())
+            if vr_field is None:
+                v3_dset = 'vr_smoothed_' + vr_zerr_width
+                assert v3_dset in h5file.keys() or (vr_zerr_width == '1.0' and 'vr_smoothed' in h5file.keys())
 
-            if v3_dset in h5file.keys():
-                # v3 file
-                vr_dset = v3_dset
+                if v3_dset in h5file.keys():
+                    # v3 file
+                    vr_dset = v3_dset
+                else:
+                    vr_dset = 'vr_smoothed'
             else:
-                vr_dset = 'vr_smoothed'
+                assert vr_field in h5file.keys()
+                vr_dset = vr_field
 
             thiscut = cut(h5file)
             print(f'GalCat: included galaxies: {thiscut.sum()} of {self.ngal}')

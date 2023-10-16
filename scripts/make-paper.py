@@ -140,7 +140,7 @@ if __name__ == "__main__":
     local_dict = locals()
     printlog('dumping config')
     for key, value in config_dict.items():
-        printlog(key, value)
+        printlog(f'{key}: {value}')
         local_dict[key] = value
     printlog('################## DONE ##################')
 

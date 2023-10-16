@@ -1,0 +1,31 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  plot-cl-tz-mf-dir.py:
+    base_path: "scripts/"
+
+    paths_f150_randsub_vsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+      base_path: "/data/aroman/symmetry/desils/cltz_f150_nmc_1024_randsub_vmeansub/"
+
+    paths_f150_randsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+      base_path: "/data/aroman/symmetry/desils/cltz_f150_nmc_1024_randsub/"
+
+    paths_f090_randsub_vsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+      base_path: "/data/aroman/symmetry/desils/cltz_f090_nmc_1024_randsub_vmeansub/"
+
+    paths_f090_randsub:
+      beam: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+      base_path: "/data/aroman/symmetry/desils/cltz_f090_nmc_1024_randsub/"
+
+
+    NAVE_TZ: 500
+    NAVE_TT: 64
+    LMIN_PLOT: 501
+
+    LMIN_FIT: 2000
+    LMAX_FIT: 7000
+
+    NTRIAL_MC: 1024

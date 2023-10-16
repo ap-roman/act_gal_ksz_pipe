@@ -16,6 +16,19 @@ from pixell import enplot, enmap
 import h5py
 
 
+def get_mc_files(rank, size, nfiles, nmc, file_stem):
+    assert nmc % nfiles == 0
+    assert nfiles % size == 0
+
+    nfiles_per_task = nfiles // size
+    my_ifiles = rank * nfiles_per_task + np.arange(nfiles_per_task)
+    my_ntrial_mc = nmc // ntrials
+
+    mc_lists = [mc_list_base + f'_rank_{ifile}.h5' for ifile in my_ifiles]
+
+    return mc_lists, my_ntrial_mc
+
+
 # buffers a transposed chunk; fixed size
 class ChunkedTransposeWriter:
     def _init_file(self):
@@ -180,17 +193,7 @@ class ChunkedMaskedReader:
             self.nread += nfill_buf
             self.ichunk = ichunk
 
-    def __init__(self, path, chunk_size, row_mask, bufname='array', dset_buffer_factor=50):
-        self.path = path
-        self.bufname = bufname
-        self.chunk_size = chunk_size
-        self.row_mask = row_mask
-        assert dset_buffer_factor >= 1 and type(dset_buffer_factor) is int
-        self.dset_buffer_factor = dset_buffer_factor
-        self.nbuf_dset = self.chunk_size * self.dset_buffer_factor
-
-        self._init_file()
-
+    def reset(self):
         self.nread = 0
         self.ichunk = 0
         self.nchunk = self.ngal_in // self.chunk_size + (self.ngal_in % self.chunk_size != 0)
@@ -202,6 +205,18 @@ class ChunkedMaskedReader:
 
         self.has_next_chunk = True
         self._get_chunk(self.ichunk)
+
+    def __init__(self, path, chunk_size, row_mask, bufname='array', dset_buffer_factor=50):
+        self.path = path
+        self.bufname = bufname
+        self.chunk_size = chunk_size
+        self.row_mask = row_mask
+        assert dset_buffer_factor >= 1 and type(dset_buffer_factor) is int
+        self.dset_buffer_factor = dset_buffer_factor
+        self.nbuf_dset = self.chunk_size * self.dset_buffer_factor
+
+        self._init_file()
+        self.reset()
 
     def get_next_chunk(self):
         ret = self.buf.copy()
@@ -233,6 +248,52 @@ class ChunkedMaskedReader:
     #     return self.buf[chunk_ind]
 
 
+# This class un-transposes tranposed mc list data
+class TranposedReader:
+    def __init__(self, cmr, nmc_chunk):
+        assert cmr.ichunk == 0
+        self.cmr = cmr
+        self.nmc = cmr.ncol
+        assert self.nmc % nmc_chunk == 0
+        self.nmc_chunk = nmc_chunk
+
+        self.has_next_chunk = True
+        self.ichunk = 0
+        self.nchunk = nmc // nmc_chunk
+        self.buf = None
+        self._get_chunk(0)
+
+    def _get_chunk(self, ichunk):
+        assert ichunk < self.nchunk
+
+        imc0 = ichunk * self.nmc_chunk
+        imc1 = imc0 + self.nmc_chunk
+
+        tmp = np.empty((0, self.nmc_chunk), dtype=np.float32)
+
+        cmr = self.cmr
+        while cmr.has_next_chunk:
+            gal_inds, dat_galmc = cmr.get_next_chunk()
+            dat_keep = np.concatenate(tmp, dat_galmc[:, imc0:imc1])
+        cmr.reset()
+
+        printlog(tmp.shape)
+
+        self.ichunk = ichunk
+        self.buf = tmp.T
+
+    def get_next_chunk(self):
+        assert self.has_next_chunk()
+        ret = self.buf.copy()
+
+        if self.ichunk < self.nchunk:
+            self._get_chunk(ichunk)
+        else:
+            self.has_next_chunk = False
+
+        return ret
+
+
 # NOT thread safe
 class Timer:
     def __init__(self):
@@ -254,8 +315,32 @@ def ensure_sep(path):
     pass
 
 
+def get_file_with_prefix(base_path, prefix, unique=True):
+    assert path.isdir(base_path), base_path
+    files = [d for d in listdir(base_path) if path.isfile(path.join(base_path, d))]
+
+    matches = []
+    for file in files:
+        if len(file.split(prefix)) > 1: 
+            matches.append(path.join(base_path, file))
+
+    if unique:
+        assert len(matches) == 1
+        return matches[0]
+    else:
+        return matches
+
+
+def get_unique_files_prefixes(base_path, prefixes):
+    ret = {}
+    for pf in prefixes:
+        ret[pf] = get_file_with_prefix(base_path, pf, unique=True)
+
+    return ret
+
+
 def get_dirs(base_path, stem=True):
-    assert(path.isdir(base_path))
+    assert path.isdir(base_path)
     dirs = [d for d in listdir(base_path) if path.isdir(path.join(base_path, d))]
 
     if stem:
@@ -267,7 +352,7 @@ def get_dirs(base_path, stem=True):
 
 
 def get_files(base_path, stem=True):
-    assert(path.isdir(base_path))
+    assert path.isdir(base_path), base_path
     files = [f for f in listdir(base_path) if path.isfile(path.join(base_path, f))]
 
     if stem:
@@ -300,6 +385,9 @@ def ensure_dir(dirpath):
 
     if len(dirsplt) > 1:
         base = path.join(*dirsplt[:-1])
+
+        if dirpath[0] == os.sep:
+            base = os.sep + base
     else:
         base = ''
 
@@ -329,7 +417,7 @@ def get_label(base_path, title, replace=False):
 # Manages output directory. Not parallel
 # logs is a list of tuples (logname, logpath)
 class OutputManager:
-    def __init__(self, title, base_path='output', subdirs=['plots', 'logs'], logs=None, replace=False,
+    def __init__(self, title, base_path='output', subdirs=['plots', 'logs', 'data'], logs=None, replace=False,
                  mpi_rank=None, mpi_comm=None):
         assert title != ''
         assert 'logs' in subdirs
@@ -342,6 +430,8 @@ class OutputManager:
         self.mpi_rank = mpi_rank
         self.mpi_comm = mpi_comm
         self.is_mpi = (mpi_rank is not None)
+
+        self.replace = replace
 
         if self.is_mpi:
             label = None
@@ -365,9 +455,12 @@ class OutputManager:
 
         if logs is None:
             logs = [title,]
-        
+
+        if title not in logs:
+            logs += [title,]
+
         self.log_names = logs
-        self.logs = {log:LogFile(os.path.join(self.working_dir, 'logs', log + '.log')) for log in logs}
+        self.logs = {log: LogFile(os.path.join(self.working_dir, 'logs', log + '.log')) for log in logs}
         self.default_log = title
 
     def set_default_log(self, log=None):
@@ -394,22 +487,35 @@ class OutputManager:
 
         pline = line
         if rank is not None:
+            assert isinstance(rank, int)
             pline = f'rank {rank}: ' + line
 
         print(pline)
         self.log(line, log)
 
-    def savefig(self, name, mode='matplotlib', fig=None):
-        assert('plots' in self.subdirs)
-        assert(mode == 'matplotlib' or mode == 'pixell' )
+    def savefig(self, name, mode='matplotlib', subdir=None, fig=None):
+        assert 'plots' in self.subdirs
+        assert mode == 'matplotlib' or mode == 'pixell'
 
-        plot_path = path.join(self.working_dir, 'plots', name)
+        if subdir is not None:
+            assert not self.is_mpi
+            
+            ensure_dir(path.join(self.working_dir, 'plots', subdir))
+            plot_path = path.join(self.working_dir, 'plots', subdir, name)
+        else: 
+            plot_path = path.join(self.working_dir, 'plots', name)
 
         if mode == 'matplotlib':
             plt.savefig(plot_path)
         elif mode == 'pixell':
             assert fig is not None
             enplot.write(plot_path, fig)
+
+    def save_enmap(self, name, map_t):
+        assert 'data' in self.subdirs
+        assert self.replace == True
+        fname = path.join(self.working_dir, 'data', name)
+        enmap.write_map(fname, map_t)
 
 
 def import_config(path):
@@ -435,6 +541,12 @@ def fequal(a,b,tol=1e-6):
 
 def fequal_either(a,b,tol=1e-3):
     return np.all(np.logical_or(np.abs(a - b) <= tol, 2 * np.abs(a - b) / np.abs(a + b) <= tol))
+
+
+def map2clx(map1, map2, lmax):
+    alm1 = map2alm(map1, lmax=lmax)
+    alm2 = map2alm(map2, lmax=lmax)
+    return alm2cl(alm1, alm2)
 
 
 def map2cl(t_map, lmax):

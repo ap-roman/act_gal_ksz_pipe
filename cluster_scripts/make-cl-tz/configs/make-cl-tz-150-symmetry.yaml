@@ -1,0 +1,41 @@
+base_path: "make-cl-tz/"
+NTRIAL_MC: 1024
+NTRIAL_TT: 4
+LMAX: 10000
+L_KSZ_SUM: 2000
+plots: True
+data_path: "/gpfs/aroman/data/"
+planck_mask_path: "/gpfs/aroman/data/mask/planck_foreground_mask_GAL080.npy"
+freq: 150
+freq_string: "150"
+map_path: "/gpfs/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_map_srcfree.fits"
+ivar_path: "/gpfs/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f150_daynight_ivar.fits"
+beam_path: "/gpfs/aroman/data/act_pub/act_planck_dr5.01_s08s18_f150_daynight_beam.txt"
+map_weight_path: "/gpfs/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_150.fits"
+# gal_mask_path: "/home/aroman/data/vr_source/desils/intersect_sdss_desi_mask.fits"
+gal_mask_path: "/gpfs/aroman/data/kendrick/01_act_ps_model_inputs/desils_sdss_footprint_ds20.fits"
+gal_upgrade: 20
+desils_v3_north: "/gpfs/aroman/data/vr_source/desils/v03_desils_north_cmass.h5"
+desils_v3_south: "/gpfs/aroman/data/vr_source/desils/v03_desils_south_cmass.h5"
+vr_width: '1.0'
+zerr_max: 0.0225
+do_cut: True
+
+do_randsub: True
+rand_cat_path: "/gpfs/aroman/data/kendrick/02_pixellized_lss_maps/random_catalog.h5"
+
+# tsz cluster masking hilton 2020
+do_tsz_mask: False
+tsz_cat_path: '/gpfs/aroman/data/act_pub/sz_cluster_hilton/DR5_cluster-catalog_v1.1.fits'
+tsz_mask_path: '/gpfs/aroman/data/act_pub/sz_cluster_hilton/DR5_cluster-search-area-mask_v1.0.fits'
+ndown_tsz: 40
+tsz_mask_sidelength_arcmin: 4.4 # (arcmin) 2.4' FWHM and 1' positional uncertainty
+
+do_vmean_sub: True
+
+desc_str: 'kendrick_data_'
+
+outdir_base: "/gpfs/aroman/data/desils/"
+
+cl_model: [0.00002, -3.5, 1.5]
+cmb_path: '/gpfs/aroman/data/kendrick/01_act_ps_model_inputs/cl_camb.npy'

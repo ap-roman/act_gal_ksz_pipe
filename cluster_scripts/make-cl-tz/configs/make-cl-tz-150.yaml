@@ -1,0 +1,28 @@
+base_path: "/home/aroman/ksz_repos/act_gal_ksz_pipe/"
+tmp_dir: "/home/aroman/ksz_repos/act_gal_ksz_pipe/tmp/"
+scripts:
+  make-cl-tz.py:
+    base_path: "scripts/"
+    NTRIAL_MC: 8
+    LMAX: 10000
+    L_KSZ_SUM: 2000
+    plots: True
+    data_path: "/home/aroman/data/"
+    planck_mask_path: "/home/aroman/data/mask/planck_foreground_mask_GAL080.npy"
+    freq: 150
+    freq_string: "150"
+    map_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f090_daynight_map_srcfree.fits"
+    ivar_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_AA_f090_daynight_ivar.fits"
+    beam_path: "/home/aroman/data/act_pub/act_planck_dr5.01_s08s18_f090_daynight_beam.txt"
+    map_weight_path: "/home/aroman/data/kendrick/01_act_ps_model_inputs/wfkp_150.fits"
+    # gal_mask_path: "/home/aroman/data/vr_source/desils/intersect_sdss_desi_mask.fits"
+    gal_mask_path: "/home/aroman/data/kendrick/01_act_ps_model_inputs/desils_sdss_footprint_ds20.fits"
+    desils_v3_north: "/home/aroman/data/vr_source/desils/v03_desils_north_cmass.h5"
+    desils_v3_south: "/home/aroman/data/vr_source/desils/v03_desils_south_cmass.h5"
+    vr_width: '1.0'
+    zerr_max: 0.0225
+    do_cut: True
+
+    cl_tz_outpath: "/home/aroman/desils/cl_tz_mc_kendrick_data_nmc_16_freq_150.npy"
+    cl_model: [0.00002, -3.5, 1.5]
+    cmb-path: '/home/aroman/data/kendrick/01_act_ps_model_inputs/cl_camb.npy'

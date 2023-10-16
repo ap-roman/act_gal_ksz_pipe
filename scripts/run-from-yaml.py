@@ -1,5 +1,6 @@
 # run many scripts from a yaml config file
-# at the core, a valid config file has the structure:
+#
+# a valid config file has the structure:
 # 
 # base_path: <the base path from which paths are referenced, usually the repository folder>
 # tmp_dir: <a directory in which to place temporary yaml files>
@@ -22,7 +23,9 @@ from fnl_pipe.util import get_yaml_dict, validate_script_config, validate_config
 
 
 supported_scripts = ['phack-bootstrap.py', 'explore-multifreq-bootstrap.py', 'make-paper.py',
-                     'make-mf-bootstrap.py', 'explore-mf-bootstrap.py']
+                     'make-mf-bootstrap.py', 'explore-mf-bootstrap.py', 'make-pseudo-cl.py',
+                     'plot-cl-tz.py', 'plot-cl-tz-mf.py', 'plot-cl-tz-mf-dir.py', 
+                     'make-significance-mc-simple.py', 'make-cl-tz.py', 'rebeam-diff.py']
 
 
 def run_single_config(yaml_config):

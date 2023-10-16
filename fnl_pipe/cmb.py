@@ -31,16 +31,39 @@ class ACTMetadata:
         return deepcopy(self)
 
 
+# A mini-class to specify key map + beam + lmax definitions
+# contains shape, wcs, lmax
+class CMBSpec:
+    def __init__(self, lmax, shape, wcs, beam):
+        self.lmax = lmax
+        self.shape = shape
+        self.wcs = wcs
+        self.bl = beam[:lmax + 1]
+        self.bl2 = self.bl**2
+
+    def make_zero_map(self):
+        ret_map = enmap.ndmap(np.zeros(self.shape), self.wcs)
+        return ret_map
+
+    def rand_map(self, ps):
+        return rand_map(self.shape, self.wcs, ps)
+
+
 # A class to represent an individual act map at a single frequency
 # this class does not explicitly reference a galaxy mask since this is defined
-# at the "cross analysis" level, i.e. higher up.
+# at the "cross analysis" level in gal_cmb.py
+#
+# Note: it may make sense to generalize this class to the multi-frequency case in the long term
 class ACTPipe:
     def __init__(self, map_path, ivar_path, beam_path, planck_mask_path,
         output_manager, freq=None, lmax=12000, lmax_sim=12000, plots=False, metadata=None,
-        l_ksz = 3000, lmin_cut=1500):
+        l_ksz = 3000, lmin_cut=1500, var_scale=1.):
         assert freq is not None
         assert freq == 90 or freq == 150 or freq == 220
+        assert var_scale > 0.
+
         self.freq = freq
+        self.nfreq = 1
 
         self.l_ksz = l_ksz
 
@@ -75,6 +98,12 @@ class ACTPipe:
         self.init_lweight_f = False
         self.init_xfer = False
         self.init_fkp_f = False
+        self.init_chain = {}
+
+        self.l_weight = None
+
+        self.init_var_scale = False
+        self.update_var_scale(var_scale)
 
     # def init(self):
     #     assert self.
@@ -109,7 +138,12 @@ class ACTPipe:
         norm = self.ltool.norm
 
         printlog(f'importing act map {self.map_path}')
-        self.map_t = enmap.read_map(self.map_path)[0]
+        mt = enmap.read_map(self.map_path)
+        if len(mt.shape) == 3:
+            self.map_t = mt[0]
+            del mt
+        else:
+            self.map_t = mt
 
         self.cl_tt_act = map2cl(self.map_t, lmax=self.lmax)
 
@@ -126,9 +160,9 @@ class ACTPipe:
 
         printlog(f'importing act ivar map {self.ivar_path}')
         # Note: this is expensive and I'm not sure we explicitly use eta_n2 anywhere
-        self.ivar_t = enmap.read_map(self.ivar_path)[0]
-        self.eta_n2 = self.ivar_t / self.pixel_area # WARN: eta_n2 is not calulcated correctly!
-        self.map_std = np.sqrt(masked_inv(self.ivar_t))
+        self.ivar_t = enmap.read_map(self.ivar_path)[0] / self.var_scale
+        # self.eta_n2 = self.ivar_t / self.pixel_area # WARN: eta_n2 is not calulcated correctly!
+        self.map_std = np.sqrt(masked_inv(self.ivar_t)) * self.std_scale
 
         # quality check on map_std?
         if plots:
@@ -162,7 +196,11 @@ class ACTPipe:
             self.output_manager.savefig(f'act_beam_{self.freq}_ghz.png')
             plt.close()
 
+        self.init_chain['import_data'] = (self.import_data, [plots,])
         self.init_data = True
+
+    def get_cmb_spec(self):
+        return CMBSpec(self.lmax, self.map_t.shape, self.map_t.wcs, self.beam)
 
     def update_metadata(self, act_metadata, do_init=True):
         if self.metadata.r_lwidth != act_metadata.r_lwidth:
@@ -184,9 +222,9 @@ class ACTPipe:
     def make_zero_map(self,):
         return enmap.ndmap(np.zeros(self.map_t.shape), self.map_t.wcs)
 
-    def make_noise_map(self):
-        return enmap.ndmap(np.random.normal(size=self.map_t.shape) * self.map_std, 
-                           self.map_t.wcs)
+    # def make_noise_map(self):
+    #     return enmap.ndmap(np.random.normal(size=self.map_t.shape) * self.map_std, 
+    #                        self.map_t.wcs)
 
     # single frequency lweight
     def init_lweight(self, plots=False):
@@ -218,9 +256,11 @@ class ACTPipe:
             self.output_manager.savefig(f'l_weight_{self.freq}.png')
             plt.close()
 
+
+        self.init_chain['init_lweight'] = (self.init_lweight, [plots,])
         self.init_lweight_f = True
 
-    def init_fkp(self, fkp=None, plots=False):
+    def init_fkp_old(self, fkp=None, plots=False):
         assert self.init_data
         assert self.init_metadata
 
@@ -266,6 +306,85 @@ class ACTPipe:
 
         self.init_fkp_f = True
 
+    # A generalized FKP function shared across multiple frequencies
+    # Note: need to re-optimize to translate r_fkp -> sigma0
+    # repurposed from CMBMFxGalPipe
+    def _make_fkp(self, sigma0, ivars=None):
+        prod1 = self.make_zero_map() + 1.
+        prod2 = self.make_zero_map()
+
+        if ivars is None:
+            nfreq = self.nfreq
+            ivars = [self.ivar_t,]
+        else:
+            assert len(ivars) > 0
+            nfreq = len(ivars)
+
+        for ivar in ivars:
+            prod1 *= ivar
+
+        for ifreq in range(nfreq):
+            summand = self.make_zero_map() + 1.
+            for ifreq2 in range(nfreq):
+                if ifreq2 != ifreq: summand *= ivars[ifreq2]
+            prod2 += summand
+
+        fkp = prod1 * masked_inv(sigma0**2 * prod1 + prod2)
+
+        ref_map = self.map_t
+
+        # zero pixels where at least one ivar map is zero 
+        # logically this is a sound practice
+        # this also addresses the numerical problem of div-by-zero
+        # where all nfreq ivar maps are zero
+        zero_mask = np.zeros(ref_map.shape, dtype=np.uint8)
+        for ivar_t in ivars:
+            zero_mask = np.logical_or(zero_mask, ivar_t == 0.)
+        fkp[zero_mask] = 0.
+
+        return fkp
+
+    def init_fkp(self, sigma0=0., ivars=None, plots=False):
+        printlog = self.output_manager.printlog
+
+        if ivars is None:
+            ivars = [self.ivar_t,]
+
+        if sigma0 == 0.:
+            printlog('init_fkp WARNING: sigma0 = 0., possibly not set')
+       
+        fkp = self._make_fkp(sigma0, ivars)
+
+        planck_mask = self.get_planck_mask()
+        self.fkp = planck_mask * fkp
+
+        printlog(f'FKP min/max: {np.min(self.fkp):.3e} {np.max(self.fkp):.3e}')
+
+        if plots:
+            fig1 = enplot.plot(enmap.downgrade(self.fkp, 16), ticks=15, colorbar=True)
+            self.output_manager.savefig(f'fkp_map_{self.freq}', mode='pixell',
+                                        fig=fig1)
+
+        self.init_chain['init_fkp'] = (self.init_fkp, [sigma0, None, plots])
+        self.init_fkp_f = True
+
+    def load_fkp(self, fkp_path):
+        fkp_map = enmap.read_map(fkp_path)
+        assert self.map_t.wcs == fkp_map.wcs
+        self.fkp = fkp_map
+        self.init_fkp_f = True
+
+    def update_var_scale(self, var_scale):
+        assert var_scale > 0.
+
+        if not self.init_var_scale or var_scale != self.var_scale:
+            self.var_scale = var_scale
+            self.std_scale = np.sqrt(var_scale)
+
+            for fun, args in self.init_chain.values():
+                fun(*args)
+
+            self.init_var_scale = True
 
 class MultiFreqPipe:
     def __init__(self, act_pipes):

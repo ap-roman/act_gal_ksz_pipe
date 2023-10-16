@@ -9,21 +9,23 @@ act_path = data_path + 'act/'
 map_path = act_path + 'act_planck_s08_s19_cmb_f150_daynight_srcfree_map.fits' # private, reference map
 
 
-desi_base = data_path + 'vr_source/desi_ls/'
+desi_base = data_path + 'vr_source/desils/'
 
 cat_base = 'desils_randcat_'
 cat_north_path = desi_base + cat_base + 'north.h5'
 cat_south_path = desi_base + cat_base + 'south.h5'
 
-mask_out_path = desi_base + 'desi_mask.fits'
-intersect_out_path = desi_base + 'intersect_sdss_desi_mask.fits'
+# mask_out_path = desi_base + 'desi_mask.fits'
+mask_out_path = desi_base + 'desi_south_mask.fits'
+intersect_out_path = desi_base + 'intersect_sdss_desi_south_mask.fits'
 
-sdss_mask_path = data_path + 'sdss_footprint/pixellized_sdss_north_completeness.fits'
+sdss_mask_path = data_path + 'sdss_footprint/pixellized_sdss_south_completeness.fits'
 
 # cats = [🐈, 🐱, 😹, 😻]
-cats = [cat_north_path, cat_south_path]
+# cats = [cat_north_path, cat_south_path]
+cats = [cat_south_path,]
 
-grid_downsample = 10 # resolution downgrade factor for ACT map -> 
+grid_downsample = 20 # resolution downgrade factor for ACT map -> 
 plot_downsample = 16 # a further downsample factor for plots
 
 # max_ram = 16 * 1024 * 1024 * 1024 # bytes
